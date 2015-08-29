@@ -1,15 +1,15 @@
 class LinksController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:profile]
   before_action :correct_link, only: [:edit, :update]
 
   def index
     @links = current_user.links
   end
 
-  # def profile
-  #   @user = User.find(params[:id])
-  #   @links = @user.links
-  # end
+  def profile
+    @user = User.find(params[:id])
+    @links = @user.links
+  end
 
   def new
     @link = Link.new
@@ -45,7 +45,7 @@ class LinksController < ApplicationController
   private
     def correct_link
       @link = Link.find(params[:id])
-      redirect_to(root_url) unless @link.user == current_user
+      redirect_to links_url unless @link.user == current_user
     end
 
     def link_params

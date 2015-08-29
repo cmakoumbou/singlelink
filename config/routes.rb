@@ -1,7 +1,21 @@
 Rails.application.routes.draw do
-  root 'links#index'
+
+  authenticated :user do
+    root to: 'links#index', as: :authenticated_root
+  end
+
+  devise_scope :user do
+    root to: "devise/registrations#new"
+  end
+
   resources :links, except: [:show]
-  devise_for :users
+
+  devise_for :users, :path => ''
+  as :user do
+    get '/settings' => 'devise/registrations#edit'
+  end
+  
+  get '/:id' => 'links#profile', :as => :profile
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
