@@ -25,8 +25,19 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :links, dependent: :destroy
+
+  extend FriendlyId
+  friendly_id :username
+
+  after_validation :move_friendly_id_error_to_name
          
   VALID_USERNAME_REGEX = /\A[a-z0-9]+\z/i
 	validates :username, presence: true, length: { maximum: 20 }, uniqueness: { case_sensitive: false },
 		format: { with: VALID_USERNAME_REGEX, message: "is invalid (only letters and numbers allowed)"}
+
+	private
+
+	  def move_friendly_id_error_to_name
+    	errors.add :name, *errors.delete(:friendly_id) if errors[:friendly_id].present?
+    end
 end

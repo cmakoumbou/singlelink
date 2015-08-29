@@ -7,7 +7,7 @@ class LinksController < ApplicationController
   end
 
   def profile
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
     @links = @user.links
   end
 

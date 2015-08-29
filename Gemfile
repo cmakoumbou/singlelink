@@ -14,6 +14,7 @@ gem 'pg', '0.18.2'
 gem 'annotate', '2.6.10'
 gem 'devise', '3.5.2'
 gem 'valid_url', '0.0.4'
+gem 'friendly_id', '5.1.0'
 
 group :development, :test do
   gem 'byebug', '5.0.0'
