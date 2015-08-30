@@ -15,6 +15,7 @@ gem 'annotate', '2.6.10'
 gem 'devise', '3.5.2'
 gem 'valid_url', '0.0.4'
 gem 'friendly_id', '5.1.0'
+gem 'bootstrap-sass', '3.3.5.1'
 
 group :development, :test do
   gem 'byebug', '5.0.0'
