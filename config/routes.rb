@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :links, except: [:show]
 
-  devise_for :users, :path => ''
+  devise_for :users, :path => '', :controllers => { :registrations => 'registrations' }
   as :user do
     get '/settings' => 'devise/registrations#edit'
   end
