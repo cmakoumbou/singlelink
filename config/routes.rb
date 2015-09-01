@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   devise_for :users, :path => '', :controllers => { :registrations => 'registrations' }
   as :user do
     get '/settings' => 'devise/registrations#edit'
+    get '/settings/cancel' => 'registrations#delete'
   end
   
   get '/:id' => 'links#profile', :as => :profile

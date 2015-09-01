@@ -1,0 +1,25 @@
+<div class="row">
+  <%= render 'layouts/welcome' %>
+  <div class="col-md-6 col-md-offset-3"> 
+    <div class="panel panel-default">
+      <div class="panel-heading">Cancel your account</div>
+      <div class="panel-body">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { confirm: "Are you sure?" }, html: { method: :delete }) do |f| %>
+          <%= devise_error_messages! %>
+          <div class="panel panel-default">
+            <div class="panel-heading">We need your current password to cancel your account</div>
+            <div class="panel-body">
+              <div class="form-group">
+                <%= f.password_field :current_password, autocomplete: "off", class: "form-control", placeholder: "Current password" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "Cancel your account", class: "btn btn-default btn-block" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
