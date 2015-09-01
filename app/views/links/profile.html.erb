@@ -1,7 +1,11 @@
-<h1><%= @user.username %></h1>
-
-<ul>
-	<% @links.each do |link| %>
-		<li><%= link_to link.url, link.url, :target => "_blank" %></li>
-	<% end %>
-</ul>
+<% provide(:title, "#{@user.username}") %>
+<div class="panel panel-default">
+  <div class="panel-heading"><%= @user.username %> | <%= link_to "singlelink.me/#{@user.username}", url_for() %> </div>
+  <div class="panel-body">
+	  <ul class="list-group">
+			<% @links.each do |link| %>
+				<%= link_to link.url, link.url, :target => "_blank", class: "list-group-item" %>
+			<% end %>
+		</ul>
+  </div>
+</div>
