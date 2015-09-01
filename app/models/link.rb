@@ -12,6 +12,10 @@
 class Link < ActiveRecord::Base
   belongs_to :user
   before_save :smart_add_url_protocol
+
+  include RankedModel
+  ranks :row_order
+  
   validates :url, :url => { :message => "is not valid" }
   validates_presence_of :user
 

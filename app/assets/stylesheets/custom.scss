@@ -58,3 +58,9 @@ body {
     color: $state-danger-text;
   }
 }
+
+.special_link {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

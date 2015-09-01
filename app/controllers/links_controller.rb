@@ -3,12 +3,12 @@ class LinksController < ApplicationController
   before_action :correct_link, only: [:edit, :update]
 
   def index
-    @links = current_user.links
+    @links = current_user.links.order(:row_order)
   end
 
   def profile
     @user = User.friendly.find(params[:id])
-    @links = @user.links
+    @links = @user.links.order(:row_order)
   end
 
   def new
@@ -40,6 +40,18 @@ class LinksController < ApplicationController
     @link = current_user.links.find(params[:id])
     @link.destroy
     redirect_to links_url, notice: 'Link was successfully destroyed.'
+  end
+
+  def move_up
+    @link = Link.find(params[:id])
+    @link.update_attribute :row_order_position, :up
+    redirect_to :back
+  end
+
+  def move_down
+    @link = Link.find(params[:id])
+    @link.update_attribute :row_order_position, :down
+    redirect_to :back
   end
 
   private

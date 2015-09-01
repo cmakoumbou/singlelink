@@ -9,7 +9,16 @@
         <tbody>
           <% @links.each do |link| %>
             <tr>
-              <td class="col-xs-8 col-md-10"><%= link_to link.url, link.url, :target => "_blank" %></td>
+              <td class="col-xs-1 col-md-1 text-center">
+                <%= link_to move_up_link_path(link), :method => :post do %>
+                  <span class="glyphicon glyphicon-arrow-up"></span><br />
+                <% end %>
+                &bull;</span><br />
+                <%= link_to move_down_link_path(link), :method => :post do %>
+                  <span class="glyphicon glyphicon-arrow-down"></span>
+                <% end %>
+              </td>
+              <td class="col-xs-7 col-md-9"><%= link_to link.url, link.url, :target => "_blank" %></td>
               <td class="col-xs-2 col-md-1"><%= link_to 'Edit', edit_link_path(link) %></td>
               <td class="col-xs-2 col-md-1"><%= link_to 'Delete', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>

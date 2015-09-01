@@ -8,7 +8,12 @@ Rails.application.routes.draw do
     root to: "devise/registrations#new"
   end
 
-  resources :links, except: [:show]
+  resources :links, except: [:show] do
+    member do
+      post :move_up
+      post :move_down
+    end
+  end
 
   devise_for :users, :path => '', :controllers => { :registrations => 'registrations' }
   as :user do
