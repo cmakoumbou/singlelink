@@ -17,6 +17,8 @@ gem 'valid_url', '0.0.4'
 gem 'friendly_id', '5.1.0'
 gem 'bootstrap-sass', '3.3.5.1'
 gem 'ranked-model', '0.4.0'
+gem 'rails_admin', '0.7.0'
+gem 'cancancan', '1.12.0'
 
 group :development, :test do
   gem 'byebug', '5.0.0'
