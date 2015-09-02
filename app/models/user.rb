@@ -16,6 +16,8 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  username               :string
+#  display_name           :string
+#  bio                    :string
 #
 
 class User < ActiveRecord::Base
@@ -34,6 +36,9 @@ class User < ActiveRecord::Base
   VALID_USERNAME_REGEX = /\A[a-z0-9]+\z/i
 	validates :username, presence: true, length: { maximum: 20 }, uniqueness: { case_sensitive: false },
 		format: { with: VALID_USERNAME_REGEX, message: "is invalid (only letters and numbers allowed)"}
+
+  validates :display_name, length: { maximum: 25 }
+  validates :bio, length: { maximum: 160 }
 
 	private
 

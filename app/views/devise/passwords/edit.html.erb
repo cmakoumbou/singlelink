@@ -3,7 +3,7 @@
   <%= render 'layouts/welcome' %>
   <div class="col-md-6 col-md-offset-3">
     <div class="panel panel-default">
-      <div class="panel-heading">Change your password</div>
+      <div class="panel-heading"><b>Change your password</b></div>
       <div class="panel-body">
         <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
           <%= devise_error_messages! %>

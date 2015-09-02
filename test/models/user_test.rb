@@ -16,6 +16,8 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  username               :string
+#  display_name           :string
+#  bio                    :string
 #
 
 require 'test_helper'

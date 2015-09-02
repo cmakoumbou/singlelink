@@ -1,11 +1,25 @@
 <% provide(:title, "#{@user.username}") %>
 <div class="panel panel-default">
-  <div class="panel-heading"><%= @user.username %> | <%= link_to "singlelink.me/#{@user.username}", url_for() %> </div>
+  <div class="panel-heading">
+  	<% if !@user.display_name.blank? %>
+			<b><%= @user.display_name %> | <%= link_to "singlelink.me/#{@user.username}", url_for() %></b><br />
+		<% else %>
+			<b><%= @user.username %> | <%= link_to "singlelink.me/#{@user.username}", url_for() %></b><br />
+		<% end %>
+		<% if !@user.bio.blank? %>
+		  <%= @user.bio %>
+		<% end %>
+  </div>
   <div class="panel-body">
-	  <ul class="list-group">
-			<% @links.each do |link| %>
-				<%= link_to link.url, link.url, :target => "_blank", class: "list-group-item special_link" %>
-			<% end %>
-		</ul>
+  	<% if !@links.empty? %>
+		  <ul class="list-group">
+				<% @links.each do |link| %>
+					<%= link_to link.url, link.url, :target => "_blank", class: "list-group-item special_link" %>
+				<% end %>
+			</ul>
+		<% else %>
+			<div class="text-center">No links</div>
+		<% end %>
   </div>
 </div>
+

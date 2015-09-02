@@ -3,10 +3,23 @@
   <%= render 'layouts/welcome' %>
   <div class="col-md-6 col-md-offset-3">
     <div class="panel panel-default">
-      <div class="panel-heading">Settings</div>
+      <div class="panel-heading"><b>Settings</b></div>
       <div class="panel-body">
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
           <%= devise_error_messages! %>
+
+            <div class="panel panel-default">
+            <div class="panel-heading">Change your profile details</div>
+            <div class="panel-body">
+              <div class="form-group">
+                <%= f.text_field :display_name, autofocus: true, class: "form-control", placeholder: "Display Name" %>
+              </div>
+
+              <div class="form-group">
+                <%= f.text_area :bio, class: "form-control", placeholder: "Bio", rows: 3 %>
+              </div>
+            </div>
+          </div>
 
           <div class="panel panel-default">
             <div class="panel-heading">Change your account details</div>
@@ -14,7 +27,7 @@
               <div class="form-group">
                 <div class="input-group">
                   <div class="input-group-addon">www.singlelink.me/</div>
-                  <%= f.text_field :username, autofocus: true, class: "form-control", placeholder: "Username" %>
+                  <%= f.text_field :username, class: "form-control", placeholder: "Username" %>
                 </div>
               </div>
 
