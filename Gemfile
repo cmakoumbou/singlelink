@@ -26,6 +26,12 @@ group :development, :test do
   gem 'spring', '1.3.6'
 end
 
+group :test do
+	gem 'minitest-reporters', '1.0.20'
+	gem 'mini_backtrace',     '0.1.3'
+end
+
+
 group :production do
 	gem 'rails_12factor', '0.0.3'
 end
