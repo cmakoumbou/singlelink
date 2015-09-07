@@ -1,4 +1,8 @@
-<% provide(:title, "#{@user.username}") %>
+<% if !@user.display_name.blank? %>
+	<% provide(:title, "#{@user.display_name}") %>
+<% else %>
+	<% provide(:title, "#{@user.username}") %>
+<% end %>
 <div class="panel panel-default">
   <div class="panel-heading">
   	<% if !@user.display_name.blank? %>

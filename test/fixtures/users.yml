@@ -33,6 +33,11 @@
 #  column: value
 
 bob:
-  username: bob
-  email: bob@company.com
+  username: "bob"
+  email: "bob@company.com"
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+
+joe:
+  username: "joe"
+  email: "joe@company.com"
   encrypted_password: <%= User.new.send(:password_digest, 'password') %>

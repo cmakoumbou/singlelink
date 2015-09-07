@@ -12,10 +12,16 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  url: MyString
-  user_id: 
+google:
+  url: "http://www.google.com"
+  user: bob
+  row_order: "8228045"
 
-two:
-  url: MyString
-  user_id: 
+netflix:
+  url: "http://www.netflix.com"
+  user: bob
+  row_order: "8382054"
+
+twitter:
+  url: "http://www.twitter.com"
+  user: joe
