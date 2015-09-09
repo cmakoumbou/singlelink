@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'pages/about'
-
   mount RailsAdmin::Engine => '/mabika', as: 'rails_admin'
   authenticated :user do
     root to: 'links#index', as: :authenticated_root
