@@ -18,6 +18,7 @@
 #  username               :string
 #  display_name           :string
 #  bio                    :string
+#  admin                  :boolean          default(FALSE)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

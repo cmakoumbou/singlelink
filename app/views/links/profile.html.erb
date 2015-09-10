@@ -18,7 +18,7 @@
   	<% if !@links.empty? %>
 		  <ul class="list-group">
 				<% @links.each do |link| %>
-					<li class="list-group-item special_link"><%= link_to link.url, link.url, :target => "_blank" %></li>
+					<li class="list-group-item special_link"><%= link_to link.url, link.url, :target => "_blank", :class => 'alert', :id => 'mylink', :data => {:user_id => link.user.id} %></li>
 				<% end %>
 			</ul>
 		<% else %>
@@ -26,4 +26,3 @@
 		<% end %>
   </div>
 </div>
-

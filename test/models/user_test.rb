@@ -18,6 +18,7 @@
 #  username               :string
 #  display_name           :string
 #  bio                    :string
+#  admin                  :boolean          default(FALSE)
 #
 
 require 'test_helper'

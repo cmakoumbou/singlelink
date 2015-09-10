@@ -18,6 +18,7 @@
 #  username               :string
 #  display_name           :string
 #  bio                    :string
+#  admin                  :boolean          default(FALSE)
 #
 
 class User < ActiveRecord::Base
@@ -27,6 +28,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :links, dependent: :destroy
+  has_many :visits
 
   extend FriendlyId
   friendly_id :username
