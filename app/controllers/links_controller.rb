@@ -9,7 +9,7 @@ class LinksController < ApplicationController
   def profile
     @user = User.friendly.find(params[:id])
     @links = @user.links.order(:row_order)
-    # ahoy.track("Profile checked", user_id: @user.id)
+    ahoy.track("Profile visit", user_id: @user.id)
   end
 
   def new
