@@ -1,0 +1,30 @@
+<p><b>Visits: </b></p>
+
+<p>Profile visits: <%= @profile_visits_count %></p>
+<p>Unique visitors: <%= @profile_visits_unique_count %></p>
+
+<p><b>Device types: </b></p>
+
+<% @profile_visits_device.each do |key, value| %>
+  <p><%= "#{key}: #{value}" %></p>
+<% end %>
+
+<p><b>Cities: </b></p>
+
+<% @profile_visits_city.each do |key, value| %>
+	<% if key.blank? %>
+		<p><%= "Unknown: #{value}" %></p>
+	<% else %>
+  	<p><%= "#{key}: #{value}" %></p>
+  <% end %>
+<% end %>
+
+<p><b>Countries: </b></p>
+
+<% @profile_visits_country.each do |key, value| %>
+	<% if key.blank? || key == "Reserved" %>
+		<p><%= "Unknown: #{value}" %></p>
+	<% else %>
+  	<p><%= "#{key}: #{value}" %></p>
+  <% end %>
+<% end %>

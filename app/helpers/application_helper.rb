@@ -8,4 +8,10 @@ module ApplicationHelper
       page_title + " | " + base_title
     end
   end
+
+  class ActionDispatch::Request #rails 2: ActionController::Request
+	  def remote_ip
+	    '1.2.3.4'
+	  end
+	end
 end

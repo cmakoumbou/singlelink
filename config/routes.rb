@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/analytics' => 'analytics#index', :as => :analytics
+
   devise_for :users, :path => '', :controllers => { :registrations => 'registrations' }
   as :user do
     get '/settings' => 'devise/registrations#edit'

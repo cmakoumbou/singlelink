@@ -1,6 +1,7 @@
 class LinksController < ApplicationController
   before_action :authenticate_user!, except: [:profile]
   before_action :correct_link, only: [:edit, :update, :destroy, :move_up, :move_down]
+  # before_filter :track_ahoy_visit, only: [:profile]
 
   def index
     @links = current_user.links.order(:row_order)
@@ -9,6 +10,7 @@ class LinksController < ApplicationController
   def profile
     @user = User.friendly.find(params[:id])
     @links = @user.links.order(:row_order)
+    ahoy.track("Profile visit", visited_user: @user.id)
   end
 
   def new
@@ -60,4 +62,8 @@ class LinksController < ApplicationController
     def link_params
       params.require(:link).permit(:url)
     end
+
+    # def track_visit
+    #   ahoy.track_visit
+    # end
 end
