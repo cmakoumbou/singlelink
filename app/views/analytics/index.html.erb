@@ -1,30 +1,33 @@
-<p><b>Visits: </b></p>
+<div class="panel panel-default">
+  <div class="panel-heading"><b>Analytics - One Month Report (<%= 1.month.ago.midnight.strftime("%b %d, %Y") %> - <%= Time.now.strftime("%b %d, %Y") %>)</b></div>
+  <div class="panel-body">
+  	<p class="text-center">Profile Views: <b><%= @profile_visits_count %></b> | Unique Visits: <b><%= @profile_visits_unique_count %></b></p>
+		<div class="panel panel-default">
+    	<div class="panel-heading">Profile Views per day</div>
+      <div class="panel-body">
+				<%= area_chart @profile_visits_chart %>
+			</div>
+		</div>
 
-<p>Profile visits: <%= @profile_visits_count %></p>
-<p>Unique visitors: <%= @profile_visits_unique_count %></p>
+		<div class="panel panel-default">
+    	<div class="panel-heading">Profile visits by Device</div>
+      <div class="panel-body">
+				<%= pie_chart @profile_visits_device_chart %>
+			</div>
+		</div>
 
-<p><b>Device types: </b></p>
+		<div class="panel panel-default">
+    	<div class="panel-heading">Profile visits by City (<%= link_to('Change Country', settings_path) %>)</div>
+      <div class="panel-body">
+				<%= geo_chart @profile_visits_city_chart, library: {region: "#{@user.country}", displayMode: "markers"} %>
+			</div>
+		</div>
 
-<% @profile_visits_device.each do |key, value| %>
-  <p><%= "#{key}: #{value}" %></p>
-<% end %>
-
-<p><b>Cities: </b></p>
-
-<% @profile_visits_city.each do |key, value| %>
-	<% if key.blank? %>
-		<p><%= "Unknown: #{value}" %></p>
-	<% else %>
-  	<p><%= "#{key}: #{value}" %></p>
-  <% end %>
-<% end %>
-
-<p><b>Countries: </b></p>
-
-<% @profile_visits_country.each do |key, value| %>
-	<% if key.blank? || key == "Reserved" %>
-		<p><%= "Unknown: #{value}" %></p>
-	<% else %>
-  	<p><%= "#{key}: #{value}" %></p>
-  <% end %>
-<% end %>
+	  <div class="panel panel-default">
+    	<div class="panel-heading">Profile visits by Country</div>
+      <div class="panel-body">
+				<%= geo_chart @profile_visits_country_chart %>
+			</div>
+		</div>
+  </div>
+</div>

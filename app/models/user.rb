@@ -18,6 +18,8 @@
 #  username               :string
 #  display_name           :string
 #  bio                    :string
+#  admin                  :boolean          default(FALSE)
+#  country                :string           default("GB"), not null
 #
 
 class User < ActiveRecord::Base
@@ -39,6 +41,7 @@ class User < ActiveRecord::Base
 
   validates :display_name, length: { maximum: 25 }
   validates :bio, length: { maximum: 160 }
+  validates :country, presence: true
 
 	private
 

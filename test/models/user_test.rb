@@ -18,6 +18,8 @@
 #  username               :string
 #  display_name           :string
 #  bio                    :string
+#  admin                  :boolean          default(FALSE)
+#  country                :string           default("GB"), not null
 #
 
 require 'test_helper'
@@ -75,5 +77,10 @@ class UserTest < ActiveSupport::TestCase
   test "bio should not be too long" do
   	@user.bio = "a" * 170
   	assert_not @user.valid?
+  end
+
+  test "country should be present" do
+    @user.country = " "
+    assert_not @user.valid?
   end
 end

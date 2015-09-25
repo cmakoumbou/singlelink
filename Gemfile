@@ -21,6 +21,9 @@ gem 'rails_admin', '0.7.0'
 gem 'cancancan', '1.12.0'
 gem 'ahoy_matey', '1.2.1'
 gem 'jquery-turbolinks', '2.1.0'
+gem 'chartkick', '1.4.1'
+gem 'groupdate', '2.4.0'
+gem 'country_select', '2.4.0'
 
 group :development, :test do
   gem 'byebug', '5.0.0'
