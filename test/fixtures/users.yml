@@ -19,7 +19,7 @@
 #  display_name           :string
 #  bio                    :string
 #  admin                  :boolean          default(FALSE)
-#  country                :string           default("GB"), not null
+#  country                :string
 #  time_zone              :string
 #
 

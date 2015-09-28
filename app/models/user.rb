@@ -19,7 +19,7 @@
 #  display_name           :string
 #  bio                    :string
 #  admin                  :boolean          default(FALSE)
-#  country                :string           default("GB"), not null
+#  country                :string
 #  time_zone              :string
 #
 
@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :username
 
+  before_create :default_country_and_time_zone
+
   after_validation :move_friendly_id_error_to_name
          
   VALID_USERNAME_REGEX = /\A[a-z0-9]+\z/i
@@ -42,7 +44,8 @@ class User < ActiveRecord::Base
 
   validates :display_name, length: { maximum: 25 }
   validates :bio, length: { maximum: 160 }
-  validates :country, presence: true
+  validates :country, inclusion: { in: ISO3166::Country.translations(:en).keys }, on: :update
+  validates :time_zone, inclusion: { in: ActiveSupport::TimeZone.zones_map.keys }, on: :update
 
   def country_name
     country = ISO3166::Country[self.country]
@@ -53,5 +56,10 @@ class User < ActiveRecord::Base
 
 	  def move_friendly_id_error_to_name
     	errors.add :name, *errors.delete(:friendly_id) if errors[:friendly_id].present?
+    end
+
+    def default_country_and_time_zone
+      self.country = "GB"
+      self.time_zone = "London"
     end
 end

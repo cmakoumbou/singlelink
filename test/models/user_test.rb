@@ -19,7 +19,7 @@
 #  display_name           :string
 #  bio                    :string
 #  admin                  :boolean          default(FALSE)
-#  country                :string           default("GB"), not null
+#  country                :string
 #  time_zone              :string
 #
 
@@ -80,8 +80,13 @@ class UserTest < ActiveSupport::TestCase
   	assert_not @user.valid?
   end
 
-  test "country should be present" do
-    @user.country = " "
-    assert_not @user.valid?
+  test "country should be included" do
+    @user.save
+    assert_includes(ISO3166::Country.translations(:en).keys, @user.country)
+  end
+
+  test "time_zone should be included" do
+    @user.save
+    assert_includes(ActiveSupport::TimeZone.zones_map.keys, @user.time_zone)
   end
 end

@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20150926155207) do
     t.string   "display_name"
     t.string   "bio"
     t.boolean  "admin",                  default: false
-    t.string   "country",                default: "GB",  null: false
+    t.string   "country"
     t.string   "time_zone"
   end
 
