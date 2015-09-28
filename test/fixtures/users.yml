@@ -20,6 +20,7 @@
 #  bio                    :string
 #  admin                  :boolean          default(FALSE)
 #  country                :string           default("GB"), not null
+#  time_zone              :string
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

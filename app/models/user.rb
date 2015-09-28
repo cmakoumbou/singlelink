@@ -20,6 +20,7 @@
 #  bio                    :string
 #  admin                  :boolean          default(FALSE)
 #  country                :string           default("GB"), not null
+#  time_zone              :string
 #
 
 class User < ActiveRecord::Base
@@ -42,6 +43,11 @@ class User < ActiveRecord::Base
   validates :display_name, length: { maximum: 25 }
   validates :bio, length: { maximum: 160 }
   validates :country, presence: true
+
+  def country_name
+    country = ISO3166::Country[self.country]
+    country.translations[I18n.locale.to_s] || country.name
+  end
 
 	private
 

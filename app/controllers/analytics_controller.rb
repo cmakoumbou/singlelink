@@ -7,12 +7,19 @@ class AnalyticsController < ApplicationController
   	# Data
   	@profile_events = Ahoy::Event.where(properties: [visited_user: current_user.id])
   	@profile_visits = @profile_events.where(name: "Profile visit")
-  	@profile_visits_month = @profile_visits.where(time: 1.month.ago.midnight..Time.now)
+
+    # Data for one month
+    @from = Time.now.in_time_zone(@user.time_zone).beginning_of_month
+    @to = Time.now.in_time_zone(@user.time_zone).end_of_month
+  	@profile_visits_month = @profile_visits.where(time: @from..@to)
 
   	# Profile
-  	@profile_visits_count = @profile_visits.count
-  	@profile_visits_unique_count = @profile_visits.uniq.pluck(:visit_id).count
-  	@profile_visits_chart = @profile_visits.group_by_day(:time, range: 1.month.ago.midnight..Time.now).count
+  	@profile_visits_count = @profile_visits_month.count
+  	@profile_visits_unique_count = @profile_visits_month.uniq.pluck(:visit_id).count
+    @from_profile = Time.now.beginning_of_month
+    @to_profile = Time.now.end_of_month
+  	@profile_visits_chart = @profile_visits.group_by_day(:time, time_zone: @user.time_zone, format: "%B %d, %Y",
+                           range: @from_profile..@to_profile).count
 
   	# Device
   	@profile_visits_device_chart = @profile_visits_month.select(:visit_id).uniq.joins(:visit).group("device_type").count

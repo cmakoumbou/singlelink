@@ -1,9 +1,9 @@
 <div class="panel panel-default">
-  <div class="panel-heading"><b>Analytics - One Month Report (<%= 1.month.ago.midnight.strftime("%b %d, %Y") %> - <%= Time.now.strftime("%b %d, %Y") %>)</b></div>
+  <div class="panel-heading"><b>Analytics - One Month Report (<%= Time.now.in_time_zone(@user.time_zone).strftime("%B") %>)</b></div>
   <div class="panel-body">
   	<p class="text-center">Profile Views: <b><%= @profile_visits_count %></b> | Unique Visits: <b><%= @profile_visits_unique_count %></b></p>
 		<div class="panel panel-default">
-    	<div class="panel-heading">Profile Views per day</div>
+    	<div class="panel-heading">Profile Views per day - Timezone: <%= @user.time_zone %> - (<%= link_to('Change Timezone', settings_path) %>)</div>
       <div class="panel-body">
 				<%= area_chart @profile_visits_chart %>
 			</div>
@@ -17,7 +17,7 @@
 		</div>
 
 		<div class="panel panel-default">
-    	<div class="panel-heading">Profile visits by City (<%= link_to('Change Country', settings_path) %>)</div>
+    	<div class="panel-heading">Profile visits by City - Country: <%= @user.country_name %> - (<%= link_to('Change Country', settings_path) %>)</div>
       <div class="panel-body">
 				<%= geo_chart @profile_visits_city_chart, library: {region: "#{@user.country}", displayMode: "markers"} %>
 			</div>
