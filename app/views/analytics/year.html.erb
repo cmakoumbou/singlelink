@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-  <div class="panel-heading analytics-title"><b>Analytics - One Month Report: <%= Time.now.in_time_zone(@user.time_zone).strftime("%B") %> - ( <%= link_to('View One Year Report', analytics_year_path) %> )</b></div>
+  <div class="panel-heading analytics-title"><b>Analytics - One Year Report: <%= Time.now.in_time_zone(@user.time_zone).strftime("%Y") %> - ( <%= link_to('View One Month Report', analytics_path) %> )</b></div>
   <div class="panel-body">
   	<p class="text-center">Profile Views: <b><%= @profile_visits_count %></b> | Unique Visits: <b><%= @profile_visits_unique_count %></b></p>
 		<div class="panel panel-default">

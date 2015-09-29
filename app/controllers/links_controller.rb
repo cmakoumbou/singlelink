@@ -10,7 +10,11 @@ class LinksController < ApplicationController
   def profile
     @user = User.friendly.find(params[:id])
     @links = @user.links.order(:row_order)
-    ahoy.track("Profile visit", visited_user: @user.id)
+    if user_signed_in?
+      ahoy.track("Profile visit", visited_user: @user.id) unless @user == current_user
+    else
+      ahoy.track("Profile visit", visited_user: @user.id)
+    end
   end
 
   def new

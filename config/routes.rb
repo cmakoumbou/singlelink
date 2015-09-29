@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   end
 
   get '/analytics' => 'analytics#index', :as => :analytics
+  get '/analytics/year' => 'analytics#year', :as => :analytics_year
 
   devise_for :users, :path => '', :controllers => { :registrations => 'registrations' }
   as :user do
