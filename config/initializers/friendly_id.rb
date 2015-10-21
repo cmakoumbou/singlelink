@@ -28,8 +28,8 @@ FriendlyId.defaults do |config|
   games guest group groups help home homepage host hosting hostname html http 
   httpd https hpg info information image img images imap index invite intranet 
   indice ipad iphone irc java javascript javascripts job jobs js knowledgebase
-  log login logs logout list lists links link mail mail1 mail2 mail3 mail4 mail5 
-  mailer mailing mx manager marketing master me media message microblog microblogs 
+  log login logs logout list lists links link mabika mail mail1 mail2 mail3 mail4 mail5 
+  makoumbou mailer mailing mx manager marketing master me media message microblog microblogs 
   mine mp3 msg msn mysql messenger mob mobile movie movies music musicas my name 
   named net network new news newsletter nick nickname notes noticiasns ns1 ns2 
   ns3 ns4 old online operator order orders page pager pages panel password perl 

@@ -8,7 +8,6 @@ gem 'sass-rails', '5.0.3'
 gem 'uglifier', '2.7.1'
 gem 'coffee-rails', '4.1.0'
 gem 'jquery-rails', '4.0.4'
-gem 'turbolinks', '2.5.3'
 gem 'sdoc', '0.4.1', group: :doc
 gem 'pg', '0.18.2'
 gem 'annotate', '2.6.10'
@@ -20,10 +19,12 @@ gem 'ranked-model', '0.4.0'
 gem 'rails_admin', '0.7.0'
 gem 'cancancan', '1.12.0'
 gem 'ahoy_matey', '1.2.1'
-gem 'jquery-turbolinks', '2.1.0'
 gem 'chartkick', '1.4.1'
 gem 'groupdate', '2.4.0'
 gem 'country_select', '2.4.0'
+gem 'payola-payments', '1.3.2'
+gem 'sidekiq', '3.5.1'
+gem 'sinatra', :require => nil
 
 group :development, :test do
   gem 'byebug', '5.0.0'

@@ -16,9 +16,14 @@
 					<li><%= link_to('Home', root_path) %></li>
 			  	<li><%= link_to('Profile', profile_path(current_user)) %></li>
 			  	<li><%= link_to('Analytics', analytics_path) %></li>
+			  	<li><%= link_to('Subscriptions', subscriptions_path) %></li>
+			  	<li><%= link_to('Cancel', subscriptions_cancel_path) %></li>
+			  	<li><%= link_to('Change', subscriptions_change_path) %></li>
+			  	<li><%= link_to('Card', subscriptions_card_path) %></li>
 					<li><%= link_to('Settings', settings_path) %></li>
 					<% if current_user.admin? %>
             <li><%= link_to('Admin', rails_admin_path) %></li>
+            <li><%= link_to('Sidekiq', sidekiq_web_path) %></li>
           <% end %>
 					<li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li> 
 				<% else %>

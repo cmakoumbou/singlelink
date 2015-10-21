@@ -1,13 +1,21 @@
 Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/mabika', as: 'rails_admin'
+
   authenticated :user do
     root to: 'links#index', as: :authenticated_root
+  end
+
+  require 'sidekiq/web'
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/makoumbou'
   end
 
   devise_scope :user do
     root to: "devise/registrations#new"
   end
+
+  mount Payola::Engine => '/payola', as: :payola
 
   resources :links, except: [:show] do
     member do
@@ -15,6 +23,11 @@ Rails.application.routes.draw do
       post :move_down
     end
   end
+
+  get '/subscriptions' => 'subscriptions#index', :as => :subscriptions
+  get '/subscriptions/cancel' => 'subscriptions#cancel', :as => :subscriptions_cancel
+  get '/subscriptions/change' => 'subscriptions#change', :as => :subscriptions_change
+  get '/subscriptions/card' => 'subscriptions#card', :as => :subscriptions_card
 
   get '/analytics' => 'analytics#index', :as => :analytics
   get '/analytics/year' => 'analytics#year', :as => :analytics_year

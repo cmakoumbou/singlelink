@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
       :display_name, :bio, :country, :time_zone) }
   end
 
-  # private
+  private
 
   # def user_time_zone(&block)
   #   time_zone = current_user.try(:time_zone) || 'UTC'

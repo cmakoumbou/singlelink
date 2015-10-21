@@ -1,0 +1,1 @@
+<%= render 'payola/subscriptions/cancel', subscription: Payola::Subscription.where(owner_id: current_user.id).last %>
