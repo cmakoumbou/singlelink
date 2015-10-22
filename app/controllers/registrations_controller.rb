@@ -15,5 +15,11 @@ class RegistrationsController < Devise::RegistrationsController
 	  else
 	  	render :delete
 	  end 
-  end  
+  end
+
+  protected
+
+  def after_sign_up_path_for(resource)
+    '/pricing'
+  end 
 end

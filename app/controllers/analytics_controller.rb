@@ -1,5 +1,6 @@
 class AnalyticsController < ApplicationController
   before_action :authenticate_user!
+  before_action :subscribed_user, only: [:index, :year]
 
   def index
   	# User
@@ -64,5 +65,13 @@ class AnalyticsController < ApplicationController
     # Country
     @profile_visits_country_chart = @profile_visits_year.select(:visit_id).uniq.joins(:visit).group("country").count
   end
+
+  def showcase
+  end
+
+  private
+    def subscribed_user
+      redirect_to analytics_showcase_url unless user_subscribed?
+    end
 end
 

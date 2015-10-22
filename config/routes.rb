@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   devise_scope :user do
-    root to: "devise/registrations#new"
+    root to: "static#home"
   end
 
   mount Payola::Engine => '/payola', as: :payola
@@ -24,13 +24,12 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/subscriptions' => 'subscriptions#index', :as => :subscriptions
-  get '/subscriptions/cancel' => 'subscriptions#cancel', :as => :subscriptions_cancel
-  get '/subscriptions/change' => 'subscriptions#change', :as => :subscriptions_change
-  get '/subscriptions/card' => 'subscriptions#card', :as => :subscriptions_card
+  get '/pricing' => 'subscriptions#pricing', :as => :pricing
+  get '/subscription' => 'subscriptions#index', :as => :subscription
 
   get '/analytics' => 'analytics#index', :as => :analytics
   get '/analytics/year' => 'analytics#year', :as => :analytics_year
+  get '/analytics/showcase' => 'analytics#showcase', :as => :analytics_showcase
 
   devise_for :users, :path => '', :controllers => { :registrations => 'registrations' }
   as :user do

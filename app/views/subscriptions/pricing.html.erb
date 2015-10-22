@@ -1,0 +1,8 @@
+<% if user_signed_in? %>
+	<%= render 'payola/subscriptions/checkout', plan: @pro_plan, email: current_user.email %>
+	<br />
+<% else %>
+<div class="btn-group">
+  <%= link_to('Sign up', new_user_registration_path, class: "btn btn-default btn-block") %>
+</div>
+<% end %>

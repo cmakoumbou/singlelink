@@ -21,6 +21,7 @@
 #  admin                  :boolean          default(FALSE)
 #  country                :string
 #  time_zone              :string
+#  plan                   :integer          default(0), not null
 #
 
 require 'test_helper'

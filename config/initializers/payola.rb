@@ -38,4 +38,25 @@ Payola.configure do |config|
     sub.owner = user
     sub.save!
   end
+
+  config.subscribe 'customer.subscription.created' do |event|
+    subscription = Payola::Subscription.find_by(stripe_id: event.data.object.id)
+    user = User.find_by(email: subscription.email)
+    user.plan = subscription.plan_id
+    user.save!
+  end
+
+  config.subscribe 'customer.subscription.deleted' do |event|
+    subscription = Payola::Subscription.find_by(stripe_id: event.data.object.id)
+    user = User.find_by(email: subscription.email)
+    user.plan = 0
+    user.save!
+  end
+
+  config.subscribe 'customer.subscription.updated' do |event|
+    subscription = Payola::Subscription.find_by(stripe_id: event.data.object.id)
+    user = User.find_by(email: subscription.email)
+    user.plan = subscription.plan_id
+    user.save!
+  end
 end
