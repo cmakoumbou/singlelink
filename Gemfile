@@ -30,6 +30,7 @@ group :development, :test do
   gem 'byebug', '5.0.0'
   gem 'web-console', '2.2.1'
   gem 'spring', '1.3.6'
+  gem 'factory_girl_rails', '4.5.0'
 end
 
 group :test do

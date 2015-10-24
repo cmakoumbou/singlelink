@@ -14,4 +14,5 @@ end
 class ActionController::TestCase
   include Devise::TestHelpers
   include Chartkick::Helper
+  include FactoryGirl::Syntax::Methods
 end

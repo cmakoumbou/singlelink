@@ -27,13 +27,25 @@ class Link < ActiveRecord::Base
   			errors.add(:base, 'Exceeded links limit')
   		end
   	elsif self.user.plan == 1
-  		if self.user.links(:reload).count >= 10
-  			errors.add(:base, 'Exceeded links limit')
-  		end
+      if self.user.plan_ending > Time.zone.now
+    		if self.user.links(:reload).count >= 10
+    			errors.add(:base, 'Exceeded links limit')
+    		end
+      elsif self.user.plan_ending < Time.zone.now
+        if self.user.links(:reload).count >= 5
+          errors.add(:base, 'Exceeded links limit')
+        end
+      end
     elsif self.user.plan == 2
-    	if self.user.links(:reload).count >= 25
-  			errors.add(:base, 'Exceeded links limit')
-  		end
+      if self.user.plan_ending > Time.zone.now
+      	if self.user.links(:reload).count >= 25
+    			errors.add(:base, 'Exceeded links limit')
+    		end
+      elsif self.user.plan_ending < Time.zone.now
+        if self.user.links(:reload).count >= 5
+          errors.add(:base, 'Exceeded links limit')
+        end
+      end
     end
   end
 

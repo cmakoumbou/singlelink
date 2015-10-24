@@ -14,6 +14,11 @@ class AnalyticsControllerTest < ActionController::TestCase
     assert_redirected_to new_user_session_path
   end
 
+  test "should redirect showcase when not logged in" do
+    get :showcase
+    assert_redirected_to new_user_session_path
+  end
+
   # Analytics index test
 
   test "index" do

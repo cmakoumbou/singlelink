@@ -43,13 +43,14 @@ Payola.configure do |config|
     subscription = Payola::Subscription.find_by(stripe_id: event.data.object.id)
     user = User.find_by(email: subscription.email)
     user.plan = subscription.plan_id
+    user.plan_ending = subscription.current_period_end
     user.save!
   end
 
   config.subscribe 'customer.subscription.deleted' do |event|
     subscription = Payola::Subscription.find_by(stripe_id: event.data.object.id)
     user = User.find_by(email: subscription.email)
-    user.plan = 0
+    user.plan_ending = subscription.current_period_end
     user.save!
   end
 
@@ -57,6 +58,7 @@ Payola.configure do |config|
     subscription = Payola::Subscription.find_by(stripe_id: event.data.object.id)
     user = User.find_by(email: subscription.email)
     user.plan = subscription.plan_id
+    user.plan_ending = subscription.current_period_end
     user.save!
   end
 end

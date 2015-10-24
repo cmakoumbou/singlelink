@@ -22,6 +22,7 @@
 #  country                :string
 #  time_zone              :string
 #  plan                   :integer          default(0), not null
+#  plan_ending            :datetime
 #
 
 require 'test_helper'
