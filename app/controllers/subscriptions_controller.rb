@@ -3,16 +3,16 @@ class SubscriptionsController < ApplicationController
 	before_action :subscribed_user, only: [:index]
 	before_action :non_subscribed_user, only: [:pricing]
 
-  def pricing
-  	@pro_plan = SubscriptionPlan.first
-  	@business_plan = SubscriptionPlan.second
-  end
-
   def index
   	@subscription = Payola::Subscription.where(owner_id: current_user.id).last
   	@subscription_guid = @subscription.guid
   	@pro_plan = SubscriptionPlan.first
   	@business_plan = SubscriptionPlan.second
+  end
+
+  def pricing
+    @pro_plan = SubscriptionPlan.first
+    @business_plan = SubscriptionPlan.second
   end
 
   private

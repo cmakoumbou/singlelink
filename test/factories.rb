@@ -18,21 +18,26 @@ FactoryGirl.define do
   factory :subscription, :class => 'Payola::Subscription' do
     plan_type "SubscriptionPlan"
     plan_id 1
-    start "2014-11-04 22:34:39"
-    status "MyString"
-    owner_type "Owner"
+    start nil
+    status nil
+    owner_type "User"
     owner_id 1
+    stripe_customer_id "random_customer_id"
     cancel_at_period_end false
-    current_period_start "2014-11-04 22:34:39"
-    current_period_end "2014-11-04 22:34:39"
-    ended_at "2014-11-04 22:34:39"
-    trial_start Time.now
-    trial_end Time.now + 7.days
-    canceled_at "2014-11-04 22:34:39"
-    email "jeremy@octolabs.com"
-    stripe_token "yyz123"
-    currency 'usd'
+    current_period_start Time.now
+    current_period_end Time.now + 7.days
+    ended_at nil
+    trial_start nil
+    trial_end nil
+    canceled_at nil
     quantity 1
-    stripe_id 'sub_123456'
+    stripe_id "random_stripe_id"
+    stripe_token "random_stripe_token"
+    card_last4 "4242"
+    card_expiration (Time.now + 2.years).strftime("%Y-%m-%d")
+    card_type "Visa"
+    email "user@example.com"
+    currency "gbp"
+    amount 499
   end
 end
