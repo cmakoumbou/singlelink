@@ -30,7 +30,7 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
 
 	def setup
-    @user = User.new(username: "example", email: "example@company.com", password: "superlol", password_confirmation: "superlol")
+    @user = FactoryGirl.create(:user)
   end
 
   test "should be valid" do
@@ -90,5 +90,9 @@ class UserTest < ActiveSupport::TestCase
   test "time_zone should be included" do
     @user.save
     assert_includes(ActiveSupport::TimeZone.zones_map.keys, @user.time_zone)
+  end
+
+  test "plan default value should be zero" do
+    assert_equal @user.plan, 0
   end
 end

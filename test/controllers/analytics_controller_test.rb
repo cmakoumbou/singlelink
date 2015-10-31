@@ -71,6 +71,18 @@ class AnalyticsControllerTest < ActionController::TestCase
     get :year
     assert_redirected_to analytics_showcase_path
   end
+
+  test "showcase when subscribed" do
+    sign_in @user
+    get :showcase
+    assert_redirected_to analytics_path
+  end
+
+  test "showcase when not subscribed" do
+    sign_in @user_2
+    get :showcase
+    assert_template 'analytics/showcase'
+  end
 end
 
 

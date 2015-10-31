@@ -1,6 +1,7 @@
 class AnalyticsController < ApplicationController
   before_action :authenticate_user!
   before_action :subscribed_user, only: [:index, :year]
+  before_action :non_subscribed, only: [:showcase]
 
   def index
   	# User
@@ -72,6 +73,10 @@ class AnalyticsController < ApplicationController
   private
     def subscribed_user
       redirect_to analytics_showcase_url unless user_subscribed?
+    end
+
+    def non_subscribed
+      redirect_to analytics_url unless !user_subscribed?
     end
 end
 

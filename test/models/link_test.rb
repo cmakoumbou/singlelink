@@ -15,8 +15,42 @@ require 'test_helper'
 class LinkTest < ActiveSupport::TestCase
 
 	def setup
-		@user = users(:bob)
-		@link = Link.new(url: "http://www.google.com", user_id: @user.id)
+
+		# User 1 with 5 links
+		@user = FactoryGirl.create(:user)
+		@link = FactoryGirl.create(:link, user: @user)
+		@link2 = FactoryGirl.create(:link, user: @user)
+		@link3 = FactoryGirl.create(:link, user: @user)
+		@link4 = FactoryGirl.create(:link, user: @user)
+		@link5 = FactoryGirl.create(:link, user: @user)
+
+		# User 2 with 0 link
+		@user2 = FactoryGirl.create(:user)
+
+		# User 3 with 7 links and a pro subscription
+		@user3 = FactoryGirl.create(:user, plan: 1, plan_ending: Time.now + 7.days)
+		@link_user3 = FactoryGirl.create(:link, user: @user3)
+		@link2_user3 = FactoryGirl.create(:link, user: @user3)
+		@link3_user3 = FactoryGirl.create(:link, user: @user3)
+		@link4_user3 = FactoryGirl.create(:link, user: @user3)
+		@link5_user3 = FactoryGirl.create(:link, user: @user3)
+		@link6_user3 = FactoryGirl.create(:link, user: @user3)
+		@link7_user3 = FactoryGirl.create(:link, user: @user3)
+
+		# User 4 with 12 links and a business subscription
+		@user4 = FactoryGirl.create(:user, plan: 2, plan_ending: Time.now + 7.days)
+		@link_user4 = FactoryGirl.create(:link, user: @user4)
+		@link2_user4 = FactoryGirl.create(:link, user: @user4)
+		@link3_user4 = FactoryGirl.create(:link, user: @user4)
+		@link4_user4 = FactoryGirl.create(:link, user: @user4)
+		@link5_user4 = FactoryGirl.create(:link, user: @user4)
+		@link6_user4 = FactoryGirl.create(:link, user: @user4)
+		@link7_user4 = FactoryGirl.create(:link, user: @user4)
+		@link8_user4 = FactoryGirl.create(:link, user: @user4)
+		@link9_user4 = FactoryGirl.create(:link, user: @user4)
+		@link10_user4 = FactoryGirl.create(:link, user: @user4)
+		@link11_user4 = FactoryGirl.create(:link, user: @user4)
+		@link12_user4 = FactoryGirl.create(:link, user: @user4)
 	end
 
 	test "should be valid" do
@@ -51,4 +85,23 @@ class LinkTest < ActiveSupport::TestCase
   	end
   end
 
+  test "links plan limit when 0 link already present" do
+  	@link_limit_user2 = Link.new(url: "google.com", user: @user2)
+  	assert @link_limit_user2.valid?
+  end
+
+  test "links plan limit when 5 links already present and no subscription" do
+  	@link_limit = Link.new(url: "google.com", user: @user)
+  	assert_not @link_limit.valid?
+  end
+
+  test "links plan limit when 7 links already present and pro subscription" do
+  	@link_limit_user3 = Link.new(url: "google.com", user: @user3)
+  	assert @link_limit_user3.valid?
+  end
+
+  test "links plan limit when 12 links already present and business subscription" do
+  	@link_limit_user4 = Link.new(url: "google.com", user: @user4)
+  	assert @link_limit_user4.valid?
+  end
 end
