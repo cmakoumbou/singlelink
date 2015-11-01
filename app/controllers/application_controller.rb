@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 	before_action :configure_permitted_parameters, if: :devise_controller?
-  helper_method :user_subscribed?
+  helper_method :user_subscribed?, :user_canceled?
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -25,6 +25,17 @@ class ApplicationController < ActionController::Base
       end
     else
       return false
+    end
+  end
+
+  def user_canceled?
+    subscription = subscription = Payola::Subscription.where(owner_id: current_user.id).last
+    if subscription.present?
+      if subscription.state == "canceled"
+        return true
+      else
+        return false
+      end
     end
   end
 

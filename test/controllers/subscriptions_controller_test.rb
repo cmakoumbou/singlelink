@@ -21,7 +21,7 @@ class SubscriptionsControllerTest < ActionController::TestCase
     assert_template 'subscriptions/pricing'
   end
 
-  # Subscription index test
+  # Subscription test
 
   test "index when subscribed" do
     sign_in @user
