@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151024193556) do
+ActiveRecord::Schema.define(version: 20150926155207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,15 +137,6 @@ ActiveRecord::Schema.define(version: 20151024193556) do
 
   add_index "payola_subscriptions", ["guid"], name: "index_payola_subscriptions_on_guid", using: :btree
 
-  create_table "subscription_plans", force: :cascade do |t|
-    t.integer  "amount"
-    t.string   "interval"
-    t.string   "stripe_id"
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -165,8 +156,6 @@ ActiveRecord::Schema.define(version: 20151024193556) do
     t.boolean  "admin",                  default: false
     t.string   "country"
     t.string   "time_zone"
-    t.integer  "plan",                   default: 0,     null: false
-    t.datetime "plan_ending"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
