@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   mount RailsAdmin::Engine => '/mabika', as: 'rails_admin'
   authenticated :user do
     root to: 'links#index', as: :authenticated_root
@@ -16,6 +17,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :subscriptions
+
+  # get '/subscriptions' =>  'subscriptions#index', :as => :subscriptions
   get '/analytics' => 'analytics#index', :as => :analytics
   get '/analytics/year' => 'analytics#year', :as => :analytics_year
 
