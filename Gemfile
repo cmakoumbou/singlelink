@@ -22,7 +22,7 @@ gem 'ahoy_matey', '1.2.1'
 gem 'chartkick', '1.4.1'
 gem 'groupdate', '2.4.0'
 gem 'country_select', '2.4.0'
-gem 'payola-payments', '1.3.2'
+gem 'payola-payments'
 gem 'sidekiq', '3.5.1'
 gem 'sinatra', :require => nil
 
