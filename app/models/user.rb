@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :links, dependent: :destroy
+  has_many :subscriptions
 
   extend FriendlyId
   friendly_id :username

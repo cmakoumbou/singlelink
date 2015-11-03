@@ -38,12 +38,13 @@ FriendlyId.defaults do |config|
   passwords random register registration root ruby rss report sale sales sample 
   samples script scripts secure send service shop sql signup signin search security 
   settings setting setup site sites sitemap smtp soporte ssh stage staging start 
-  subscribe subdomain suporte support stat static stats status store stores system
-  stylesheets stylesheet session sponsor sponsors tablet tablets tech telnet test 
-  test1 test2 test3 teste tests theme themes tmp todo task tasks tools tv talk 
+  stripe subscribe subdomain suporte support stat static stats status store stores 
+  system stylesheets stylesheet session sponsor sponsors tablet tablets tech telnet 
+  test test1 test2 test3 teste tests theme themes tmp todo task tasks tools tv talk 
   update upload url user username usuario usage users vendas video videos visitor
-  win ww www www1 www2 www3 www4 www5 www6 www7 wwww wws wwws web webmail website 
-  websites webmaster workshop xxx xpg you yourname yourusername yoursite yourdomain) 
+  win ww www www1 www2 www3 www4 www5 www6 www7 wwww wws wwws web webhook webhooks 
+  webmail website websites webmaster workshop xxx xpg you yourname yourusername 
+  yoursite yourdomain) 
 
   #  ## Friendly Finders
   #

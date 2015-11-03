@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   get '/analytics' => 'analytics#index', :as => :analytics
   get '/analytics/year' => 'analytics#year', :as => :analytics_year
 
+  mount StripeEvent::Engine, at: '/webhooks'
+
   devise_for :users, :path => '', :controllers => { :registrations => 'registrations' }
   as :user do
     get '/settings' => 'devise/registrations#edit'

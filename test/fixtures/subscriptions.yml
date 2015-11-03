@@ -1,0 +1,29 @@
+# == Schema Information
+#
+# Table name: subscriptions
+#
+#  id              :integer          not null, primary key
+#  subscription_id :string
+#  customer_id     :string
+#  plan_id         :string
+#  user_id         :integer
+#  end_date        :datetime
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subscription_id: MyString
+  customer_id: MyString
+  plan_id: MyString
+  user_id: 
+  end_date: 2015-11-03 01:57:01
+
+two:
+  subscription_id: MyString
+  customer_id: MyString
+  plan_id: MyString
+  user_id: 
+  end_date: 2015-11-03 01:57:01
