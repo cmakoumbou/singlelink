@@ -1,0 +1,12 @@
+Hi, <%= @user.username %>
+===============================================
+
+<% if @next_payment_attempt.blank? %>
+  Your subscription payment failed and your subscription has been cancelled.
+<% elsif @next_payment_attempt.present? && @attempt_count ==  3 %>
+  Your subscription payment failed, the next payment attempt will be on <%= Time.at(@next_payment_attempt).strftime("%A %d %B %Y") %>.
+
+  This will be your final payment attempt before we cancel your subscription.
+<% else %>
+	Your subscription payment failed, the next payment attempt will be on <%= Time.at(@next_payment_attempt).strftime("%A %d %B %Y") %>.
+<% end %>

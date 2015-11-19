@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi, <%= @user.username %></h1>
+    <% if @next_payment_attempt.blank? %>
+	    <p>
+	      Your subscription payment failed and your subscription has been cancelled.
+	    </p>
+	  <% elsif @next_payment_attempt.present? && @attempt_count ==  3 %>
+	  	<p>
+	      Your subscription payment failed, the next payment attempt will be on <%= Time.at(@next_payment_attempt).strftime("%A %d %B %Y") %>.
+	    </p>
+	    <p>
+	    	This will be your final payment attempt before we cancel your subscription.
+	    </p>
+	  <% else %>
+	    <p>
+	  		Your subscription payment failed, the next payment attempt will be on <%= Time.at(@next_payment_attempt).strftime("%A %d %B %Y") %>.
+	  	</p>
+	  <% end %>
+  </body>
+</html>

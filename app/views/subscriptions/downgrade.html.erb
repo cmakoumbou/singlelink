@@ -1,0 +1,14 @@
+<p>Prorating time set on: <b><%= Time.now.strftime("%A, %d %B %Y at %H:%M") %></b></p>
+
+<p>If you downgrade your subscription before <b><%= (Time.now + 1.hour).strftime("%A, %d %B %Y at %H:%M") %></b>, you will get discount of <b><%= @final_charge.gsub("-", "") %></b> that will go towards your next subscription payment(s) on <b><%= @user_subscription.end_date.strftime("%A, %d %B %Y") %></b>.</p>
+
+<p>After an hour, you will need to refresh this page to get the correct discount amount.</p>
+
+<%= form_tag downgrade_confirm_path do %>
+	<%= hidden_field_tag "prorate_date", Time.now.to_i %>
+	<%= submit_tag "Downgrade Subscription" %>
+<% end %>
+
+<%= @lol %>
+<br />
+<%= @hello %>

@@ -14,3 +14,19 @@
           data-currency="gbp"
           data-allow-remember-me="false"></script>
 <% end %>
+
+<br />
+
+<%= button_to "Cancel Subscription", { :controller => "subscriptions", :action => "cancel" } %>
+
+<br />
+
+<%= button_to "Resume Subscription", { :controller => "subscriptions", :action => "resume" } %>
+
+<br />
+
+<%= link_to "Upgrade Subscription", upgrade_subscription_path %>
+
+<br />
+
+<%= link_to "Downgrade Subscription", downgrade_subscription_path %>

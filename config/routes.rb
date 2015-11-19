@@ -17,9 +17,17 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :subscriptions
+  resources :subscriptions, only: [:index, :create]
 
-  # get '/subscriptions' =>  'subscriptions#index', :as => :subscriptions
+  post '/subscriptions/cancel' => 'subscriptions#cancel', as: :cancel_subscription
+  post '/subscriptions/resume' => 'subscriptions#resume', as: :resume_subscription
+
+  get '/subscriptions/upgrade' => 'subscriptions#upgrade', as: :upgrade_subscription
+  get '/subscriptions/downgrade' => 'subscriptions#downgrade', as: :downgrade_subscription
+
+  post '/subscriptions/upgrade' => 'subscriptions#upgrade_confirm', as: :upgrade_confirm
+  post '/subscriptions/downgrade' => 'subscriptions#downgrade_confirm', as: :downgrade_confirm
+
   get '/analytics' => 'analytics#index', :as => :analytics
   get '/analytics/year' => 'analytics#year', :as => :analytics_year
 
