@@ -1,15 +1,5 @@
-<p>Prorating time set on: <b><%= Time.now.strftime("%A, %d %B %Y at %H:%M") %></b></p>
+<p>Upgrade your subscription to the <b>Business plan for £10 a month</b>.</p>
 
-<p>If you upgrade your subscription before <b><%= (Time.now + 1.hour).strftime("%A, %d %B %Y at %H:%M") %></b>, you will be charged <b>£<%= @final_charge %></b>
- on <b><%= @user_subscription.end_date.strftime("%A, %d %B %Y") %></b>.</p>
+<p>You won't be charged until <b><%= @user_subscription.end_date.strftime("%d %B %Y") %></b> and your subscription immediately changes to <b>Business plan</b>.</p>
 
- <p>This charge includes:</p> 
- <p>A prorated charge at <b>£<%= @prorated_charge %></b> for the use of the <b>Business plan</b> from when you upgrade till <b><%= @user_subscription.end_date.strftime("%A, %d %B %Y") %></b>.<br />
-	One month subscription for the <b>Business plan</b> at <b>£9.99</b> starting on <b><%= @user_subscription.end_date.strftime("%A, %d %B %Y") %></b>.</p>
-
-<p>After an hour, you will need to refresh this page to get the correct amount that will be charged.</p>
-
-<%= form_tag upgrade_confirm_path do %>
-	<%= hidden_field_tag "prorate_date", Time.now.to_i %>
-	<%= submit_tag "Upgrade Subscription" %>
-<% end %>
+<%= button_to "Upgrade Subscription", { :controller => "subscriptions", :action => "upgrade_confirm" } %>
