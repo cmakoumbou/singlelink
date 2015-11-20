@@ -21,12 +21,14 @@ StripeEvent.configure do |events|
 				s.user = user
 				s.start_date = Time.at(sub.current_period_start)
 				s.end_date = Time.at(sub.current_period_end)
+				s.end_date_extended = Time.at(sub.current_period_end) + 3.hours
 			end
 			subscription.save!
 		else
 			user_subscription.plan_id = sub.plan.id
 			user_subscription.start_date = Time.at(sub.current_period_start)
 			user_subscription.end_date = Time.at(sub.current_period_end)
+			user_subscription.end_date_extended = Time.at(sub.current_period_end) + 3.hours
 			user_subscription.save!
 		end
 	end
