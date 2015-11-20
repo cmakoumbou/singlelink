@@ -17,16 +17,38 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :subscriptions, only: [:index, :create]
+  resources :subscriptions, only: [:index]
 
-  post '/subscriptions/cancel' => 'subscriptions#cancel', as: :cancel_subscription
-  post '/subscriptions/resume' => 'subscriptions#resume', as: :resume_subscription
+  # Pro / Business Subscriptions
+
+  get '/subscriptions/pro' => 'subscriptions#pro', as: :pro_subscription
+  get '/subscriptions/business' => 'subscriptions#business', as: :business_subscription
+
+  post '/subscriptions/pro' => 'subscriptions#pro_confirm', as: :pro_confirm
+  post '/subscriptions/business' => 'subscriptions#business_confirm', as: :business_confirm
+
+  # Cancel / Resume Subscriptions
+
+  get '/subscriptions/cancel' => 'subscriptions#cancel', as: :cancel_subscription
+  get '/subscriptions/resume' => 'subscriptions#resume', as: :resume_subscription
+
+  post '/subscriptions/cancel' => 'subscriptions#cancel_confirm', as: :cancel_confirm
+  post '/subscriptions/resume' => 'subscriptions#resume_confirm', as: :resume_confirm
+
+  # Upgrade / Downgrade Subscriptions
 
   get '/subscriptions/upgrade' => 'subscriptions#upgrade', as: :upgrade_subscription
   get '/subscriptions/downgrade' => 'subscriptions#downgrade', as: :downgrade_subscription
 
   post '/subscriptions/upgrade' => 'subscriptions#upgrade_confirm', as: :upgrade_confirm
   post '/subscriptions/downgrade' => 'subscriptions#downgrade_confirm', as: :downgrade_confirm
+
+  # Card Update
+
+  get '/subscriptions/card' => 'subscriptions#card', as: :card_subscription
+  post '/subscriptions/card' => 'subscriptions#card_update', as: :card_update
+
+  # Analytics
 
   get '/analytics' => 'analytics#index', :as => :analytics
   get '/analytics/year' => 'analytics#year', :as => :analytics_year

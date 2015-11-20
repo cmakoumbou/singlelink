@@ -1,0 +1,16 @@
+<%= form_tag pro_confirm_path do %>
+  <article>
+    <label class="amount">
+      <span>Amount: £5</span>
+    </label>
+  </article>
+
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-name="Pro Subscription"
+          data-description="£5 per month"
+          data-email="<%= @user.email%>"
+          data-locale="auto"
+          data-panel-label="Pay £5"
+          data-allow-remember-me="false"></script>
+<% end %>

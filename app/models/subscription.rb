@@ -10,6 +10,7 @@
 #  end_date        :datetime
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  start_date      :datetime
 #
 
 class Subscription < ActiveRecord::Base

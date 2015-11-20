@@ -1,5 +1,5 @@
 <p>Upgrade your subscription to the <b>Business plan for £10 a month</b>.</p>
 
-<p>You won't be charged until <b><%= @user_subscription.end_date.strftime("%d %B %Y") %></b> and your subscription immediately changes to <b>Business plan</b>.</p>
+<p>You won't be charged until <b><%= @user_subscription.end_date.strftime("%A %d %B %Y") %></b> and your subscription will immediately change to the <b>Business plan</b> now.</p>
 
 <%= button_to "Upgrade Subscription", { :controller => "subscriptions", :action => "upgrade_confirm" } %>

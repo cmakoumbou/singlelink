@@ -1,27 +1,8 @@
-<%= form_tag subscriptions_path do %>
-  <article>
-    <label class="amount">
-      <span>Amount: £4.99</span>
-    </label>
-  </article>
-
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-description="A month's subscription"
-          data-amount="499"
-          data-email="<%= @user.email%>"
-          data-locale="auto"
-          data-currency="gbp"
-          data-allow-remember-me="false"></script>
-<% end %>
+<%= link_to "Pro Subscription", pro_subscription_path %>
 
 <br />
 
-<%= button_to "Cancel Subscription", { :controller => "subscriptions", :action => "cancel" } %>
-
-<br />
-
-<%= button_to "Resume Subscription", { :controller => "subscriptions", :action => "resume" } %>
+<%= link_to "Business Subscription", business_subscription_path %>
 
 <br />
 
@@ -30,3 +11,15 @@
 <br />
 
 <%= link_to "Downgrade Subscription", downgrade_subscription_path %>
+
+<br />
+
+<%= link_to "Cancel Subscription", cancel_subscription_path %>
+
+<br />
+
+<%= link_to "Resume Subscription", resume_subscription_path %>
+
+<br />
+
+<%= link_to "Update Card", card_subscription_path %>

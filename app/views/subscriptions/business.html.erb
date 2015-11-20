@@ -1,0 +1,16 @@
+<%= form_tag business_confirm_path do %>
+  <article>
+    <label class="amount">
+      <span>Amount: £10</span>
+    </label>
+  </article>
+
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-name="Business Subscription"
+          data-description="£10 per month"
+          data-email="<%= @user.email%>"
+          data-locale="auto"
+          data-panel-label="Pay £10"
+          data-allow-remember-me="false"></script>
+<% end %>
