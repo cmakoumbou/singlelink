@@ -3,6 +3,7 @@ class SubscriptionsController < ApplicationController
 
   def index
   	@user = current_user
+    @user_subscription = @user.subscriptions.last
   end
 
   def pro
@@ -59,7 +60,12 @@ class SubscriptionsController < ApplicationController
 
     customer = Stripe::Customer.retrieve(@user_subscription.customer_id)
     customer.subscriptions.retrieve(@user_subscription.subscription_id).delete(:at_period_end => true)
+
+    @user_subscription.status = "cancelled"
+    @user_subscription.save
+
     redirect_to root_url, notice: 'Subscription was successfully cancelled.'
+
   rescue => e
     flash[:error] = e.message
     redirect_to cancel_subscription_path
@@ -73,7 +79,12 @@ class SubscriptionsController < ApplicationController
     subscription = customer.subscriptions.retrieve(@user_subscription.subscription_id)
     subscription.plan = @user_subscription.plan_id
     subscription.save
+
+    @user_subscription.status = "active"
+    @user_subscription.save
+
     redirect_to root_url, notice: 'Subscription was successfully resumed.'
+
   rescue => e
     flash[:error] = e.message
     redirect_to resume_subscription_path
@@ -100,9 +111,11 @@ class SubscriptionsController < ApplicationController
     subscription.save
 
     @user_subscription.plan_id = "2"
+    @user_subscription.status = "active"
     @user_subscription.save
 
     redirect_to root_url, notice: 'Subscription was successfully upgraded.'
+
   rescue => e
     flash[:error] = e.message
     redirect_to upgrade_subscription_path
@@ -117,6 +130,9 @@ class SubscriptionsController < ApplicationController
     subscription.plan = "1"
     subscription.prorate = false
     subscription.save
+
+    @user_subscription.status = "downgrade"
+    @user_subscription.save
 
     redirect_to root_url, notice: 'Subscription was successfully downgraded.'
 

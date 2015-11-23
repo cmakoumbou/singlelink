@@ -21,15 +21,15 @@ StripeEvent.configure do |events|
 				s.user = user
 				s.start_date = Time.at(sub.current_period_start)
 				s.end_date = Time.at(sub.current_period_end)
-				s.end_date_extended = Time.at(sub.current_period_end) + 3.hours
+				s.status = "active"
 			end
-			subscription.save!
+			subscription.save
 		else
 			user_subscription.plan_id = sub.plan.id
 			user_subscription.start_date = Time.at(sub.current_period_start)
 			user_subscription.end_date = Time.at(sub.current_period_end)
-			user_subscription.end_date_extended = Time.at(sub.current_period_end) + 3.hours
-			user_subscription.save!
+			user_subscription.status = "active"
+			user_subscription.save
 		end
 	end
 
@@ -37,12 +37,22 @@ StripeEvent.configure do |events|
 		customer = Stripe::Customer.retrieve(event.data.object.customer)
 		invoice = Stripe::Invoice.retrieve(event.data.object.id)
 
-		user_subscription = Subscription.find_by_subscription_id(invoice.subscription)
-		user = User.find_by_id(user_subscription.user_id)
+		# user_subscription = Subscription.find_by_subscription_id(invoice.subscription)
+		# user = User.find_by_id(user_subscription.user_id)
+
+		user_subscription = Subscription.find_by_id(1)
+		user = User.find_by_id(1)
 
 		next_payment_attempt = invoice.next_payment_attempt
 		attempt_count = invoice.attempt_count
 
+		if next_payment_attempt.blank?
+			user_subscription.status = "cancelled"
+		else
+			user_subscription.status = "past_due"
+		end
+		user_subscription.save
+		
 		UserMailer.failed_payment(user, next_payment_attempt, attempt_count).deliver
 	end
 end

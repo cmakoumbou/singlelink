@@ -1,5 +1,5 @@
 <p>Downgrade your subscription to the <b>Pro plan for £5 a month</b>.</p>
 
-<p>You won't be charged until <b><%= @user_subscription.end_date.strftime("%A %d %B %Y") %></b> and your subscription remains as <b>Business plan</b> until that date.</p>
+<p>Your subscription remains as <b>Business plan</b> until <b><%= @user_subscription.end_date.strftime("%A %d %B %Y") %></b> then you will be charged £5 per month for the <b>Pro plan</b>.
 
 <%= button_to "Downgrade Subscription", { :controller => "subscriptions", :action => "downgrade_confirm" } %>
