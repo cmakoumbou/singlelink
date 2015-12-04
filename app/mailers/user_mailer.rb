@@ -7,4 +7,9 @@ class UserMailer < ApplicationMailer
 		@user = user
 		mail(to: @user.email, subject: 'Failed payment')
 	end
+
+	def cancel_subscription(user)
+		@user = user
+		mail(to: @user.email, subject: 'Canceled Subscription')
+	end
 end

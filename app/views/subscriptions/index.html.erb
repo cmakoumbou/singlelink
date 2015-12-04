@@ -1,68 +1,18 @@
-<% if @user_subscription.blank? %>
-  <p>Current Subscription: <b>Free Plan</b></p>
-
-  <ul>
-  	<li><%= link_to "Pro Subscription", pro_subscription_path %></li>
-  	<li><%= link_to "Business Subscription", business_subscription_path %></li>
-  </ul>
-
-<% elsif @user_subscription.plan_id == "1" && user_subscribed? %>
-  <p>Current Subscription: <b>Pro Plan</b> until <b><%= @user_subscription.end_date.strftime("%A %d %B %Y") %></b>
-  <% if @user_subscription.status == "cancelled" %>
-    then your subscription will be cancelled.
+<ul>
+  <% if can? :pro, Subscription %>
+    <li><%= link_to "Pro Subscription", pro_subscription_path %></li>
   <% end %>
-  </p>
 
-  <ul>	
-		<% if @user_subscription.status == "active" %>
-		  <li><%= link_to "Upgrade Subscription", upgrade_subscription_path %></li>
-		  <li><%= link_to "Cancel Subscription", cancel_subscription_path %></li>
-		<% elsif @user_subscription.status == "cancelled" %>
-		  <li><%= link_to "Resume Subscription", resume_subscription_path %></li>
-		<% end %>
-		<li><%= link_to "Update Card", card_subscription_path %></li>
-	</ul>
-
-<% elsif @user_subscription.plan_id == "2" && user_subscribed? %>
-  <p>Current Subscription: <b>Business Plan</b> until <b><%= @user_subscription.end_date.strftime("%A %d %B %Y") %></b>
-  <% if @user_subscription.status == "cancelled" %>
-    then your subscription will be cancelled.
-  <% elsif @user_subscription.status == "downgrade" %>
-    then your subscription will be downgraded to the <b>Pro plan</b>.
+  <% if can? :resume, Subscription %>
+    <li><%= link_to "Resume Subscription", resume_subscription_path %></li>
   <% end %>
-  </p>
 
-  <ul>	
-		<% if @user_subscription.status == "active" %>
-		  <li><%= link_to "Downgrade Subscription", downgrade_subscription_path %></li>
-		  <li><%= link_to "Cancel Subscription", cancel_subscription_path %></li>
-		<% elsif @user_subscription.status == "downgrade" %>
-		  <li><%= link_to "Stop Subscription Downgrade", upgrade_subscription_path %></li>
-		  <li><%= link_to "Cancel Subscription", cancel_subscription_path %></li>
-		<% elsif @user_subscription.status == "cancelled" %>
-		  <li><%= link_to "Resume Subscription", resume_subscription_path %></li>
-		<% end %>
-		<li><%= link_to "Update Card", card_subscription_path %></li>
-	</ul>
+  <% if can? :cancel, Subscription %>
+    <li><%= link_to "Cancel Subscription", cancel_subscription_path %></li>
+  <% end %>
 
-<% else %>
-  
-	<% if @user_subscription.status == "past_due" && @user_subscription.plan_id == "1" %>
-		<p>Current Subscription: <b>Pro Plan</b>, your subscription payment failed, please make sure you have enough funds or update your card.</p>
-  <% elsif @user_subscription.status == "past_due" && @user_subscription.plan_id == "2" %>
-    <p>Current Subscription: <b>Business Plan</b>, your subscription payment failed, please make sure you have enough funds or update your card.</p>
-  <% elsif @user_subscription.status == "cancelled" %>
-  	<p>Current Subscription: <b>Free Plan</b></p>
-	<% end %>
+  <% if can? :card, Subscription %>
+    <li><%= link_to "Update Card", card_subscription_path %></li>
+  <% end %>
+</ul>
 
-	<ul>
-		<% if @user_subscription.status == "past_due" %>
-		  <li><%= link_to "Update Card", card_subscription_path %></li>
-		  <li><%= link_to "Cancel Subscription", cancel_subscription_path %></li>
-		<% elsif @user_subscription.status == "cancelled" %>
-		  <li><%= link_to "Pro Subscription", pro_subscription_path %></li>
-  		<li><%= link_to "Business Subscription", business_subscription_path %></li>
-  	<% end %>
-  </ul>
-
-<% end %>

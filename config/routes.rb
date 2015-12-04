@@ -22,10 +22,7 @@ Rails.application.routes.draw do
   # Pro / Business Subscriptions
 
   get '/subscriptions/pro' => 'subscriptions#pro', as: :pro_subscription
-  get '/subscriptions/business' => 'subscriptions#business', as: :business_subscription
-
   post '/subscriptions/pro' => 'subscriptions#pro_confirm', as: :pro_confirm
-  post '/subscriptions/business' => 'subscriptions#business_confirm', as: :business_confirm
 
   # Cancel / Resume Subscriptions
 
@@ -34,14 +31,6 @@ Rails.application.routes.draw do
 
   post '/subscriptions/cancel' => 'subscriptions#cancel_confirm', as: :cancel_confirm
   post '/subscriptions/resume' => 'subscriptions#resume_confirm', as: :resume_confirm
-
-  # Upgrade / Downgrade Subscriptions
-
-  get '/subscriptions/upgrade' => 'subscriptions#upgrade', as: :upgrade_subscription
-  get '/subscriptions/downgrade' => 'subscriptions#downgrade', as: :downgrade_subscription
-
-  post '/subscriptions/upgrade' => 'subscriptions#upgrade_confirm', as: :upgrade_confirm
-  post '/subscriptions/downgrade' => 'subscriptions#downgrade_confirm', as: :downgrade_confirm
 
   # Card Update
 

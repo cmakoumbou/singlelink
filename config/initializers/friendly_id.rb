@@ -33,7 +33,7 @@ FriendlyId.defaults do |config|
   mine mp3 msg msn mysql messenger mob mobile movie movies music musicas my name 
   named net network new news newsletter nick nickname notes noticiasns ns1 ns2 
   ns3 ns4 old online operator order orders page pager pages panel password perl 
-  pic pics photo photos photoalbum php plugin plugins pop pop3 post postmaster
+  pic pics pro photo photos photoalbum php plugin plugins pop pop3 post postmaster
   postfix posts profile project projects promo pub public python premium premiums
   passwords random register registration root ruby rss report sale sales sample 
   samples script scripts secure send service shop sql signup signin search security 

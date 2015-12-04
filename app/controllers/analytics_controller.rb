@@ -41,7 +41,7 @@ class AnalyticsController < ApplicationController
     @profile_events = Ahoy::Event.where.not(user_id: @user.id).where(properties: [visited_user: @user.id])
     @profile_visits = @profile_events.where(name: "Profile visit")
 
-    # Data for one month
+    # Data for one year
     @from = Time.now.in_time_zone(@user.time_zone).beginning_of_year
     @to = Time.now.in_time_zone(@user.time_zone).end_of_year
     @profile_visits_year = @profile_visits.where(time: @from..@to)

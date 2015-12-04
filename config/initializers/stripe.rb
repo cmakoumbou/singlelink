@@ -9,7 +9,6 @@ StripeEvent.configure do |events|
 	events.subscribe 'invoice.payment_succeeded' do |event|
 		customer = Stripe::Customer.retrieve(event.data.object.customer)
 		sub = customer.subscriptions.retrieve(event.data.object.subscription)
-
 		user_subscription = Subscription.find_by_subscription_id(sub.id)
 
 		if user_subscription.blank?
@@ -34,25 +33,22 @@ StripeEvent.configure do |events|
 	end
 
 	events.subscribe 'invoice.payment_failed' do |event|
-		customer = Stripe::Customer.retrieve(event.data.object.customer)
-		invoice = Stripe::Invoice.retrieve(event.data.object.id)
-
-		# user_subscription = Subscription.find_by_subscription_id(invoice.subscription)
-		# user = User.find_by_id(user_subscription.user_id)
-
-		user_subscription = Subscription.find_by_id(1)
-		user = User.find_by_id(1)
-
-		next_payment_attempt = invoice.next_payment_attempt
-		attempt_count = invoice.attempt_count
-
-		if next_payment_attempt.blank?
-			user_subscription.status = "cancelled"
-		else
+		next_payment_attempt = event.data.object.next_payment_attempt
+		if next_payment_attempt.present?
+			attempt_count = event.data.object.attempt_count
+			user_subscription = Subscription.find_by_customer_id(event.data.object.customer)
+			user = User.find_by_id(user_subscription.user_id)
 			user_subscription.status = "past_due"
+			user_subscription.save
+			UserMailer.failed_payment(user, next_payment_attempt, attempt_count).deliver
 		end
+	end
+
+	events.subscribe 'customer.subscription.deleted' do |event|
+		user_subscription = Subscription.find_by_subscription_id(event.data.object.id)
+		user = User.find_by_id(user_subscription.user_id)
+		user_subscription.status = "canceled"
 		user_subscription.save
-		
-		UserMailer.failed_payment(user, next_payment_attempt, attempt_count).deliver
+		UserMailer.cancel_subscription(user).deliver
 	end
 end
