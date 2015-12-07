@@ -1,3 +1,26 @@
+<% if can? :pro, Subscription %>
+  <p>Current Subscription: <b>Free Plan</b></p>
+<% end %>
+
+<% if @user_subscription.active? %>
+  <p>Current Subscription: <b>Pro Plan</b> until <b><%= @user_subscription.end_date.strftime("%A %d %B %Y") %></b>.</p>
+<% end %>
+
+<% if @user_subscription.past_due? %>
+  <p>Current Subscription: <b>Pro Plan (Inactive)</b><br/>
+  Your subscription payment failed, you can cancel or update your card if necessary.<br/>
+  The next payment attempt will be on <b><%= @user_subscription.next_payment_attempt.strftime("%A %d %B %Y") %></b>.</p>
+<% end %>
+
+<% if @user_subscription.canceled_later? %>
+  <p>Current Subscription: <b>Pro Plan</b> until <b><%= @user_subscription.end_date.strftime("%A %d %B %Y") %></b>
+  then your subscription will be canceled.</p>
+<% end %>
+
+<% if cannot? :pro, Subscription %>
+  <p>Payment Info: <b><%= @user_subscription.last4 %> (Last 4 digits)</b></p>
+<% end %>
+
 <ul>
   <% if can? :pro, Subscription %>
     <li><%= link_to "Pro Subscription", pro_subscription_path %></li>
@@ -15,4 +38,3 @@
     <li><%= link_to "Update Card", card_subscription_path %></li>
   <% end %>
 </ul>
-

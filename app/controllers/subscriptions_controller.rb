@@ -5,7 +5,7 @@ class SubscriptionsController < ApplicationController
 
   def index
   	@user = current_user
-    @user_subscription = @user.subscriptions.last
+    @user_subscription = @user.subscriptions.take
   end
 
   # Pro Subscription
@@ -19,15 +19,17 @@ class SubscriptionsController < ApplicationController
   def pro_confirm
     authorize! :pro_confirm, Subscription
 
-    token = params[:stripeToken]
-    customer_email = params[:stripeEmail]
+    @user = current_user
 
-    customer = Stripe::Customer.create(
-      :source => token,
-      :plan => "1",
-      :email => customer_email,
-      :trial_end => 1449152447
-    )
+    if @user.subscriptions.present?
+      token = params[:stripeToken]
+      customer = Stripe::Customer.retrieve(@user.subscriptions.take.customer_id)
+      customer.subscriptions.create(:source => token, :plan => "1")
+    else
+      token = params[:stripeToken]
+      customer_email = params[:stripeEmail]
+      customer = Stripe::Customer.create(:source => token, :plan => "1", :email => customer_email)
+    end
 
     redirect_to root_url, notice: 'Pro Subscription was successfully activated.'
 
@@ -46,7 +48,7 @@ class SubscriptionsController < ApplicationController
     authorize! :cancel_confirm, Subscription
 
     @user = current_user
-    @user_subscription = @user.subscriptions.last
+    @user_subscription = @user.subscriptions.take
     customer = Stripe::Customer.retrieve(@user_subscription.customer_id)
 
     if @user_subscription.status == "active" && @user_subscription.end_date > Time.now
@@ -75,7 +77,7 @@ class SubscriptionsController < ApplicationController
     authorize! :resume_confirm, Subscription
 
     @user = current_user
-    @user_subscription = @user.subscriptions.last
+    @user_subscription = @user.subscriptions.take
 
     customer = Stripe::Customer.retrieve(@user_subscription.customer_id)
     subscription = customer.subscriptions.retrieve(@user_subscription.subscription_id)
@@ -105,7 +107,7 @@ class SubscriptionsController < ApplicationController
 
     token = params[:stripeToken]
     @user = current_user
-    @user_subscription = @user.subscriptions.last
+    @user_subscription = @user.subscriptions.take
 
     customer = Stripe::Customer.retrieve(@user_subscription.customer_id)
     customer.source = token

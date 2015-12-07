@@ -14,20 +14,21 @@ class Ability
     end
 
     if user.subscriptions.present?
+      sub = user.subscriptions.take
       can :card, Subscription
       can :card_update, Subscription
-      if user.subscriptions.last.status == "active"
+      if sub.status == "active"
         can :cancel, Subscription
         can :cancel_confirm, Subscription
-      elsif user.subscriptions.last.status == "canceled" && user.subscriptions.last.end_date > Time.now
+      elsif sub.status == "canceled" && sub.end_date > Time.now
         can :resume, Subscription
         can :resume_confirm, Subscription
-      elsif user.subscriptions.last.status == "canceled" && user.subscriptions.last.end_date < Time.now
+      elsif sub.status == "canceled" && sub.end_date < Time.now
         can :pro, Subscription
         can :pro_confirm, Subscription
         cannot :card, Subscription
         cannot :card_update, Subscription
-      elsif user.subscriptions.last.status == "past_due"
+      elsif sub.status == "past_due"
         can :cancel, Subscription
         can :cancel_confirm, Subscription
       end

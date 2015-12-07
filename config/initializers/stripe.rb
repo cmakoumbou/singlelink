@@ -9,7 +9,7 @@ StripeEvent.configure do |events|
 	events.subscribe 'invoice.payment_succeeded' do |event|
 		customer = Stripe::Customer.retrieve(event.data.object.customer)
 		sub = customer.subscriptions.retrieve(event.data.object.subscription)
-		user_subscription = Subscription.find_by_subscription_id(sub.id)
+		user_subscription = Subscription.find_by_customer_id(event.data.object.customer)
 
 		if user_subscription.blank?
 			user = User.find_by_email(customer.email)
@@ -24,6 +24,7 @@ StripeEvent.configure do |events|
 			end
 			subscription.save
 		else
+			user_subscription.subscription_id = sub.id
 			user_subscription.plan_id = sub.plan.id
 			user_subscription.start_date = Time.at(sub.current_period_start)
 			user_subscription.end_date = Time.at(sub.current_period_end)
@@ -39,16 +40,23 @@ StripeEvent.configure do |events|
 			user_subscription = Subscription.find_by_customer_id(event.data.object.customer)
 			user = User.find_by_id(user_subscription.user_id)
 			user_subscription.status = "past_due"
+			user_subscription.next_payment_attempt = Time.at(event.data.object.next_payment_attempt)
 			user_subscription.save
 			UserMailer.failed_payment(user, next_payment_attempt, attempt_count).deliver
 		end
 	end
 
 	events.subscribe 'customer.subscription.deleted' do |event|
-		user_subscription = Subscription.find_by_subscription_id(event.data.object.id)
+		user_subscription = Subscription.find_by_customer_id(event.data.object.customer)
 		user = User.find_by_id(user_subscription.user_id)
 		user_subscription.status = "canceled"
 		user_subscription.save
 		UserMailer.cancel_subscription(user).deliver
+	end
+
+	events.subscribe 'customer.source.created' do |event|
+		user_subscription = Subscription.find_by_customer_id(event.data.object.customer)
+		user_subscription.last4 = event.data.object.last4
+		user_subscription.save
 	end
 end
