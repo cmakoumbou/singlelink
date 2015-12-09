@@ -42,4 +42,12 @@ class Subscription < ActiveRecord::Base
       return false
     end
   end
+
+  def canceled_now?
+    if self.status == "canceled" && self.end_date < Time.now
+      return true
+    else
+      return false
+    end
+  end
 end

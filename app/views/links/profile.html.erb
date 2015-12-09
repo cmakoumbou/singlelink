@@ -18,7 +18,9 @@
   	<% if !@links.empty? %>
 		  <ul class="list-group">
 				<% @links.each do |link| %>
-					<li class="list-group-item special_link"><%= link_to link.url, link.url, :target => "_blank" %></li>
+				  <% if link.disable == false %>
+						<li class="list-group-item special_link"><%= link_to link.url, link.url, :target => "_blank" %></li>
+					<% end %>
 				<% end %>
 			</ul>
 		<% else %>

@@ -19,7 +19,12 @@
                     <span class="glyphicon glyphicon-arrow-down"></span>
                   <% end %>
                 </td>
-                <td class="col-xs-7 col-md-9"><%= link_to link.url, link.url, :target => "_blank" %></td>
+                <td class="col-xs-5 col-md-8"><%= link_to link.url, link.url, :target => "_blank" %></td>
+                <% if link.disable == false %>
+                  <td class="col-xs-2 col-md-1"><%= link_to 'Disable', disable_link_path(link), :method => :post %></td>
+                <% else %>
+                  <td class="col-xs-2 col-md-1"><%= link_to 'Enable', enable_link_path(link), :method => :post %></td>
+                <% end %>
                 <td class="col-xs-2 col-md-1"><%= link_to 'Edit', edit_link_path(link) %></td>
                 <td class="col-xs-2 col-md-1"><%= link_to 'Delete', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
               </tr>

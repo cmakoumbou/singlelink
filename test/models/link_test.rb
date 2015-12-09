@@ -8,6 +8,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  row_order  :integer
+#  disable    :boolean          default(FALSE)
 #
 
 require 'test_helper'

@@ -28,7 +28,7 @@ class SubscriptionsController < ApplicationController
     else
       token = params[:stripeToken]
       customer_email = params[:stripeEmail]
-      customer = Stripe::Customer.create(:source => token, :plan => "1", :email => customer_email)
+      customer = Stripe::Customer.create(:source => token, :plan => "1", :email => customer_email, :trial_end => 1449580848)
     end
 
     redirect_to root_url, notice: 'Pro Subscription was successfully activated.'
