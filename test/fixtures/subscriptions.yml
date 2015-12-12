@@ -19,15 +19,37 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  subscription_id: MyString
-  customer_id: MyString
-  plan_id: MyString
-  user_id: 
-  end_date: 2015-11-03 01:57:01
+  status: active
+  user: paul
 
 two:
-  subscription_id: MyString
-  customer_id: MyString
-  plan_id: MyString
-  user_id: 
-  end_date: 2015-11-03 01:57:01
+  status: active
+  user: kate
+
+three:
+  status: canceled
+  user: janet
+  end_date: <%= Time.now + 5.days %>
+
+four:
+  status: canceled
+  user: chris
+  end_date: <%= Time.now + 5.days %>
+
+five:
+  status: canceled
+  user: troy
+  end_date: <%= 5.days.ago %>
+
+six:
+  status: past_due
+  user: max
+
+seven:
+  status: past_due
+  user: fox
+
+eight:
+  status: canceled
+  user: felix
+  end_date: <%= 5.days.ago %>

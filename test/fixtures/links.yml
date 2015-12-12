@@ -26,3 +26,70 @@ netflix:
 twitter:
   url: "http://www.twitter.com"
   user: joe
+  disable: true
+
+facebook:
+  url: "http://www.facebook.com"
+  user: joe
+
+<% 1.upto(5) do |i| %>
+link_leo_<%= i %>:
+  url: http://www.link_<%= 1 %>.com
+  user: leo
+<% end %>
+
+<% 1.upto(5) do |i| %>
+link_paul_<%= i %>:
+  url: http://www.link_<%= 1 %>.com
+  user: paul
+<% end %>
+
+<% 1.upto(25) do |i| %>
+link_kate_<%= i %>:
+  url: http://www.link_<%= 1 %>.com
+  user: kate
+<% end %>
+
+<% 1.upto(5) do |i| %>
+link_janet_<%= i %>:
+  url: http://www.link_<%= 1 %>.com
+  user: janet
+<% end %>
+
+<% 1.upto(25) do |i| %>
+link_chris_<%= i %>:
+  url: http://www.link_<%= 1 %>.com
+  user: chris
+<% end %>
+
+<% 1.upto(5) do |i| %>
+link_troy_<%= i %>:
+  url: http://www.link_<%= 1 %>.com
+  user: troy
+<% end %>
+
+<% 1.upto(5) do |i| %>
+link_max_<%= i %>:
+  url: http://www.link_<%= 1 %>.com
+  user: max
+<% end %>
+
+<% 1.upto(25) do |i| %>
+link_fox_<%= i %>:
+  url: http://www.link_<%= 1 %>.com
+  user: fox
+<% end %>
+
+<% 1.upto(20) do |i| %>
+link_felix_<%= i %>:
+  url: http://www.link_<%= 1 %>.com
+  user: felix
+  disable: true
+<% end %>
+
+<% 1.upto(5) do |i| %>
+link_felix2_<%= i %>:
+  url: http://www.link_<%= 1 %>.com
+  user: felix
+  disable: false
+<% end %>

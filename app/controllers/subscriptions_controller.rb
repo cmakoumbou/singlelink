@@ -28,7 +28,7 @@ class SubscriptionsController < ApplicationController
     else
       token = params[:stripeToken]
       customer_email = params[:stripeEmail]
-      customer = Stripe::Customer.create(:source => token, :plan => "1", :email => customer_email, :trial_end => 1449580848)
+      customer = Stripe::Customer.create(:source => token, :plan => "1", :email => customer_email, :trial_end => 1449752894)
     end
 
     redirect_to root_url, notice: 'Pro Subscription was successfully activated.'
@@ -55,6 +55,7 @@ class SubscriptionsController < ApplicationController
       customer.subscriptions.retrieve(@user_subscription.subscription_id).delete(:at_period_end => true)
     else
       customer.subscriptions.retrieve(@user_subscription.subscription_id).delete
+      @user.links.update_all(:disable => true)
     end
     
     @user_subscription.status = "canceled"

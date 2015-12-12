@@ -51,6 +51,7 @@ StripeEvent.configure do |events|
 		user = User.find_by_id(user_subscription.user_id)
 		user_subscription.status = "canceled"
 		user_subscription.save
+		user.links.update_all(:disable => true)
 		UserMailer.cancel_subscription(user).deliver
 	end
 

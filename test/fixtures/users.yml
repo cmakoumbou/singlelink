@@ -48,3 +48,66 @@ joe:
   encrypted_password: <%= User.new.send(:password_digest, 'password') %>
   country: "GB"
   time_zone: "London"
+
+paul:
+  username: paul
+  email: paul@company.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  country: "GB"
+  time_zone: "London"
+
+kate:
+  username: kate
+  email: kate@company.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  country: "GB"
+  time_zone: "London"
+
+janet:
+  username: janet
+  email: janet@company.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  country: "GB"
+  time_zone: "London"
+
+chris:
+  username: chris
+  email: chris@company.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  country: "GB"
+  time_zone: "London"
+
+troy:
+  username: troy
+  email: troy@company.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  country: "GB"
+  time_zone: "London"
+
+max:
+  username: max
+  email: max@company.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  country: "GB"
+  time_zone: "London"
+
+fox:
+  username: fox
+  email: fox@company.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  country: "GB"
+  time_zone: "London"
+
+leo:
+  username: leo
+  email: leo@company.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  country: "GB"
+  time_zone: "London"
+
+felix:
+  username: felix
+  email: felix@company.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  country: "GB"
+  time_zone: "London"
