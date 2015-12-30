@@ -5,6 +5,10 @@ Rails.configuration.stripe = {
 
 Stripe.api_key = Rails.configuration.stripe[:secret_key]
 
+if ENV.has_key?("STRIPE_WEBHOOK_SECRET")
+  StripeEvent.authentication_secret = ENV['STRIPE_WEBHOOK_SECRET']
+end
+
 StripeEvent.configure do |events|
 	events.subscribe 'invoice.payment_succeeded' do |event|
 		customer = Stripe::Customer.retrieve(event.data.object.customer)
