@@ -48,11 +48,13 @@ StripeEvent.configure do |events|
 
 	events.subscribe 'customer.subscription.deleted' do |event|
 		user_subscription = Subscription.find_by_customer_id(event.data.object.customer)
-		user = User.find_by_id(user_subscription.user_id)
-		user_subscription.status = "canceled"
-		user_subscription.save
-		user.links.update_all(:disable => true)
-		UserMailer.cancel_subscription(user).deliver
+		if user_subscription.present?
+			user = User.find_by_id(user_subscription.user_id)
+			user_subscription.status = "canceled"
+			user_subscription.save
+			user.links.update_all(:disable => true)
+			UserMailer.cancel_subscription(user).deliver
+		end
 	end
 
 	events.subscribe 'customer.source.created' do |event|

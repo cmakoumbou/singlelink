@@ -28,13 +28,16 @@ class SubscriptionsController < ApplicationController
     else
       token = params[:stripeToken]
       customer_email = params[:stripeEmail]
-      customer = Stripe::Customer.create(:source => token, :plan => "1", :email => customer_email, :trial_end => 1449752894)
+      customer = Stripe::Customer.create(:source => token, :plan => "1", :email => customer_email)
     end
 
     redirect_to root_url, notice: 'Pro Subscription was successfully activated.'
 
-  rescue => e
+  rescue Stripe::CardError => e
     flash[:error] = e.message
+    redirect_to pro_subscription_path
+  rescue => e
+    flash[:error] = "We are having trouble processing your request. Please try again later."
     redirect_to pro_subscription_path
   end
 
@@ -63,8 +66,11 @@ class SubscriptionsController < ApplicationController
 
     redirect_to root_url, notice: 'Subscription was successfully canceled.'
 
-  rescue => e
+  rescue Stripe::CardError => e
     flash[:error] = e.message
+    redirect_to cancel_subscription_path
+  rescue => e
+    flash[:error] = "We are having trouble processing your request. Please try again later."
     redirect_to cancel_subscription_path
   end
 
@@ -90,8 +96,11 @@ class SubscriptionsController < ApplicationController
 
     redirect_to root_url, notice: 'Subscription was successfully resumed.'
 
-  rescue => e
+  rescue Stripe::CardError => e
     flash[:error] = e.message
+    redirect_to resume_subscription_path
+  rescue => e
+    flash[:error] = "We are having trouble processing your request. Please try again later."
     redirect_to resume_subscription_path
   end
 
@@ -115,8 +124,11 @@ class SubscriptionsController < ApplicationController
     customer.save
     redirect_to root_url, notice: 'Card was successfully updated.'
 
-  rescue => e
+  rescue Stripe::CardError => e
     flash[:error] = e.message
+    redirect_to card_subscription_path
+  rescue => e
+    flash[:error] = "We are having trouble processing your request. Please try again later."
     redirect_to card_subscription_path
   end
 end

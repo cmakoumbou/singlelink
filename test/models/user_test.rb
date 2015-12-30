@@ -19,8 +19,6 @@
 #  display_name           :string
 #  bio                    :string
 #  admin                  :boolean          default(FALSE)
-#  country                :string
-#  time_zone              :string
 #
 
 require 'test_helper'

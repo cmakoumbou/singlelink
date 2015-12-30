@@ -19,8 +19,6 @@
 #  display_name           :string
 #  bio                    :string
 #  admin                  :boolean          default(FALSE)
-#  country                :string
-#  time_zone              :string
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
@@ -108,6 +106,41 @@ leo:
 felix:
   username: felix
   email: felix@company.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  country: "GB"
+  time_zone: "London"
+
+peter:
+  username: peter
+  email: peter@company.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  country: "GB"
+  time_zone: "London"
+
+travis:
+  username: travis
+  email: travis@company.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  country: "GB"
+  time_zone: "London"
+
+elise:
+  username: elise
+  email: elise@company.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  country: "GB"
+  time_zone: "London"
+
+ciara:
+  username: ciara
+  email: ciara@company.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  country: "GB"
+  time_zone: "London"
+
+laura:
+  username: laura
+  email: laura@company.com
   encrypted_password: <%= User.new.send(:password_digest, 'password') %>
   country: "GB"
   time_zone: "London"

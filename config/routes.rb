@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+
   mount RailsAdmin::Engine => '/mabika', as: 'rails_admin'
   authenticated :user do
     root to: 'links#index', as: :authenticated_root
@@ -39,18 +40,13 @@ Rails.application.routes.draw do
   get '/subscriptions/card' => 'subscriptions#card', as: :card_subscription
   post '/subscriptions/card' => 'subscriptions#card_update', as: :card_update
 
-  # Analytics
-
-  get '/analytics' => 'analytics#index', :as => :analytics
-  get '/analytics/year' => 'analytics#year', :as => :analytics_year
-
   mount StripeEvent::Engine, at: '/webhooks'
 
   devise_for :users, :path => '', :controllers => { :registrations => 'registrations' }
   as :user do
     get '/settings' => 'devise/registrations#edit'
     get '/settings/cancel' => 'registrations#delete'
-  end
+  end 
   
   get '/:id' => 'links#profile', :as => :profile
   # The priority is based upon order of creation: first created -> highest priority.

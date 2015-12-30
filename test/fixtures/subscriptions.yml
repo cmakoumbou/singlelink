@@ -53,3 +53,16 @@ eight:
   status: canceled
   user: felix
   end_date: <%= 5.days.ago %>
+
+nine:
+  status: active
+  user: travis
+
+ten:
+  status: canceled
+  user: elise
+  end_date: <%= Time.now + 5.days %>
+
+eleven:
+  status: past_due
+  user: laura
