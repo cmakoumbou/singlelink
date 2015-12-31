@@ -1,15 +1,24 @@
 Rails.application.routes.draw do
 
-
-
   mount RailsAdmin::Engine => '/mabika', as: 'rails_admin'
   authenticated :user do
     root to: 'links#index', as: :authenticated_root
   end
 
   devise_scope :user do
-    root to: "devise/registrations#new"
+    # root to: "devise/registrations#new"
+    root to: "static_pages#home"
   end
+
+  get '/help' => 'static_pages#help', as: :help
+
+  get '/about' => 'static_pages#about', as: :about
+  get '/terms' => 'static_pages#terms', as: :terms
+  get '/privacy' => 'static_pages#privacy', as: :privacy
+  get '/contact' => 'static_pages#contact', as: :contact
+
+  get '/features' => 'static_pages#features', as: :features
+  get '/pricing' => 'static_pages#pricing', as: :pricing
 
   resources :links, except: [:show] do
     member do

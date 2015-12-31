@@ -1,9 +1,20 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+
+html {
+  position: relative;
+  min-height: 100%;
+}
 body {
   padding-top: 70px;
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
 }
+
+// body {
+//   padding-top: 70px;
+// }
 
 /*flash*/
 .alert-error {
@@ -66,3 +77,16 @@ body {
 }
 
 textarea { resize: none; }
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #101010;
+}
+
+.container .text-muted {
+  margin: 20px 0;
+}
