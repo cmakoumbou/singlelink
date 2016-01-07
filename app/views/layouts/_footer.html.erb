@@ -1,14 +1,14 @@
-<footer class="footer">
-  <div class="container">
-    <p class="text-muted">
-    	<span class="pull-left">&copy; Singlelinkme</span>
-    	<ul class="list-inline pull-right">
-    		<li><%= link_to('About', about_path) %></li>
-				<li><%= link_to('Help', help_path) %></li>
-				<li><%= link_to('Terms', terms_path) %></li>
-				<li><%= link_to('Privacy', privacy_path) %></li>
-				<li><%= link_to('Contact', contact_path) %></li>
-			</ul>
-    </p>
-  </div>
-</footer>
+<div class="ui large bottom fixed borderless menu">
+	<div class="ui container">
+	  <div class="left menu">
+	  	<div class="item">&copy; 2016 Singlelinkme Ltd</div>
+	  </div>
+		<div class="right menu">
+			<%= link_to 'About', about_path, class: "item" %>
+	  	<%= link_to 'Help', help_path, class: "item" %>
+			<%= link_to 'Terms', terms_path, class: "item" %>
+			<%= link_to 'Privacy', privacy_path, class: "item" %>
+			<%= link_to 'Contact', contact_path, class: "item" %>
+		</div>
+	</div>
+</div>

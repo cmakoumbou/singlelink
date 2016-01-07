@@ -1,37 +1,17 @@
-<div class="panel panel-default">
-  <div class="panel-heading"><b>Home</b></div>
-  <div class="panel-body">
-    <%= link_to 'Add a new link', new_link_path, class: "btn btn-default btn-block" %>
-    <% if !@links.empty? %>
-      <br />
-      <div class="panel panel-default">
-        <div class="panel-heading">Manage your links</div>
-        <table class="table table-bordered table-hover">
-          <tbody>
-            <% @links.each do |link| %>
-              <tr>
-                <td class="col-xs-1 col-md-1 text-center">
-                  <%= link_to move_up_link_path(link), :method => :post do %>
-                    <span class="glyphicon glyphicon-arrow-up"></span><br />
-                  <% end %>
-                  &bull;</span><br />
-                  <%= link_to move_down_link_path(link), :method => :post do %>
-                    <span class="glyphicon glyphicon-arrow-down"></span>
-                  <% end %>
-                </td>
-                <td class="col-xs-5 col-md-8"><%= link_to link.url, link.url, :target => "_blank" %></td>
-                <% if link.disable == false %>
-                  <td class="col-xs-2 col-md-1"><%= link_to 'Disable', disable_link_path(link), :method => :post %></td>
-                <% else %>
-                  <td class="col-xs-2 col-md-1"><%= link_to 'Enable', enable_link_path(link), :method => :post %></td>
-                <% end %>
-                <td class="col-xs-2 col-md-1"><%= link_to 'Edit', edit_link_path(link) %></td>
-                <td class="col-xs-2 col-md-1"><%= link_to 'Delete', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
+<%= link_to 'Add a new link', new_link_path %>
+<br />
+<% if !@links.empty? %> 
+  <% @links.each do |link| %>
+    <%= link_to move_up_link_path(link), :method => :post do %>Move Up<% end %>
+    <%= link_to move_down_link_path(link), :method => :post do %>Move Down<% end %>
+    <%= link_to link.url, link.url, :target => "_blank" %>
+    <% if link.disable == false %>
+      <%= link_to 'Disable', disable_link_path(link), :method => :post %>
+    <% else %>
+      <%= link_to 'Enable', enable_link_path(link), :method => :post %>
     <% end %>
-  </div>
-</div>
+    <%= link_to 'Edit', edit_link_path(link) %>
+    <%= link_to 'Delete', link, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <br />
+  <% end %>
+<% end %>
