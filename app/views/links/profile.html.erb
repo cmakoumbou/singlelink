@@ -4,179 +4,47 @@
   <% provide(:title, "#{@user.username}") %>
 <% end %>
 
-<% if !@user.display_name.blank? %>
-  <b><%= @user.display_name %> | <%= link_to "singlelink.me/#{@user.username}", url_for() %></b><br />
-<% else %>
-  <h3 class="ui header"><%= @user.username %> | <%= link_to "singlelink.me/#{@user.username}", url_for() %></h4>
-<% end %>
-
-<% if !@user.bio.blank? %>
-  <p><%= @user.bio %></p>
-<% end %>
+<div class="ui items">
+  <div class="item">
+    <div class="ui medium image">
+      <%= image_tag @user.avatar.url %>
+    </div>
+    <% if @user.bio.present? %>
+      <div class="middle aligned content">
+        <% if !@user.display_name.blank? %>
+          <div class="header"><%= @user.display_name %></div>
+        <% else %>
+          <div class="header"><%= @user.username %></div>
+        <% end %>
+        <div class="description"><p><%= @user.bio %></p></div>
+      </div>
+    <% else %>
+      <div class="content">
+        <% if !@user.display_name.blank? %>
+          <div class="header"><%= @user.display_name %></div>
+        <% else %>
+          <div class="header"><%= @user.username %></div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
 
 <div class="ui divider"></div>
 
-<div class="ui five link cards">
-  <div class="card">
-    <div class="image">
-      <%= image_tag('twitter.png') %>
-    </div>
-    <div class="content">
-      <div class="header">Matt</div>
-    </div>
+<% if !@links.empty? %>
+  <div class="ui four link doubling stackable cards">
+    <% @links.each do |link| %>
+      <% if link.disable == false %>
+        <%= link_to link.url, class: "card", :target => "_blank" do %>
+          <div class="image">
+            <%= image_tag link.image.url %>
+          </div>
+          <div class="content">
+            <div class="ui centered header"><%= link.title %></div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
   </div>
-  <div class="card">
-    <div class="image">
-      <%= image_tag('twitter.png') %>
-    </div>
-    <div class="content">
-      <div class="header">Molly</div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="image">
-      <%= image_tag('twitter.png') %>
-    </div>
-    <div class="content">
-      <div class="header">Elyse</div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="image">
-      <%= image_tag('twitter.png') %>
-    </div>
-    <div class="content">
-      <div class="header">Elyse</div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="image">
-      <%= image_tag('twitter.png') %>
-    </div>
-    <div class="content">
-      <div class="header">Elyse</div>
-    </div>
-  </div>
-    <div class="card">
-    <div class="image">
-      <%= image_tag('twitter.png') %>
-    </div>
-    <div class="content">
-      <div class="header">Matt Giampietro</div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="image">
-      <%= image_tag('twitter.png') %>
-    </div>
-    <div class="content">
-      <div class="header">Molly</div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="image">
-      <%= image_tag('twitter.png') %>
-    </div>
-    <div class="content">
-      <div class="header">Elyse</div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="image">
-      <%= image_tag('twitter.png') %>
-    </div>
-    <div class="content">
-      <div class="header">Elyse</div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="image">
-      <%= image_tag('twitter.png') %>
-    </div>
-    <div class="content">
-      <div class="header">Elyse</div>
-    </div>
-  </div>
-    <div class="card">
-    <div class="image">
-      <%= image_tag('twitter.png') %>
-    </div>
-    <div class="content">
-      <div class="header">Matt</div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="image">
-      <%= image_tag('twitter.png') %>
-    </div>
-    <div class="content">
-      <div class="header">Molly</div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="image">
-      <%= image_tag('twitter.png') %>
-    </div>
-    <div class="content">
-      <div class="header">Elyse</div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="image">
-      <%= image_tag('twitter.png') %>
-    </div>
-    <div class="content">
-      <div class="header">Elyse</div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="image">
-      <%= image_tag('twitter.png') %>
-    </div>
-    <div class="content">
-      <div class="header">Elyse</div>
-    </div>
-  </div>
-    <div class="card">
-    <div class="image">
-      <%= image_tag('twitter.png') %>
-    </div>
-    <div class="content">
-      <div class="header">Matt Giampietro</div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="image">
-      <%= image_tag('twitter.png') %>
-    </div>
-    <div class="content">
-      <div class="header">Molly</div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="image">
-      <%= image_tag('twitter.png') %>
-    </div>
-    <div class="content">
-      <div class="header">Elyse</div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="image">
-      <%= image_tag('twitter.png') %>
-    </div>
-    <div class="content">
-      <div class="header">Elyse</div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="image">
-      <%= image_tag('twitter.png') %>
-    </div>
-    <div class="content">
-      <div class="header">Elyse</div>
-    </div>
-  </div>
-
-
-</div>
+<% end %>

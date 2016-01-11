@@ -11,9 +11,9 @@ class Ability
     if user.subscriptions.blank?
       can :pro, Subscription
       can :pro_confirm, Subscription
-      can :new, Link if user.links(:reload).count < 5
-      can :create, Link if user.links(:reload).count < 5
-      can :enable, Link if user.links(:reload).where(disable: false).count < 5
+      can :new, Link if user.links(:reload).count < 25
+      can :create, Link if user.links(:reload).count < 25
+      can :enable, Link if user.links(:reload).where(disable: false).count < 25
     end
 
     if user.subscriptions.present?

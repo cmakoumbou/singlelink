@@ -10,11 +10,6 @@ class LinksController < ApplicationController
   def profile
     @user = User.friendly.find(params[:id])
     @links = @user.links.order(:row_order)
-    if user_signed_in?
-      ahoy.track("Profile visit", visited_user: @user.id) unless @user == current_user
-    else
-      ahoy.track("Profile visit", visited_user: @user.id)
-    end
   end
 
   def new
@@ -83,7 +78,7 @@ class LinksController < ApplicationController
     end
 
     def link_params
-      params.require(:link).permit(:url)
+      params.require(:link).permit(:url, :title, :image)
     end
 
     # def track_visit

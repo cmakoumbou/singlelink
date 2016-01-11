@@ -3,10 +3,70 @@ body {
 }
 
 #main {
-	padding-top:90px;
-	margin-bottom:50px;
+	padding-top:70px;
+	margin-bottom:70px;
 }
+
+#profile {
+	padding-top:40px;
+	margin-bottom:40px;
+}
+
 
 .pyro {
 	height: 75px;
+}
+
+.ui.vertical.inverted.menu .menu .item, .ui.vertical.inverted.menu .menu .item a:not(.ui) {
+	color:rgba(255,255,255,0.7);
+}
+
+.ui.medium.images .image,
+.ui.medium.images img,
+.ui.medium.images svg,
+.ui.medium.image {
+  width: 250px;
+  height: auto;
+  font-size: 1rem;
+}
+
+// Mobile Portrait
+@media only screen and (max-width : 767px) and (orientation: portrait) {
+	.normal-menu {
+		display: none;
+	}
+	html.ios {
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+// Mobile Landscape
+@media only screen and (max-width : 767px) and (orientation: landscape) {
+	.normal-menu {
+		display: none;
+	}
+	html.ios {
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+
+// Tablet
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	.mobile-menu {
+		display: none;
+	}
+	html.ios {
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+// Computer
+@media only screen and (min-width: 992px) {
+	.mobile-menu {
+		display: none;
+	}
 }

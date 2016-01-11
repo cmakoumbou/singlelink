@@ -23,6 +23,8 @@ gem 'stripe', '1.31.0'
 gem 'stripe_event', '1.5.0'
 # gem 'stripe_tester', "~> 0.3.2"
 gem 'semantic-ui-sass', '2.1.6.0'
+gem 'carrierwave', '0.10.0'
+gem 'mini_magick', '4.3.6'
 
 group :development, :test do
   gem 'byebug', '5.0.0'

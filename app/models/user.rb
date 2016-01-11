@@ -22,6 +22,7 @@
 #
 
 class User < ActiveRecord::Base
+  mount_uploader :avatar, AvatarUploader
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -40,7 +41,7 @@ class User < ActiveRecord::Base
 		format: { with: VALID_USERNAME_REGEX, message: "is invalid (only letters and numbers allowed)"}
 
   validates :display_name, length: { maximum: 25 }
-  validates :bio, length: { maximum: 160 }
+  validates :bio, length: { maximum: 230 }
 
 	private
 

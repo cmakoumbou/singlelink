@@ -1,0 +1,45 @@
+<% if action_name == "profile" %>
+  <% if user_signed_in? %>
+  	<% if @user == current_user %>
+  		<div class="ui blue huge visible left vertical inverted sidebar menu">
+  	<% else %>
+  		<div class="ui blue huge left vertical inverted sidebar menu">
+  	<% end %>
+  <% else %>
+		<div class="ui blue huge left vertical inverted sidebar menu">
+	<% end %>
+<% else %>
+	<div class="ui blue huge visible left vertical inverted sidebar menu">
+<% end %>
+	<div class="item">
+		<div class="header">Singlelinkme</div>
+		<div class="menu">
+			<% if user_signed_in? %>
+				<%= link_to 'Home', root_path, class: "item" %>
+		  	<%= link_to 'Profile', profile_path(current_user), class: "item" %>
+				<%= link_to 'Settings', settings_path, class: "item" %>
+				<%= link_to 'Subscriptions', subscriptions_path, class: "item" %>
+				<% if current_user.admin? %>
+					<%= link_to 'Admin', rails_admin_path, class: "item" %>
+		    <% end %>
+				<%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "item" %>
+			<% else %>
+				<%= link_to 'Features', features_path, class: "iten" %>
+				<%= link_to 'Pricing', pricing_path, class: "item" %>
+				<%= link_to 'Sign up', new_user_registration_path, class: "item" %>
+				<%= link_to 'Log in', new_user_session_path, class: "item" %>
+			<% end %>
+		</div>
+	</div>
+	<div class="item">
+		<div class="header">Information</div>
+		<div class="menu">
+			<%= link_to 'About', about_path, class: "item" %>
+	  	<%= link_to 'Help', help_path, class: "item" %>
+			<%= link_to 'Terms', terms_path, class: "item" %>
+			<%= link_to 'Privacy', privacy_path, class: "item" %>
+			<%= link_to 'Contact', contact_path, class: "item" %>
+		</div>
+	</div>
+	<div class="item">&copy; 2016 Singlelinkme Ltd</div>
+</div>

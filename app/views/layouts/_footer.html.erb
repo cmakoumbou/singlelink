@@ -1,14 +1,39 @@
-<div class="ui large bottom fixed borderless menu">
-	<div class="ui container">
-	  <div class="left menu">
-	  	<div class="item">&copy; 2016 Singlelinkme Ltd</div>
-	  </div>
-		<div class="right menu">
-			<%= link_to 'About', about_path, class: "item" %>
-	  	<%= link_to 'Help', help_path, class: "item" %>
-			<%= link_to 'Terms', terms_path, class: "item" %>
-			<%= link_to 'Privacy', privacy_path, class: "item" %>
-			<%= link_to 'Contact', contact_path, class: "item" %>
+<% if action_name != "profile" %>
+	<div class="normal-menu">
+		<div class="ui blue inverted large bottom fixed borderless menu">
+			<div class="ui container">
+			  <div class="left menu">
+			  	<div class="item">&copy; 2016 Singlelinkme Ltd</div>
+			  </div>
+				<div class="right menu">
+					<%= link_to 'About', about_path, class: "item" %>
+			  	<%= link_to 'Help', help_path, class: "item" %>
+					<%= link_to 'Terms', terms_path, class: "item" %>
+					<%= link_to 'Privacy', privacy_path, class: "item" %>
+					<%= link_to 'Contact', contact_path, class: "item" %>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
+<% end %>
+
+<% if action_name == "profile" %>
+	<% if @user == current_user %>
+		<div class="normal-menu">
+			<div class="ui blue inverted large bottom fixed borderless menu">
+				<div class="ui container">
+				  <div class="left menu">
+				  	<div class="item">&copy; 2016 Singlelinkme Ltd</div>
+				  </div>
+					<div class="right menu">
+						<%= link_to 'About', about_path, class: "item" %>
+				  	<%= link_to 'Help', help_path, class: "item" %>
+						<%= link_to 'Terms', terms_path, class: "item" %>
+						<%= link_to 'Privacy', privacy_path, class: "item" %>
+						<%= link_to 'Contact', contact_path, class: "item" %>
+					</div>
+				</div>
+			</div>
+		</div>
+	<% end %>
+<% end %>

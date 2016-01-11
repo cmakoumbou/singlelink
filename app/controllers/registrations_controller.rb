@@ -55,5 +55,5 @@ class RegistrationsController < Devise::RegistrationsController
 	  else
 	  	render :delete
 	  end 
-  end  
+  end
 end
