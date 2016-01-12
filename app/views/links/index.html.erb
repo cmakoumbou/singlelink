@@ -1,17 +1,35 @@
-<%= link_to 'Add a new link', new_link_path %>
-<br />
-<% if !@links.empty? %> 
-  <% @links.each do |link| %>
-    <%= link_to move_up_link_path(link), :method => :post do %>Move Up<% end %>
-    <%= link_to move_down_link_path(link), :method => :post do %>Move Down<% end %>
-    <%= link_to link.url, link.url, :target => "_blank" %>
-    <% if link.disable == false %>
-      <%= link_to 'Disable', disable_link_path(link), :method => :post %>
-    <% else %>
-      <%= link_to 'Enable', enable_link_path(link), :method => :post %>
-    <% end %>
-    <%= link_to 'Edit', edit_link_path(link) %>
-    <%= link_to 'Delete', link, method: :delete, data: { confirm: 'Are you sure?' } %>
-    <br />
-  <% end %>
+<% if !@links.empty? %>
+  <table class="ui single line table">
+    <thead>
+      <tr><th colspan="6">
+        <%= link_to 'Add a new link', new_link_path %>
+      </th>
+    </tr></thead>
+    <tbody>
+      <% @links.each do |link| %>
+        <tr>
+          <td><%= link_to 'Move Up', move_up_link_path(link), :method => :put %></td>
+          <td><%= link_to 'Move Down', move_down_link_path(link), :method => :put %></td>
+          <td><%= link_to link.url, link.url, :target => "_blank" %></td>
+          <% if link.disable == false %>
+            <td><%= link_to 'Disable', disable_link_path(link), :method => :post %></td>
+          <% else %>
+            <td><%= link_to 'Enable', enable_link_path(link), :method => :post %></td>
+          <% end %>
+          <td><%= link_to 'Edit', edit_link_path(link) %></td>
+          <td><%= link_to 'Delete', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody> 
+  </table>
+<% else %>
+  <table class="ui single line table">
+    <thead>
+      <tr><th colspan="6">
+        <%= link_to 'Add a new link', new_link_path %>
+      </th>
+    </tr></thead>
+    <tbody>
+    </tbody> 
+  </table>
 <% end %>

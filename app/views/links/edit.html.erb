@@ -1,12 +1,34 @@
 <% provide(:title, "Edit link") %>
 
-<%= form_for(@link) do |f| %>
-	<%= link_error_messages! %>
-	<%= f.text_field :title, placeholder: "Title" %>
-  <%= f.text_field :url, placeholder: "Link" %>
-  <%= image_tag(@link.image_url) if @link.image? %>
-  <%= f.file_field :image %>
-  <%= f.submit "Update link" %>
-<% end %>
+<div class="ui segment">
+  <%= form_for @link, html: {class: "ui large form"} do |f| %>
+    <h4 class="ui dividing header">Edit link</h4>
+  	<%= link_error_messages! %>
+    <div class="required field">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+    <div class="required field">
+      <%= f.label :url %>
+      <%= f.text_field :url %>
+    </div>
+    <% if @link.image? %>
+      <div class="field">
+        <h4>Current Image</h4>
+    	  <div class="ui medium image"><%= image_tag(@link.image.url) %></div>
+      </div>
+      <div class="field">
+        <div class="ui checkbox">
+          <%= f.check_box :remove_image %>
+          <%= f.label :remove_image %>
+        </div>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= f.label :image %>
+      <%= f.file_field :image %>
+    </div>
+    <%= f.submit "Update link", class: "ui button" %>
+  <% end %>
+</div>
 
-<%= link_to('Go back', root_path) %>

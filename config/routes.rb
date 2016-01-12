@@ -22,8 +22,8 @@ Rails.application.routes.draw do
 
   resources :links, except: [:show] do
     member do
-      post :move_up
-      post :move_down
+      put :move_up
+      put :move_down
       post :enable
       post :disable
     end

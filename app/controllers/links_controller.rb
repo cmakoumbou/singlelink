@@ -4,12 +4,12 @@ class LinksController < ApplicationController
   # before_filter :track_ahoy_visit, only: [:profile]
 
   def index
-    @links = current_user.links.order(:row_order)
+    @links = current_user.links.order(position: :asc)
   end
 
   def profile
     @user = User.friendly.find(params[:id])
-    @links = @user.links.order(:row_order)
+    @links = @user.links.order(position: :asc)
   end
 
   def new
@@ -49,13 +49,13 @@ class LinksController < ApplicationController
   end
 
   def move_up
-    @link.update_attribute :row_order_position, :up
-    redirect_to links_url
+    @link.move_higher
+    redirect_to links_url, notice: 'Link was successfully moved up.'
   end
 
   def move_down
-    @link.update_attribute :row_order_position, :down
-    redirect_to links_url
+    @link.move_lower
+    redirect_to links_url, notice: 'Link was successfully moved down.'
   end
 
   def enable
@@ -78,7 +78,7 @@ class LinksController < ApplicationController
     end
 
     def link_params
-      params.require(:link).permit(:url, :title, :image)
+      params.require(:link).permit(:url, :title, :image, :remove_image)
     end
 
     # def track_visit

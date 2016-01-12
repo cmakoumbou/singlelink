@@ -1,12 +1,22 @@
 <% provide(:title, "New link") %>
 
-<%= form_for(@link) do |f| %>
-  <%= link_error_messages! %>
-  <%= f.text_field :title, placeholder: "Title" %>
-  <%= f.text_field :url, placeholder: "Link" %>
-  <%= f.file_field :image %>
+<div class="ui segment">
+	<%= form_for @link, html: {class: "ui large form"} do |f| %>
+		<h4 class="ui dividing header">Add new link</h4>
+	  <%= link_error_messages! %>
+	  <div class="required field">
+	  	<%= f.label :title %>
+	  	<%= f.text_field :title, placeholder: "Twitter" %>
+	  </div>
+	  <div class="required field">
+	  	<%= f.label :url %>
+	  	<%= f.text_field :url, placeholder: "www.twitter.com/yourbusiness" %>
+		</div>
+		<div class="field">
+			<%= f.label :image %>
+	  	<%= f.file_field :image %>
+	  </div>
 
-  <%= f.submit "Create link" %>
-<% end %>
-
-<%= link_to('Go back', root_path) %> 
+	  <%= f.submit "Create link", class: "ui button" %>
+	<% end %>
+</div>

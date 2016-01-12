@@ -7,9 +7,10 @@
 #  user_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  row_order  :integer
 #  disable    :boolean          default(FALSE)
 #  title      :string
+#  image      :string
+#  position   :integer
 #
 
 require 'test_helper'

@@ -7,19 +7,19 @@
 #  user_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  row_order  :integer
 #  disable    :boolean          default(FALSE)
 #  title      :string
+#  image      :string
+#  position   :integer
 #
 
 class Link < ActiveRecord::Base
-  mount_uploader :image, ImageUploader
+  acts_as_list add_new_at: :bottom
 
+  mount_uploader :image, ImageUploader
+  
   belongs_to :user
   before_save :smart_add_url_protocol
-
-  include RankedModel
-  ranks :row_order
   
   validates :title, length: { maximum: 15}, presence: true
   validates :url, :url => { :message => "is not valid" }

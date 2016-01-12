@@ -19,6 +19,7 @@
 #  display_name           :string
 #  bio                    :string
 #  admin                  :boolean          default(FALSE)
+#  avatar                 :string
 #
 
 require 'test_helper'
