@@ -1,59 +1,74 @@
 <% provide(:title, "Settings") %>
 
-<div class="ui attached segment">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, :multipart => true, class: "ui large equal width form" }) do |f| %>
-    <h4 class="ui dividing header">Settings</h4>
-    <%= devise_error_messages! %>
-    <div class="field">
-      <%= f.label :display_name, "Display name" %>
-      <%= f.text_field :display_name, placeholder: "Display Name" %>
+<div class="ui blue segment">
+  <h3 class="ui header">Settings</h3>
+</div>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, :multipart => true, class: "ui large form" }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="ui blue segment">
+    <h3 class="ui header">Profile Information (Optional)</h3>
+    <div class="field <%= "error" if f.object.errors.include?(:display_name) %>">
+      <%= f.label :display_name, "Profile Name" %>
+      <%= f.text_field :display_name, placeholder: "Profile Name" %>
     </div>
-    <div class="field">
-      <%= f.label :bio %>    
-      <%= f.text_area :bio, placeholder: "Bio", rows: 3 %>
+    <div class="field <%= "error" if f.object.errors.include?(:bio) %>">
+      <%= f.label :bio, "Profile Bio" %>    
+      <%= f.text_area :bio, placeholder: "Profile Bio", rows: 3 %>
     </div>
-    <% if current_user.avatar.url.present? %>
+    <% if current_user.avatar? %>
       <div class="field">
-        <h4>Current Avatar</h4>
+        <h4>Current Profile Image</h4>
     	  <div class="ui medium image"><%= image_tag(current_user.avatar.url) %></div>
       </div>
       <div class="field">
         <div class="ui checkbox">
     		  <%= f.check_box :remove_avatar %>
-          <%= f.label :remove_avatar %>
+          <%= f.label :remove_image, "Tick to remove current profile image" %>
         </div>
       </div>
     <% end %>
-    <div class="field">
-      <%= f.label :avatar %>
+    <div class="field <%= "error" if f.object.errors.include?(:avatar) %>">
+      <%= f.label :avatar, "Choose a profile image to upload" %>
       <%= f.file_field :avatar %>
     </div>
-    <div class="required field">
+  </div>
+
+  <div class="ui blue segment">
+    <h3 class="ui header">Account Information (Required)</h3>
+    <div class="required field <%= "error" if f.object.errors.include?(:username) %>">
       <%= f.label :username, "Username" %>
       <%= f.text_field :username, placeholder: "Username" %>
     </div>
-    <div class="required field">
+    <div class="required field <%= "error" if f.object.errors.include?(:email) %>">
       <%= f.label :email %>
       <%= f.email_field :email, placeholder: "Email" %>
     </div>
-    <h4 class="ui dividing header">Change password</h4>
-    <div class="field">
+  </div>
+
+  <div class="ui blue segment">
+    <h3 class="ui header">Change Password</h3>
+    <div class="field <%= "error" if f.object.errors.include?(:password) %>">
       <%= f.label :password %>
       <%= f.password_field :password, autocomplete: "off", placeholder: "New password" %>
     </div>
-    <div class="field">
+    <div class="field <%= "error" if f.object.errors.include?(:password_confirmation) %>">
       <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm new password" %>
     </div>
-    <h4 class="ui dividing header">Current password required to change your settings</h4>
-    <div class="required field">
+  </div>
+
+  <div class="ui blue segment">
+    <h3 class="ui header">Current password is required to change any settings</h3>
+
+    <div class="required field <%= "error" if f.object.errors.include?(:current_password) %>">
       <%= f.label :current_password %>
       <%= f.password_field :current_password, autocomplete: "off", placeholder: "Current password" %>
     </div>
-    <%= f.submit "Update", class: "ui button" %>
-  <% end %>
-</div>
+  </div>
 
-<h4 class="ui bottom attached header">
-  Unhappy? <%= link_to('Cancel your account', settings_cancel_path) %>
-</h4>
+  <%= f.submit "Update", class: "ui primary button" %>
+<% end %>
+
+

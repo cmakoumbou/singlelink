@@ -4,44 +4,42 @@
   <% provide(:title, "#{@user.username}") %>
 <% end %>
 
-
 <div class="ui items">
   <div class="item">
-    <div class="ui medium image">
-      <%= image_tag @user.avatar.url %>
+    <div class="image">
+      <%= image_tag @user.avatar.thumb.url %>
     </div>
-    <% if @user.bio.present? %>
-      <div class="middle aligned content">
-        <% if !@user.display_name.blank? %>
-          <div class="header"><%= @user.display_name %></div>
-        <% else %>
-          <div class="header"><%= @user.username %></div>
-        <% end %>
-        <div class="description"><p><%= @user.bio %></p></div>
+    <div class="middle aligned content">
+      <div class="header"><%= @user.username %></div>
+      <div class="description">
+        <p><%= @user.bio %></p>
       </div>
-    <% else %>
-      <div class="content">
-        <% if !@user.display_name.blank? %>
-          <div class="header"><%= @user.display_name %></div>
-        <% else %>
-          <div class="header"><%= @user.username %></div>
-        <% end %>
-      </div>
-    <% end %>
+    </div>
   </div>
 </div>
 
-
-<div class="ui divider"></div>
+<div class="ui hidden divider"></div>
 
 <% if !@links.empty? %>
   <div class="ui four link doubling stackable cards">
     <% @links.each do |link| %>
       <% if link.disable == false %>
         <%= link_to link.url, class: "card", :target => "_blank" do %>
-          <div class="image">
-            <%= image_tag link.image.url %>
-          </div>
+          <% if link.default_image.present? && link.image.blank? %>
+            <% if link.default_image == "facebook" %>
+              <div id="facebook" class="image">
+                <%= image_tag "facebook.png" %>
+              </div>
+            <% elsif link.default_image == "twitter" %>
+              <div id="twitter" class="image">
+                <%= image_tag "twitter.png" %>
+              </div>
+            <% end %>
+          <% else %>
+            <div class="image">
+              <%= image_tag link.image.thumb.url %>
+            </div>
+          <% end %>
           <div class="content">
             <div class="ui centered header"><%= link.title %></div>
           </div>

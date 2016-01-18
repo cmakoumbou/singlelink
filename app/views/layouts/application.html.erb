@@ -8,24 +8,10 @@
 </head>
 <body>
 	<%= render 'layouts/navigation' %>	
-	<% if action_name == "profile" %>
-		<% if @user == current_user %>
-			<div id="main" class="ui container">
-				<%= render 'layouts/messages' %>
-				<%= yield %>
-			</div>
-		<% else %>
-			<div id="profile" class="ui container">
-				<%= render 'layouts/messages' %>
-				<%= yield %>
-			</div>
-		<% end %>
-	<% else %>
-		<div id="main" class="ui container">
-			<%= render 'layouts/messages' %>
-			<%= yield %>
-		</div>
-	<% end %>
+	<div id="main" class="ui container">
+		<%= render 'layouts/messages' %>
+		<%= yield %>
+	</div>
 	<%= render 'layouts/footer' %>
 </body>
 </html>

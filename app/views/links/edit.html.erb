@@ -1,34 +1,49 @@
 <% provide(:title, "Edit link") %>
 
-<div class="ui segment">
+<div class="ui blue segment">
+  <h3 class="ui header">Edit link</h3>
+</div>
   <%= form_for @link, html: {class: "ui large form"} do |f| %>
-    <h4 class="ui dividing header">Edit link</h4>
-  	<%= link_error_messages! %>
-    <div class="required field">
-      <%= f.label :title %>
-      <%= f.text_field :title %>
-    </div>
-    <div class="required field">
-      <%= f.label :url %>
-      <%= f.text_field :url %>
-    </div>
-    <% if @link.image? %>
-      <div class="field">
-        <h4>Current Image</h4>
-    	  <div class="ui medium image"><%= image_tag(@link.image.url) %></div>
+  	<%= render 'links/error_messages' %>
+
+    <div class="ui blue segment">
+      <h3 class="ui header">Link Information (Required)</h3>
+      <div class="required field <%= "error" if f.object.errors.include?(:title) %>">
+        <%= f.label :title %>
+        <%= f.text_field :title %>
       </div>
-      <div class="field">
-        <div class="ui checkbox">
-          <%= f.check_box :remove_image %>
-          <%= f.label :remove_image %>
+      <div class="required field <%= "error" if f.object.errors.include?(:url) %>">
+        <%= f.label :url, "Website" %>
+        <%= f.text_field :url %>
+      </div>
+    </div>
+
+    <div class="ui blue segment">
+      <h3 class="ui header">Link Image (Select or Upload)</h3>
+
+      <div class="field <%= "error" if f.object.errors.include?(:default_image) %>">
+        <%= f.label :default_image, "Select an image to use" %>
+        <%= f.select :default_image, options_for_default_images, { :prompt => "Select one" }, { class: "ui dropdown" } %>
+      </div>
+
+      <% if @link.image? %>
+        <div class="field">
+          <h4>Current Image</h4>
+      	  <div class="ui medium image"><%= image_tag(@link.image.url) %></div>
         </div>
+        <div class="field">
+          <div class="ui checkbox">
+            <%= f.check_box :remove_image %>
+            <%= f.label :remove_image, "Tick to remove current image" %>
+          </div>
+        </div>
+      <% end %>
+      <div class="field <%= "error" if f.object.errors.include?(:image) %>">
+        <%= f.label :image, "Choose an image to upload" %>
+        <%= f.file_field :image %>
       </div>
-    <% end %>
-    <div class="field">
-      <%= f.label :image %>
-      <%= f.file_field :image %>
     </div>
-    <%= f.submit "Update link", class: "ui button" %>
+
+    <%= f.submit "Update link", class: "ui primary button" %>
   <% end %>
 </div>
-

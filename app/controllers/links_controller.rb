@@ -62,13 +62,13 @@ class LinksController < ApplicationController
     authorize! :enable, Link, :message => "Singlelink.me Free has a limit of 5 links. You can upgrade your subscription to Pro for more links."
     @link.disable = false
     @link.save
-    redirect_to links_url
+    redirect_to links_url, notice: 'Link was successfully enabled.'
   end
 
   def disable
     @link.disable = true
     @link.save
-    redirect_to links_url
+    redirect_to links_url, notice: 'Link was successfully disabled.'
   end
 
   private
@@ -78,7 +78,7 @@ class LinksController < ApplicationController
     end
 
     def link_params
-      params.require(:link).permit(:url, :title, :image, :remove_image)
+      params.require(:link).permit(:url, :title, :image, :remove_image, :default_image)
     end
 
     # def track_visit

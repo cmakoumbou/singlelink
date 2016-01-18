@@ -2,15 +2,16 @@
 #
 # Table name: links
 #
-#  id         :integer          not null, primary key
-#  url        :string
-#  user_id    :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  disable    :boolean          default(FALSE)
-#  title      :string
-#  image      :string
-#  position   :integer
+#  id            :integer          not null, primary key
+#  url           :string
+#  user_id       :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  disable       :boolean          default(FALSE)
+#  title         :string
+#  image         :string
+#  position      :integer
+#  default_image :string
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

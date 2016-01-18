@@ -1,22 +1,43 @@
 <% provide(:title, "New link") %>
 
-<div class="ui segment">
-	<%= form_for @link, html: {class: "ui large form"} do |f| %>
-		<h4 class="ui dividing header">Add new link</h4>
-	  <%= link_error_messages! %>
-	  <div class="required field">
+<div class="ui blue segment">
+	<h3 class="ui header">Add a new link</h3>
+</div>
+<%= form_for @link, html: {class: "ui large form"} do |f| %>
+  <%= render 'links/error_messages' %>
+
+  <div class="ui blue segment">
+
+  	<h3 class="ui header">Link Information (Required)</h3>
+
+	  <div class="required field <%= "error" if f.object.errors.include?(:title) %>">
 	  	<%= f.label :title %>
-	  	<%= f.text_field :title, placeholder: "Twitter" %>
+	  	<%= f.text_field :title, placeholder: "Title" %>
 	  </div>
-	  <div class="required field">
-	  	<%= f.label :url %>
-	  	<%= f.text_field :url, placeholder: "www.twitter.com/yourbusiness" %>
+
+	  <div class="required field <%= "error" if f.object.errors.include?(:url) %>">
+	  	<%= f.label :url, "Website" %>
+	  	<%= f.text_field :url, placeholder: "Website" %>
 		</div>
-		<div class="field">
-			<%= f.label :image %>
+
+	</div>
+
+	<div class="ui blue segment">
+
+		<h3 class="ui header">Link Image (Select or Upload)</h3>
+
+		<div class="field <%= "error" if f.object.errors.include?(:default_image) %>">
+			<%= f.label :default_image, "Select an image to use" %>
+	  	<%= f.select :default_image, options_for_default_images, { :prompt => "Select one" }, { class: "ui dropdown" } %>
+	  </div>
+
+
+		<div class="field <%= "error" if f.object.errors.include?(:image) %>">
+			<%= f.label :image, "Choose an image to upload" %>
 	  	<%= f.file_field :image %>
 	  </div>
 
-	  <%= f.submit "Create link", class: "ui button" %>
-	<% end %>
-</div>
+	</div>
+
+  <%= f.submit "Create link", class: "ui primary button" %>
+<% end %>

@@ -1,31 +1,29 @@
-<% if action_name != "profile" %>
-	<div class="normal-menu">
-		<div class="ui large top fixed blue inverted borderless menu">
-			<div class="ui container">
-				<div class="header item">Singlelinkme</div>
-					<% if user_signed_in? %>
-					  <div class="right menu">
-							<%= link_to 'Home', root_path, class: "item" %>
-					  	<%= link_to 'Profile', profile_path(current_user), class: "item" %>
-							<%= link_to 'Settings', settings_path, class: "item" %>
-							<%= link_to 'Subscriptions', subscriptions_path, class: "item" %>
-							<% if current_user.admin? %>
-								<%= link_to 'Admin', rails_admin_path, class: "item" %>
-					    <% end %>
-							<%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "item" %>
-						</div>
-					<% else %>
-						<%= link_to 'Features', features_path, class: "item" %>
-						<%= link_to 'Pricing', pricing_path, class: "item" %>
-						<div class="right menu">
-							<%= link_to 'Sign up', new_user_registration_path, class: "item" %>
-							<%= link_to 'Log in', new_user_session_path, class: "item" %>
-						</div>
-					<% end %>
-			</div>
+<div class="normal-menu">
+	<div class="ui large top fixed blue inverted borderless menu">
+		<div class="ui container">
+			<div class="header item">Singlelinkme</div>
+				<% if user_signed_in? %>
+				  <div class="right menu">
+						<%= link_to 'Home', root_path, class: "item" %>
+				  	<%= link_to 'Profile', profile_path(current_user), class: "item" %>
+						<%= link_to 'Settings', settings_path, class: "item" %>
+						<%= link_to 'Subscriptions', subscriptions_path, class: "item" %>
+						<% if current_user.admin? %>
+							<%= link_to 'Admin', rails_admin_path, class: "item" %>
+				    <% end %>
+						<%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "item" %>
+					</div>
+				<% else %>
+					<%= link_to 'Features', features_path, class: "item" %>
+					<%= link_to 'Pricing', pricing_path, class: "item" %>
+					<div class="right menu">
+						<%= link_to 'Sign up', new_user_registration_path, class: "item" %>
+						<%= link_to 'Log in', new_user_session_path, class: "item" %>
+					</div>
+				<% end %>
 		</div>
 	</div>
-<% end %>
+</div>
 
 <div id="menu_sidebar" class="ui large blue inverted left sidebar vertical borderless menu">
   <div class="header item">Singlelinkme</div>
@@ -53,53 +51,9 @@
 	<div class="item">&copy; 2016 Singlelinkme Ltd</div>
 </div>
 
-<% if action_name != "profile" %>
-	<div class="mobile-menu">
-		<div class="ui large top fixed blue inverted two item menu">
-		  <a id="menu_button" class="item"><i class="content icon"></i>Menu</a>
-		  <%= link_to 'Singlelinkme', root_path, class: "item" %>
-		</div>
+<div class="mobile-menu">
+	<div class="ui large top fixed blue inverted two item menu">
+	  <a id="menu_button" class="item"><i class="content icon"></i>Menu</a>
+	  <%= link_to 'Singlelinkme', root_path, class: "item" %>
 	</div>
-<% end %>
-
-<% if action_name == "profile" %>
-	<% if @user == current_user %>
-		<div class="normal-menu">
-			<div class="ui large top fixed blue inverted borderless menu">
-				<div class="ui container">
-					<div class="header item">Singlelinkme</div>
-						<% if user_signed_in? %>
-						  <div class="right menu">
-								<%= link_to 'Home', root_path, class: "item" %>
-						  	<%= link_to 'Profile', profile_path(current_user), class: "item" %>
-								<%= link_to 'Settings', settings_path, class: "item" %>
-								<%= link_to 'Subscriptions', subscriptions_path, class: "item" %>
-								<% if current_user.admin? %>
-									<%= link_to 'Admin', rails_admin_path, class: "item" %>
-						    <% end %>
-								<%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "item" %>
-							</div>
-						<% else %>
-							<%= link_to 'Features', features_path, class: "item" %>
-							<%= link_to 'Pricing', pricing_path, class: "item" %>
-							<div class="right menu">
-								<%= link_to 'Sign up', new_user_registration_path, class: "item" %>
-								<%= link_to 'Log in', new_user_session_path, class: "item" %>
-							</div>
-						<% end %>
-				</div>
-			</div>
-		</div>
-	<% end %>
-<% end %>
-
-<% if action_name == "profile" %>
-	<% if @user == current_user %>
-		<div class="mobile-menu">
-			<div class="ui large top fixed blue inverted two item menu">
-		  	<a id="menu_button" class="item"><i class="content icon"></i>Menu</a>
-		  	<%= link_to 'Singlelinkme', root_path, class: "item" %>
-			</div>
-		</div>
-	<% end %>
-<% end %>
+</div>

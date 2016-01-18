@@ -1,5 +1,6 @@
 body {
 	font-size: 16px;
+	background-color:#FAFAFA;
 }
 
 #main {
@@ -8,10 +9,21 @@ body {
 }
 
 #profile {
-	padding-top:40px;
-	margin-bottom:40px;
+	padding-top:30px;
+	margin-bottom:30px;
 }
 
+#facebook {
+	background-color: #3B579D;
+}
+
+#twitter {
+	background-color: #55acee;
+}
+
+#google {
+	background-color: #404040;
+}
 
 .pyro {
 	height: 75px;
