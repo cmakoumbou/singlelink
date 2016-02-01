@@ -4,7 +4,7 @@
 			<div class="header item">Singlelinkme</div>
 				<% if user_signed_in? %>
 				  <div class="right menu">
-						<%= link_to 'Home', root_path, class: "item" %>
+						<%= link_to 'Dashboard', root_path, class: "item" %>
 				  	<%= link_to 'Profile', profile_path(current_user), class: "item" %>
 						<%= link_to 'Settings', settings_path, class: "item" %>
 						<%= link_to 'Subscriptions', subscriptions_path, class: "item" %>
@@ -28,7 +28,7 @@
 <div id="menu_sidebar" class="ui large blue inverted left sidebar vertical borderless menu">
   <div class="header item">Singlelinkme</div>
   <% if user_signed_in? %>
-		<%= link_to 'Home', root_path, class: "item" %>
+		<%= link_to 'Dashboard', root_path, class: "item" %>
   	<%= link_to 'Profile', profile_path(current_user), class: "item" %>
 		<%= link_to 'Settings', settings_path, class: "item" %>
 		<%= link_to 'Subscriptions', subscriptions_path, class: "item" %>

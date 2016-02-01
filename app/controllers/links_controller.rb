@@ -1,9 +1,9 @@
 class LinksController < ApplicationController
   before_action :authenticate_user!, except: [:profile]
   before_action :correct_link, only: [:edit, :update, :destroy, :move_up, :move_down, :enable, :disable]
-  # before_filter :track_ahoy_visit, only: [:profile]
 
   def index
+    authorize! :index, Link
     @links = current_user.links.order(position: :asc)
   end
 
@@ -13,11 +13,7 @@ class LinksController < ApplicationController
   end
 
   def new
-    if current_user.subscriptions.blank? || current_user.subscriptions.take.canceled_now?
-      authorize! :new, Link, :message => "Singlelink.me Free has a limit of 5 links. You can upgrade your subscription to Pro for more links."
-    else
-      authorize! :new, Link, :message => "Singlelink.me Pro has a limit of 25 links. To add a new link, you can edit or delete a link."
-    end
+    authorize! :new, Link
     @link = Link.new
   end
 
@@ -33,9 +29,11 @@ class LinksController < ApplicationController
   end
 
   def edit
+    authorize! :edit, Link
   end
 
   def update
+    authorize! :update, Link
     if @link.update(link_params)
       redirect_to links_url, notice: 'Link was successfully updated.'
     else
@@ -44,28 +42,32 @@ class LinksController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, Link
     @link.destroy
     redirect_to links_url, notice: 'Link was successfully destroyed.'
   end
 
   def move_up
+    authorize! :move_up, Link
     @link.move_higher
     redirect_to links_url, notice: 'Link was successfully moved up.'
   end
 
   def move_down
+    authorize! :move_down, Link
     @link.move_lower
     redirect_to links_url, notice: 'Link was successfully moved down.'
   end
 
   def enable
-    authorize! :enable, Link, :message => "Singlelink.me Free has a limit of 5 links. You can upgrade your subscription to Pro for more links."
+    authorize! :enable, Link
     @link.disable = false
     @link.save
     redirect_to links_url, notice: 'Link was successfully enabled.'
   end
 
   def disable
+    authorize! :disable, Link
     @link.disable = true
     @link.save
     redirect_to links_url, notice: 'Link was successfully disabled.'

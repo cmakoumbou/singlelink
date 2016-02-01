@@ -1,47 +1,64 @@
 class SubscriptionsController < ApplicationController
 	before_action :authenticate_user!
 
-  # Subscriptions Index
-
   def index
   	@user = current_user
     @user_subscription = @user.subscriptions.take
   end
 
-  # Pro Subscription
+  def pro_new
+    authorize! :pro_new, Subscription
 
-  def pro
-    authorize! :pro, Subscription
+    @user = current_user
+    @user_subscription = @user.subscriptions.take
 
+    token = params[:stripeToken]
+    customer_email = params[:stripeEmail]
+
+    begin
+      customer = Stripe::Customer.create(:source => token, :plan => "1", :email => customer_email)
+      flash[:notice] = 'Welcome to your dashboard! This is where you add and manage your links.'
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+      redirect_to subscriptions_path
+    rescue => e
+      flash[:error] = "An error occurred while processing your card. Try again in a little bit."
+      redirect_to subscriptions_path
+    else
+      subscription = Subscription.create(user: @user, status: "active")
+      redirect_to root_url
+    end
+  end
+
+  def renew
+    authorize! :renew, Subscription
     @user = current_user
   end
 
-  def pro_confirm
-    authorize! :pro_confirm, Subscription
+  def renew_confirm
+    authorize! :renew_confirm, Subscription
 
     @user = current_user
+    @user_subscription = @user.subscriptions.take
 
-    if @user.subscriptions.present?
-      token = params[:stripeToken]
+    token = params[:stripeToken]
+
+    begin
       customer = Stripe::Customer.retrieve(@user.subscriptions.take.customer_id)
       customer.subscriptions.create(:source => token, :plan => "1")
+      flash[:notice] = 'Subscription was successfully renewed.'
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+      redirect_to subscriptions_path
+    rescue => e
+      flash[:error] = "An error occurred while processing your card. Try again in a little bit."
+      redirect_to subscriptions_path
     else
-      token = params[:stripeToken]
-      customer_email = params[:stripeEmail]
-      customer = Stripe::Customer.create(:source => token, :plan => "1", :email => customer_email)
+      @user_subscription.update(status: "active")
+      redirect_to root_url
     end
-
-    redirect_to root_url, notice: 'Pro Subscription was successfully activated.'
-
-  rescue Stripe::CardError => e
-    flash[:error] = e.message
-    redirect_to pro_subscription_path
-  rescue => e
-    flash[:error] = "We are having trouble processing your request. Please try again later."
-    redirect_to pro_subscription_path
   end
 
-  # Cancel Subscription
 
   def cancel
     authorize! :cancel, Subscription
@@ -70,11 +87,9 @@ class SubscriptionsController < ApplicationController
     flash[:error] = e.message
     redirect_to cancel_subscription_path
   rescue => e
-    flash[:error] = "We are having trouble processing your request. Please try again later."
+    flash[:error] = "An error occurred, try again in a little bit."
     redirect_to cancel_subscription_path
   end
-
-  # Resume Subscription
 
   def resume
     authorize! :resume, Subscription
@@ -100,11 +115,9 @@ class SubscriptionsController < ApplicationController
     flash[:error] = e.message
     redirect_to resume_subscription_path
   rescue => e
-    flash[:error] = "We are having trouble processing your request. Please try again later."
+    flash[:error] = "An error occurred, try again in a little bit."
     redirect_to resume_subscription_path
   end
-
-  # Card Subscription
 
   def card
     authorize! :card, Subscription
@@ -128,7 +141,7 @@ class SubscriptionsController < ApplicationController
     flash[:error] = e.message
     redirect_to card_subscription_path
   rescue => e
-    flash[:error] = "We are having trouble processing your request. Please try again later."
+    flash[:error] = "An error occurred, try again in a little bit."
     redirect_to card_subscription_path
   end
 end

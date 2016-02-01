@@ -13,27 +13,17 @@ StripeEvent.configure do |events|
 	events.subscribe 'invoice.payment_succeeded' do |event|
 		customer = Stripe::Customer.retrieve(event.data.object.customer)
 		sub = customer.subscriptions.retrieve(event.data.object.subscription)
-		user_subscription = Subscription.find_by_customer_id(event.data.object.customer)
+		renew_subscription = Subscription.find_by_customer_id(event.data.object.customer)
 
-		if user_subscription.blank?
+		if renew_subscription.blank?
 			user = User.find_by_email(customer.email)
-			subscription = Subscription.new do |s|
-				s.subscription_id = sub.id
-				s.customer_id = sub.customer
-				s.plan_id = sub.plan.id
-				s.user = user
-				s.start_date = Time.at(sub.current_period_start)
-				s.end_date = Time.at(sub.current_period_end)
-				s.status = "active"
-			end
-			subscription.save
+			new_subscription = Subscription.find_by_user_id(user.id)
+			new_subscription.update(subscription_id: sub.id, customer_id: sub.customer, plan_id: sub.plan.id,
+			 user: user, start_date: Time.at(sub.current_period_start), end_date: Time.at(sub.current_period_end),
+			 last4: customer.sources.data.last.last4, status: "active")
 		else
-			user_subscription.subscription_id = sub.id
-			user_subscription.plan_id = sub.plan.id
-			user_subscription.start_date = Time.at(sub.current_period_start)
-			user_subscription.end_date = Time.at(sub.current_period_end)
-			user_subscription.status = "active"
-			user_subscription.save
+			renew_subscription.update(subscription_id: sub.id, plan_id: sub.plan.id, start_date: Time.at(sub.current_period_start), 
+				end_date: Time.at(sub.current_period_end), status: "active")
 		end
 	end
 
@@ -63,7 +53,17 @@ StripeEvent.configure do |events|
 
 	events.subscribe 'customer.source.created' do |event|
 		user_subscription = Subscription.find_by_customer_id(event.data.object.customer)
-		user_subscription.last4 = event.data.object.last4
-		user_subscription.save
+		if user_subscription.present?
+			user_subscription.last4 = event.data.object.last4
+			user_subscription.save
+		end
+	end
+
+	events.subscribe 'customer.subscription.trial_will_end' do |event|
+		user_subscription = Subscription.find_by_customer_id(event.data.object.customer)
+		if user_subscription.present?
+			user = User.find_by_id(user_subscription.user_id)
+			UserMailer.trial_ending(user).deliver
+		end
 	end
 end

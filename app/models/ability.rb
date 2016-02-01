@@ -9,11 +9,9 @@ class Ability
     end
 
     if user.subscriptions.blank?
-      can :pro, Subscription
-      can :pro_confirm, Subscription
-      can :new, Link if user.links(:reload).count < 25
-      can :create, Link if user.links(:reload).count < 25
-      can :enable, Link if user.links(:reload).where(disable: false).count < 25
+      can :index, Link
+      can :index, Subscription
+      can :pro_new, Subscription
     end
 
     if user.subscriptions.present?
@@ -21,31 +19,23 @@ class Ability
       can :card, Subscription
       can :card_update, Subscription
       if sub.status == "active"
+        can :manage, Link
         can :cancel, Subscription
         can :cancel_confirm, Subscription
-        can :new, Link if user.links(:reload).count < 25
-        can :create, Link if user.links(:reload).count < 25
-        can :enable, Link if user.links(:reload).where(disable: false).count < 25
       elsif sub.status == "canceled" && sub.end_date > Time.now
+        can :manage, Link
         can :resume, Subscription
         can :resume_confirm, Subscription
-        can :new, Link if user.links(:reload).count < 25
-        can :create, Link if user.links(:reload).count < 25
-        can :enable, Link if user.links(:reload).where(disable: false).count < 25
       elsif sub.status == "canceled" && sub.end_date < Time.now
-        can :pro, Subscription
-        can :pro_confirm, Subscription
+        can :index, Link
+        can :renew, Subscription
+        can :renew_confirm, Subscription
         cannot :card, Subscription
-        cannot :card_update, Subscription
-        can :new, Link if user.links(:reload).count < 5
-        can :create, Link if user.links(:reload).count < 5
-        can :enable, Link if user.links(:reload).where(disable: false).count < 5
+        cannot :card_confirm, Subscription
       elsif sub.status == "past_due"
+        can :manage, Link
         can :cancel, Subscription
         can :cancel_confirm, Subscription
-        can :new, Link if user.links(:reload).count < 25
-        can :create, Link if user.links(:reload).count < 25
-        can :enable, Link if user.links(:reload).where(disable: false).count < 25
       end
     end
   end

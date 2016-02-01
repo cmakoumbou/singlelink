@@ -1,0 +1,13 @@
+<div class="ui blue segment">
+  <h3 class="ui header">Card</h3>
+	<%= form_tag card_update_path do %>
+	  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+	          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+	          data-name="Update Card"
+	          data-email="<%= @user.email%>"
+	          data-locale="auto"
+	          data-label="Update Card"
+	          data-panel-label="Update Card"
+	          data-allow-remember-me="false"></script>
+	<% end %>
+</div>

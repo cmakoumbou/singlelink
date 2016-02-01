@@ -12,4 +12,9 @@ class UserMailer < ApplicationMailer
 		@user = user
 		mail(to: @user.email, subject: 'Canceled Subscription')
 	end
+
+	def trial_ending(user)
+		@user = user
+		mail(to: @user.email, subject: 'Trial will end soon')
+	end
 end

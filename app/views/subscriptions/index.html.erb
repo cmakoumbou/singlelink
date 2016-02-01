@@ -1,40 +1,90 @@
-<% if can? :pro, Subscription %>
-  <p>Current Subscription: <b>Free Plan</b></p>
+<% provide(:title, "Subscription") %>
+
+<% if @user_subscription.blank? %>
+
+  <div class="ui large three steps">
+    <div class="completed step">
+      <i class="user icon"></i>
+      <div class="content">
+        <div class="title">Account</div>
+        <div class="description">Set up an account</div>
+      </div>
+    </div>
+    <div class="active step">
+      <i class="payment icon"></i>
+      <div class="content">
+        <div class="title">Billing</div>
+        <div class="description">Enter billing information</div>
+      </div>
+    </div>
+    <div class="disabled step">
+      <i class="dashboard icon"></i>
+      <div class="content">
+        <div class="title">Dashboard</div>
+        <div class="description">Go to your dashboard</div>
+      </div>
+    </div>
+  </div>
+
 <% end %>
 
-<% if @user_subscription && @user_subscription.active? %>
-  <p>Current Subscription: <b>Pro Plan</b> until <b><%= @user_subscription.end_date.strftime("%A %d %B %Y") %></b>.</p>
+<div class="ui blue segment">
+  <h3 class="ui header">Subscription</h3>
+</div>
+
+<% if @user_subscription && @user_subscription.subscription_id.blank? %>
+  <div class="ui blue segment">
+    <h3 class="ui header">Information</h3>
+    <p>Subscription data still processing, please wait a few minutes.</p>
+  </div>
 <% end %>
 
-<% if @user_subscription && @user_subscription.past_due? %>
-  <p>Current Subscription: <b>Pro Plan (Inactive)</b><br/>
-  Your subscription payment failed, you can cancel or update your card if necessary.</p>
-  <p>The next payment attempt will be on <b><%= @user_subscription.next_payment_attempt.strftime("%A %d %B %Y") %></b>.</p>
+<% if can? :pro_new, Subscription %>
+  <%= render 'subscriptions/pro' %>
 <% end %>
 
-<% if @user_subscription && @user_subscription.canceled_later? %>
-  <p>Current Subscription: <b>Pro Plan</b> until <b><%= @user_subscription.end_date.strftime("%A %d %B %Y") %></b>
-  then your subscription will be canceled.</p>
-<% end %>
+<% if @user_subscription && @user_subscription.subscription_id.present? %>
+  <div class="ui blue segment">
+    <h3 class="ui header">Information</h3>
 
-<% if cannot? :pro, Subscription %>
-  <p>Card Payment Info: <b><%= @user_subscription.last4 %> (Last 4 digits)</b></p>
-<% end %>
+    <% if @user_subscription && @user_subscription.active? %>
+      <p><b>Renewal: </b><%= @user_subscription.end_date.strftime("%A %d %B %Y") %></p>
+      <p><b>Cost: </b> £20 per year</p>
+    <% end %>
 
-<ul>
-  <% if can? :pro, Subscription %>
-    <li><%= link_to "Pro Subscription", pro_subscription_path %></li>
-  <% end %>
+    <% if @user_subscription && @user_subscription.past_due? %>
+      <p>Your subscription payment failed, you can update your card or cancel if necessary.</p>
+      <p>The next payment attempt will be on <%= @user_subscription.next_payment_attempt.strftime("%A %d %B %Y") %>.</p>
+    <% end %>
 
-  <% if can? :resume, Subscription %>
-    <li><%= link_to "Resume Subscription", resume_subscription_path %></li>
-  <% end %>
+    <% if @user_subscription && @user_subscription.canceled_later? %>
+      <p>Subscribed until <%= @user_subscription.end_date.strftime("%A %d %B %Y") %>
+      then your subscription will be canceled.</p>
+    <% end %>
 
-  <% if can? :cancel, Subscription %>
-    <li><%= link_to "Cancel Subscription", cancel_subscription_path %></li>
+    <% if @user_subscription && @user_subscription.canceled_now? %>
+      <p>Subscription cancelled</p>
+    <% end %>
+
+    <% if can? :card, Subscription %>
+      <p><b>Billing Card (last 4 digits): </b><%= @user_subscription.last4 %></p>
+    <% end %>
+  </div>
+
+  <% if can? :renew, Subscription %>
+    <%= render 'subscriptions/renew' %>
   <% end %>
 
   <% if can? :card, Subscription %>
-    <li><%= link_to "Update Card", card_subscription_path %></li>
+    <%= render 'subscriptions/card' %>
   <% end %>
-</ul>
+
+  <% if can? :resume, Subscription %>
+    <%= render 'subscriptions/resume' %>
+  <% end %>
+
+  <% if can? :cancel, Subscription %>
+    <%= render 'subscriptions/cancel' %>
+  <% end %>
+
+<% end %>

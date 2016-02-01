@@ -56,4 +56,10 @@ class RegistrationsController < Devise::RegistrationsController
 	  	render :delete
 	  end 
   end
+
+  protected
+
+  def after_sign_up_path_for(resource)
+    '/subscriptions'
+  end
 end
