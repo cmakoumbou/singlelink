@@ -6,8 +6,8 @@ class SubscriptionsController < ApplicationController
     @user_subscription = @user.subscriptions.take
   end
 
-  def pro_new
-    authorize! :pro_new, Subscription
+  def pro
+    authorize! :pro, Subscription
 
     @user = current_user
     @user_subscription = @user.subscriptions.take
@@ -16,7 +16,7 @@ class SubscriptionsController < ApplicationController
     customer_email = params[:stripeEmail]
 
     begin
-      customer = Stripe::Customer.create(:source => token, :plan => "1", :email => customer_email)
+      customer = Stripe::Customer.create(:source => token, :plan => "1", :email => customer_email, :trial_end => 1454341717)
       flash[:notice] = 'Welcome to your dashboard! This is where you add and manage your links.'
     rescue Stripe::CardError => e
       flash[:error] = e.message
@@ -32,11 +32,6 @@ class SubscriptionsController < ApplicationController
 
   def renew
     authorize! :renew, Subscription
-    @user = current_user
-  end
-
-  def renew_confirm
-    authorize! :renew_confirm, Subscription
 
     @user = current_user
     @user_subscription = @user.subscriptions.take
@@ -59,13 +54,8 @@ class SubscriptionsController < ApplicationController
     end
   end
 
-
   def cancel
     authorize! :cancel, Subscription
-  end
-
-  def cancel_confirm
-    authorize! :cancel_confirm, Subscription
 
     @user = current_user
     @user_subscription = @user.subscriptions.take
@@ -85,18 +75,14 @@ class SubscriptionsController < ApplicationController
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
-    redirect_to cancel_subscription_path
+    redirect_to subscriptions_path
   rescue => e
     flash[:error] = "An error occurred, try again in a little bit."
-    redirect_to cancel_subscription_path
+    redirect_to subscriptions_path
   end
 
   def resume
     authorize! :resume, Subscription
-  end
-
-  def resume_confirm
-    authorize! :resume_confirm, Subscription
 
     @user = current_user
     @user_subscription = @user.subscriptions.take
@@ -113,20 +99,14 @@ class SubscriptionsController < ApplicationController
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
-    redirect_to resume_subscription_path
+    redirect_to subscriptions_path
   rescue => e
     flash[:error] = "An error occurred, try again in a little bit."
-    redirect_to resume_subscription_path
+    redirect_to subscriptions_path
   end
 
   def card
     authorize! :card, Subscription
-
-    @user = current_user
-  end
-
-  def card_update
-    authorize! :card_update, Subscription
 
     token = params[:stripeToken]
     @user = current_user
@@ -139,9 +119,9 @@ class SubscriptionsController < ApplicationController
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
-    redirect_to card_subscription_path
+    redirect_to subscriptions_path
   rescue => e
     flash[:error] = "An error occurred, try again in a little bit."
-    redirect_to card_subscription_path
+    redirect_to subscriptions_path
   end
 end

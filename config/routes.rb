@@ -31,23 +31,11 @@ Rails.application.routes.draw do
 
   resources :subscriptions, only: [:index]
 
-  post '/subscriptions' => 'subscriptions#pro_new', as: :pro_new_subscription
-
-  # Renew / Cancel / Resume Subscriptions
-
-  get '/subscriptions/renew' => 'subscriptions#renew', as: :renew_subscription
-  post '/subscriptions/renew' => 'subscriptions#renew_confirm', as: :renew_confirm
-
+  post '/subscriptions' => 'subscriptions#pro', as: :pro_subscription
+  post '/subscriptions/renew' => 'subscriptions#renew', as: :renew_subscription
+  post '/subscriptions/card' => 'subscriptions#card', as: :card_subscription
   get '/subscriptions/cancel' => 'subscriptions#cancel', as: :cancel_subscription
   get '/subscriptions/resume' => 'subscriptions#resume', as: :resume_subscription
-
-  get '/subscriptions/cancel/confirm' => 'subscriptions#cancel_confirm', as: :cancel_confirm
-  get '/subscriptions/resume/confirm' => 'subscriptions#resume_confirm', as: :resume_confirm
-
-  # Card Update
-
-  get '/subscriptions/card' => 'subscriptions#card', as: :card_subscription
-  post '/subscriptions/card' => 'subscriptions#card_update', as: :card_update
 
   mount StripeEvent::Engine, at: '/webhooks'
 

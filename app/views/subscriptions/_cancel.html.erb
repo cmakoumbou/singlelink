@@ -7,5 +7,5 @@
   <% if @user_subscription.end_date < Time.now %>
     <p>If you cancel your subscription now, you will have to renew your subscription to use our services again.</p>
   <% end %>
-	<%= link_to "Cancel Subscription", cancel_confirm_path, data: { confirm: "Are you sure?" }, class: "ui primary button" %>
+	<%= link_to "Cancel Subscription", cancel_subscription_path, data: { confirm: "Are you sure?" }, class: "ui primary button" %>
 </div>

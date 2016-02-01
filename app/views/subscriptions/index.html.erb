@@ -1,31 +1,7 @@
 <% provide(:title, "Subscription") %>
 
 <% if @user_subscription.blank? %>
-
-  <div class="ui large three steps">
-    <div class="completed step">
-      <i class="user icon"></i>
-      <div class="content">
-        <div class="title">Account</div>
-        <div class="description">Set up an account</div>
-      </div>
-    </div>
-    <div class="active step">
-      <i class="payment icon"></i>
-      <div class="content">
-        <div class="title">Billing</div>
-        <div class="description">Enter billing information</div>
-      </div>
-    </div>
-    <div class="disabled step">
-      <i class="dashboard icon"></i>
-      <div class="content">
-        <div class="title">Dashboard</div>
-        <div class="description">Go to your dashboard</div>
-      </div>
-    </div>
-  </div>
-
+  <%= render 'subscriptions/step' %>
 <% end %>
 
 <div class="ui blue segment">
@@ -35,41 +11,17 @@
 <% if @user_subscription && @user_subscription.subscription_id.blank? %>
   <div class="ui blue segment">
     <h3 class="ui header">Information</h3>
-    <p>Subscription data still processing, please wait a few minutes.</p>
+    <p>Subscription data still processing, please wait a few minutes then re-visit this page to check the correct information is shown.</p>
   </div>
 <% end %>
 
-<% if can? :pro_new, Subscription %>
+<% if can? :pro, Subscription %>
   <%= render 'subscriptions/pro' %>
 <% end %>
 
 <% if @user_subscription && @user_subscription.subscription_id.present? %>
-  <div class="ui blue segment">
-    <h3 class="ui header">Information</h3>
-
-    <% if @user_subscription && @user_subscription.active? %>
-      <p><b>Renewal: </b><%= @user_subscription.end_date.strftime("%A %d %B %Y") %></p>
-      <p><b>Cost: </b> £20 per year</p>
-    <% end %>
-
-    <% if @user_subscription && @user_subscription.past_due? %>
-      <p>Your subscription payment failed, you can update your card or cancel if necessary.</p>
-      <p>The next payment attempt will be on <%= @user_subscription.next_payment_attempt.strftime("%A %d %B %Y") %>.</p>
-    <% end %>
-
-    <% if @user_subscription && @user_subscription.canceled_later? %>
-      <p>Subscribed until <%= @user_subscription.end_date.strftime("%A %d %B %Y") %>
-      then your subscription will be canceled.</p>
-    <% end %>
-
-    <% if @user_subscription && @user_subscription.canceled_now? %>
-      <p>Subscription cancelled</p>
-    <% end %>
-
-    <% if can? :card, Subscription %>
-      <p><b>Billing Card (last 4 digits): </b><%= @user_subscription.last4 %></p>
-    <% end %>
-  </div>
+  
+  <%= render 'subscriptions/info' %>
 
   <% if can? :renew, Subscription %>
     <%= render 'subscriptions/renew' %>

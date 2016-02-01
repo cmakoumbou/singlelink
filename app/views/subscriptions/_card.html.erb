@@ -1,6 +1,7 @@
 <div class="ui blue segment">
   <h3 class="ui header">Card</h3>
-	<%= form_tag card_update_path do %>
+  <p>If you update your card, make sure to wait a few minutes for the system to update then re-visit this page to check the correct billing card is shown.</p>
+	<%= form_tag card_subscription_path do %>
 	  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 	          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
 	          data-name="Update Card"
