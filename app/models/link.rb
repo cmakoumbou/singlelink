@@ -25,6 +25,30 @@ class Link < ActiveRecord::Base
   validates :title, length: { maximum: 15}, presence: true
   validates :url, :url => { :message => "is not valid" }
   validates_presence_of :user
+  validates :image, file_size: { less_than: 2.megabytes, message: 'link image should be less than %{count}' }
+
+
+  rails_admin do
+    list do
+      field :title
+      field :url
+      field :user
+    end
+    show do
+      field :title
+      field :url
+      field :user
+      field :image
+      field :default_image
+    end
+    edit do
+      field :title
+      field :url
+      field :user
+      field :image
+      field :default_image
+    end
+  end
 
   protected
 	  def smart_add_url_protocol

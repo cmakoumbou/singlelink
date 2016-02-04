@@ -1,9 +1,10 @@
 class LinksController < ApplicationController
   before_action :authenticate_user!, except: [:profile]
   before_action :correct_link, only: [:edit, :update, :destroy, :move_up, :move_down, :enable, :disable]
+  layout :resolve_layout
 
   def index
-    authorize! :index, Link
+    authorize! :index, Link, :message => "Enter your billing infortmation to gain access to your dashboard."
     @links = current_user.links.order(position: :asc)
   end
 
@@ -83,7 +84,12 @@ class LinksController < ApplicationController
       params.require(:link).permit(:url, :title, :image, :remove_image, :default_image)
     end
 
-    # def track_visit
-    #   ahoy.track_visit
-    # end
+  def resolve_layout
+    case action_name
+    when "profile"
+      "showcase"
+    else
+      "application"
+    end
+  end
 end

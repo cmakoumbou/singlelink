@@ -42,7 +42,32 @@ class User < ActiveRecord::Base
 		format: { with: VALID_USERNAME_REGEX, message: "is invalid (only letters and numbers allowed)"}
 
   validates :display_name, length: { maximum: 25 }
-  validates :bio, length: { maximum: 230 }
+  validates :bio, length: { maximum: 400 }
+  validates :avatar, file_size: { less_than: 2.megabytes }
+
+  rails_admin do
+    list do
+      field :email
+      field :username
+      field :display_name
+    end
+    show do
+      field :email
+      field :username
+      field :admin
+      field :display_name
+      field :bio
+      field :avatar
+    end
+    edit do
+      field :email
+      field :username
+      field :display_name
+      field :bio
+      field :avatar
+      field :admin
+    end
+  end
 
 	private
 

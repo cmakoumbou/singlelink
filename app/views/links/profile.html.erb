@@ -4,47 +4,54 @@
   <% provide(:title, "#{@user.username}") %>
 <% end %>
 
-<div class="ui items">
-  <div class="item">
-    <div class="image">
-      <%= image_tag @user.avatar.thumb.url %>
-    </div>
-    <div class="middle aligned content">
-      <div class="header"><%= @user.username %></div>
-      <div class="description">
-        <p><%= @user.bio %></p>
+<div class="showcase-info">
+  <div class="ui container">
+    <div class="ui items">
+      <div class="item">
+        <div class="image">
+          <%= image_tag @user.avatar.thumb.url %>
+        </div>
+        <div class="middle aligned content">
+          <div class="header">
+            <% if !@user.display_name.blank? %>
+              <%= @user.display_name %> 
+            <% else %>
+              <%= @user.username %> 
+            <% end %>
+          </div>
+          <% if @user == current_user %>
+            <div class="meta"><%= link_to "Dashboard", root_path %> | <%= link_to "Settings", settings_path %></div>
+          <% end %>
+          <div class="description">
+            <p><%= @user.bio %></p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="ui hidden divider"></div>
-
 <% if !@links.empty? %>
-  <div class="ui four link doubling stackable cards">
-    <% @links.each do |link| %>
-      <% if link.disable == false %>
-        <%= link_to link.url, class: "card", :target => "_blank" do %>
-          <% if link.default_image.present? && link.image.blank? %>
-            <% if link.default_image == "facebook" %>
-              <div id="facebook" class="image">
-                <%= image_tag "facebook.png" %>
+  <div class="ui container">
+    <div class="ui four link doubling stackable cards">
+      <% @links.each do |link| %>
+        <% if link.disable == false %>
+          <%= link_to link.url, class: "card", :target => "_blank" do %>
+            <% if link.default_image.present? && link.image.blank? %>
+              <div id="<%= link.default_image %>" class="image">
+                <%= image_tag link.default_image %>
               </div>
-            <% elsif link.default_image == "twitter" %>
-              <div id="twitter" class="image">
-                <%= image_tag "twitter.png" %>
+            <% else %>
+              <div class="image">
+                <%= image_tag link.image.thumb.url %>
               </div>
             <% end %>
-          <% else %>
-            <div class="image">
-              <%= image_tag link.image.thumb.url %>
+            <div class="content">
+              <div class="ui centered header"><%= link.title %></div>
             </div>
           <% end %>
-          <div class="content">
-            <div class="ui centered header"><%= link.title %></div>
-          </div>
         <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 <% end %>

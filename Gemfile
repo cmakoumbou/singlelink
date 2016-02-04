@@ -25,6 +25,7 @@ gem 'semantic-ui-sass', '2.1.6.0'
 gem 'carrierwave', '0.10.0'
 gem 'mini_magick', '4.3.6'
 gem 'acts_as_list', '0.7.2'
+gem 'file_validators', '2.0.2'
 
 group :development, :test do
   gem 'byebug', '5.0.0'

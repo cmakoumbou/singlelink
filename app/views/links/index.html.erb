@@ -5,7 +5,11 @@
   <table class="ui blue large single line table">
     <thead>
       <tr><th colspan="6">
-        <%= link_to 'Add a new link', new_link_path, class: "ui primary button" %>
+        <% if can? :new, Link %>
+          <%= link_to 'Add a new link', new_link_path, class: "ui primary button" %>
+        <% else %>
+          <%= link_to '20 Links limit reached', new_link_path, class: "ui disabled button" %>
+        <% end %>
       </th>
     </tr></thead>
     <tbody>

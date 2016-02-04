@@ -16,7 +16,7 @@ class SubscriptionsController < ApplicationController
     customer_email = params[:stripeEmail]
 
     begin
-      customer = Stripe::Customer.create(:source => token, :plan => "1", :email => customer_email, :trial_end => 1454341717)
+      customer = Stripe::Customer.create(:source => token, :plan => "1", :email => customer_email)
       flash[:notice] = 'Welcome to your dashboard! This is where you add and manage your links.'
     rescue Stripe::CardError => e
       flash[:error] = e.message

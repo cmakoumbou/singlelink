@@ -35,7 +35,7 @@
   <div class="ui blue segment">
 
     <div class="required field <%= "error" if f.object.errors.include?(:username) %>">
-      <%= f.label :username %>
+      <%= f.label :username, "Username (20 max characters, only letters and numbers)" %>
       <%= f.text_field :username, placeholder: "Username" %>
     </div>
 

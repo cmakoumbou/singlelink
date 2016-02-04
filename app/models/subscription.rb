@@ -19,6 +19,28 @@
 class Subscription < ActiveRecord::Base
   belongs_to :user
 
+  rails_admin do
+    list do
+      field :subscription_id
+      field :customer_id
+      field :user
+      field :end_date
+      field :start_date
+      field :status
+    end
+    show do
+      field :subscription_id
+      field :customer_id
+      field :user
+      field :end_date
+      field :start_date
+      field :status
+      field :last4
+      field :next_payment_attempt
+    end
+  end
+
+
   def active?
   	if self.status == "active"
   		return true

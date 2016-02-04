@@ -1,26 +1,25 @@
-Flickr
 
-Snapchat
+------ Done ---------------
+
+Youtube
+
+Twitter
+
+Facebook
+
+Google+
 
 Instagram
 
-Pinterest
+Blogger
+
+Flickr
 
 LinkedIn
 
-Ebay
+Meerkat
 
-Github
-
-Etsy
-
-Soundcloud
-
-Medium
-
-Wordpress
-
-Blogger
+Pinterest
 
 Tumblr
 
@@ -28,17 +27,12 @@ Vimeo
 
 Vine
 
+Medium
+
+Snapchat
+
 Twitch
 
+Soundcloud
 
-
------- Done ---------------
-
-Youtube
-
-
-Twitter
-
-Facebook
-
-Google+
+Wordpress

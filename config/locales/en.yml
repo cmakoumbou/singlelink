@@ -24,3 +24,7 @@ en:
     attributes:
       link:
         url: "Link"
+        en:
+  errors:
+    messages:
+       extension_white_list_error: 'allowed types: jpg, jpeg, png'

@@ -10,16 +10,16 @@
   <div class="ui blue segment">
     <h3 class="ui header">Profile Information (Optional)</h3>
     <div class="field <%= "error" if f.object.errors.include?(:display_name) %>">
-      <%= f.label :display_name, "Profile Name" %>
+      <%= f.label :display_name, "Profile Name (25 max characters)" %>
       <%= f.text_field :display_name, placeholder: "Profile Name" %>
     </div>
     <div class="field <%= "error" if f.object.errors.include?(:bio) %>">
-      <%= f.label :bio, "Profile Bio" %>    
+      <%= f.label :bio, "Profile Bio (400 max characters)" %>    
       <%= f.text_area :bio, placeholder: "Profile Bio", rows: 3 %>
     </div>
     <% if current_user.avatar? %>
       <div class="field">
-        <h4>Current Profile Image</h4>
+        <h4>Current Profile Avatar</h4>
     	  <div class="ui medium image"><%= image_tag(current_user.avatar.url) %></div>
       </div>
       <div class="field">
@@ -30,7 +30,7 @@
       </div>
     <% end %>
     <div class="field <%= "error" if f.object.errors.include?(:avatar) %>">
-      <%= f.label :avatar, "Choose a profile image to upload" %>
+      <%= f.label :avatar, "Choose a profile avatar to upload (2mb limit, png or jpeg)" %>
       <%= f.file_field :avatar %>
     </div>
   </div>
@@ -38,7 +38,7 @@
   <div class="ui blue segment">
     <h3 class="ui header">Account Information (Required)</h3>
     <div class="required field <%= "error" if f.object.errors.include?(:username) %>">
-      <%= f.label :username, "Username" %>
+      <%= f.label :username, "Username (20 max characters, only letters and numbers)" %>
       <%= f.text_field :username, placeholder: "Username" %>
     </div>
     <div class="required field <%= "error" if f.object.errors.include?(:email) %>">
@@ -57,6 +57,14 @@
       <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm new password" %>
     </div>
+  </div>
+
+  <div class="ui blue segment">
+    <h3 class="ui header"><%= link_to 'Manage your subscription', subscriptions_path %></h3>
+  </div>
+
+  <div class="ui blue segment">
+    <h3 class="ui header"><%= link_to('Close your account', settings_cancel_path) %></h3>
   </div>
 
   <div class="ui blue segment">

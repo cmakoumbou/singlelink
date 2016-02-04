@@ -4,11 +4,15 @@
 			<div class="header item">Singlelinkme</div>
 				<% if user_signed_in? %>
 				  <div class="right menu">
-						<%= link_to 'Dashboard', root_path, class: "item" %>
-				  	<%= link_to 'Profile', profile_path(current_user), class: "item" %>
-						<%= link_to 'Settings', settings_path, class: "item" %>
-						<%= link_to 'Subscriptions', subscriptions_path, class: "item" %>
-						<% if current_user.admin? %>
+				  	<% if current_user.subscriptions.present? %>
+							<%= link_to 'Dashboard', root_path, class: "item" %>
+				  	<% end %>
+				  	<% if current_user.subscriptions.blank? %>
+							<%= link_to 'Subscribe', subscriptions_path, class: "item" %>
+						<% end %>
+				    <%= link_to 'Profile', profile_path(current_user), class: "item" %>
+				   	<%= link_to 'Settings', settings_path, class: "item" %>
+				   	<% if current_user.admin? %>
 							<%= link_to 'Admin', rails_admin_path, class: "item" %>
 				    <% end %>
 						<%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "item" %>
@@ -28,10 +32,14 @@
 <div id="menu_sidebar" class="ui large blue inverted left sidebar vertical borderless menu">
   <div class="header item">Singlelinkme</div>
   <% if user_signed_in? %>
-		<%= link_to 'Dashboard', root_path, class: "item" %>
-  	<%= link_to 'Profile', profile_path(current_user), class: "item" %>
+  	<% if current_user.subscriptions.present? %>
+			<%= link_to 'Dashboard', root_path, class: "item" %>
+		<% end %>
+		<% if current_user.subscriptions.blank? %>
+			<%= link_to 'Subscribe', subscriptions_path, class: "item" %>
+		<% end %>
+    <%= link_to 'Profile', profile_path(current_user), class: "item" %>
 		<%= link_to 'Settings', settings_path, class: "item" %>
-		<%= link_to 'Subscriptions', subscriptions_path, class: "item" %>
 		<% if current_user.admin? %>
 			<%= link_to 'Admin', rails_admin_path, class: "item" %>
     <% end %>
