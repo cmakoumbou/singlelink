@@ -39,7 +39,7 @@
           <%= link_to link.url, class: "card", :target => "_blank" do %>
             <% if link.default_image.present? && link.image.blank? %>
               <div id="<%= link.default_image %>" class="image">
-                <%= image_tag link.default_image %>
+                <%= image_tag "facebook" %>
               </div>
             <% else %>
               <div class="image">
