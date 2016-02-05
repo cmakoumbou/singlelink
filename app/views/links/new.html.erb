@@ -24,16 +24,20 @@
 
 	<div class="ui blue segment">
 
-		<h3 class="ui header">Link Image (Select or Upload)</h3>
+		<h3 class="ui header">Link Image</h3>
 
 		<div class="field <%= "error" if f.object.errors.include?(:default_image) %>">
-			<%= f.label :default_image, "Select an image to use" %>
+			<%= f.label :default_image, "Select an image to use from our database" %>
 	  	<%= f.select :default_image, options_for_default_images, { :prompt => "Select one" }, { class: "ui dropdown" } %>
 	  </div>
 
+	  <div class="ui horizontal divider">
+    	Or
+  	</div>
+
 
 		<div class="field <%= "error" if f.object.errors.include?(:image) %>">
-			<%= f.label :image, "Choose an image to upload" %>
+			<%= f.label :image, "Choose an image to upload from your files" %>
 	  	<%= f.file_field :image %>
 	  </div>
 
