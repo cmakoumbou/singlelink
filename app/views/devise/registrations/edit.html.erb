@@ -14,7 +14,7 @@
       <%= f.text_field :display_name, placeholder: "Profile Name" %>
     </div>
     <div class="field <%= "error" if f.object.errors.include?(:bio) %>">
-      <%= f.label :bio, "Profile Bio (400 max characters)" %>    
+      <%= f.label :bio, "Profile Bio (200 max characters)" %>    
       <%= f.text_area :bio, placeholder: "Profile Bio", rows: 3 %>
     </div>
     <% if current_user.avatar? %>
