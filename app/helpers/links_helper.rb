@@ -23,10 +23,6 @@ module LinksHelper
       ['Youtube', 'youtube']
     ]
   end
-
-  def nice_url(uri)
-    URI.parse(uri).host + URI.parse(uri).path
-  end
 end
 
 
