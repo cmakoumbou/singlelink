@@ -1,4 +1,4 @@
-<div class="ui blue segment">
+<div class="ui segment">
   <h3 class="ui header">Cancel</h3>
   <% if @user_subscription.end_date > Time.now %>
   	<p>If you cancel your subscription now, you will be subscribed until <%= @user_subscription.end_date.strftime("%A %d %B %Y") %>

@@ -1,5 +1,10 @@
 <% provide(:title, "Sign up") %>
 
+<div class="ui segment">
+  <h3 class="ui header">Sign up</h3>
+  <p>Already have an account? <%= link_to('Log in', new_user_session_path) %></p>
+</div>
+
 <div class="ui large three steps">
   <div class="active step">
     <i class="user icon"></i>
@@ -24,15 +29,10 @@
   </div>
 </div>
 
-<div class="ui blue segment">
-  <h3 class="ui header">Sign up</h3>
-  <p>Already have an account? <%= link_to('Log in', new_user_session_path) %></p>
-</div>
-
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "ui large form" }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="ui blue segment">
+  <div class="ui segment">
 
     <div class="required field <%= "error" if f.object.errors.include?(:username) %>">
       <%= f.label :username, "Username (20 max characters, only letters and numbers)" %>
@@ -55,7 +55,7 @@
     </div>
   </div>
 
-  <div class="ui blue segment">
+  <div class="ui segment">
     By clicking on "Sign up" below, you are agreeing to the <%= link_to "Terms of Service", terms_path %> and the <%= link_to "Privacy Policy", privacy_path %>.
   </div>
 

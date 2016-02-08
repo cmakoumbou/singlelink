@@ -1,5 +1,5 @@
 <div class="normal-menu">
-	<div class="ui large top fixed blue inverted borderless menu">
+	<div class="ui large top fixed black inverted borderless menu">
 		<div class="ui container">
 			<div class="header item">Singlelinkme</div>
 				<% if user_signed_in? %>
@@ -29,7 +29,7 @@
 	</div>
 </div>
 
-<div id="menu_sidebar" class="ui large blue inverted left sidebar vertical borderless menu">
+<div id="menu_sidebar" class="ui large black inverted left sidebar vertical borderless menu">
   <div class="header item">Singlelinkme</div>
   <% if user_signed_in? %>
   	<% if current_user.subscriptions.present? %>
@@ -60,7 +60,7 @@
 </div>
 
 <div class="mobile-menu">
-	<div class="ui large top fixed blue inverted two item menu">
+	<div class="ui large top fixed black inverted two item menu">
 	  <a id="menu_button" class="item"><i class="content icon"></i>Menu</a>
 	  <%= link_to 'Singlelinkme', root_path, class: "item" %>
 	</div>

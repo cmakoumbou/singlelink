@@ -1,15 +1,15 @@
 <% provide(:title, "Subscription") %>
 
+<div class="ui segment">
+  <h3 class="ui header">Subscription</h3>
+</div>
+
 <% if @user_subscription.blank? %>
   <%= render 'subscriptions/step' %>
 <% end %>
 
-<div class="ui blue segment">
-  <h3 class="ui header">Subscription</h3>
-</div>
-
 <% if @user_subscription && @user_subscription.subscription_id.blank? %>
-  <div class="ui blue segment">
+  <div class="ui segment">
     <h3 class="ui header">Information</h3>
     <p>Subscription data still processing, please wait a few minutes then re-visit this page to check the correct information is shown.</p>
   </div>

@@ -7,6 +7,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<%= yield %>
+	<% if @user == current_user %>
+		<%= render 'layouts/navigation' %>	
+		<div id="main" class="ui container">
+			<%= yield %>
+		</div>
+	<% else %>
+		<div id="profile" class="ui container">
+			<%= yield %>
+		</div>
+	<% end %>
 </body>
 </html>

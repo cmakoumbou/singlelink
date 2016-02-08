@@ -1,9 +1,8 @@
-<div class="ui blue segment">
+<div class="ui segment">
   <h3 class="ui header">Dashboard</h3>
-  <p><%= link_to "singlelink.me" + profile_path(current_user), profile_path(current_user), :target => "_blank" %></p>
 </div>
 <% if !@links.empty? %>
-  <table class="ui blue large single line table">
+  <table class="ui large single line table">
     <thead>
       <tr><th colspan="6">
         <% if can? :new, Link %>

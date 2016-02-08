@@ -1,12 +1,12 @@
 <% provide(:title, "Edit link") %>
 
-<div class="ui blue segment">
+<div class="ui segment">
   <h3 class="ui header">Edit link</h3>
 </div>
   <%= form_for @link, html: {class: "ui large form"} do |f| %>
   	<%= render 'links/error_messages' %>
 
-    <div class="ui blue segment">
+    <div class="ui segment">
       <h3 class="ui header">Link Information (Required)</h3>
       <div class="required field <%= "error" if f.object.errors.include?(:title) %>">
         <%= f.label :title %>
@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <div class="ui blue segment">
+    <div class="ui segment">
       <h3 class="ui header">Link Image (Select or Upload)</h3>
 
       <div class="field <%= "error" if f.object.errors.include?(:default_image) %>">
