@@ -1,8 +1,9 @@
 <div class="ui segment">
-  <h3 class="ui header">Dashboard</h3>
+  <h3 class="ui header">Home</h3>
 </div>
+
 <% if !@links.empty? %>
-  <table class="ui large single line table">
+  <table class="ui padded large single line table">
     <thead>
       <tr><th colspan="6">
         <% if can? :new, Link %>
@@ -15,16 +16,16 @@
     <tbody>
       <% @links.each do |link| %>
         <tr>
-          <td><%= link_to 'Move Up', move_up_link_path(link), :method => :put %></td>
-          <td><%= link_to 'Move Down', move_down_link_path(link), :method => :put %></td>
-          <td><%= link_to link.url, link.url, :target => "_blank" %></td>
+          <td class="center aligned"><%= link_to link.title, link.url, :target => "_blank" %></td>
+          <td><%= link_to 'Move Up', move_up_link_path(link), :method => :put, class: "large fluid ui blue basic button" %></td>
+          <td><%= link_to 'Move Down', move_down_link_path(link), :method => :put, class: "large fluid ui blue basic button" %></td>
           <% if link.disable == false %>
-            <td><%= link_to 'Disable', disable_link_path(link), :method => :post %></td>
+            <td><%= link_to 'Disable', disable_link_path(link), :method => :post, class: "large fluid ui blue basic button" %></td>
           <% else %>
-            <td><%= link_to 'Enable', enable_link_path(link), :method => :post %></td>
+            <td><%= link_to 'Enable', enable_link_path(link), :method => :post, class: "large fluid ui blue basic button" %></td>
           <% end %>
-          <td><%= link_to 'Edit', edit_link_path(link) %></td>
-          <td><%= link_to 'Delete', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Edit', edit_link_path(link), class: "large fluid ui blue basic button" %></td>
+          <td><%= link_to 'Delete', link, method: :delete, data: { confirm: 'Are you sure you want to delete this link?' }, class: "large fluid ui blue basic button" %></td>
         </tr>
       <% end %>
     </tbody> 

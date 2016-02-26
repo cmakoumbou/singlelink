@@ -2,6 +2,7 @@ module LinksHelper
   def options_for_default_images
     [
       ['Blogger', 'blogger'],
+      ['Discord', 'discord'],
       ['Facebook', 'facebook'],
       ['Flickr', 'flickr'],
       ['Google', 'google'],

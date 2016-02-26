@@ -22,7 +22,7 @@ class Link < ActiveRecord::Base
   belongs_to :user
   before_save :smart_add_url_protocol
   
-  validates :title, length: { maximum: 15}, presence: true
+  validates :title, length: { maximum: 12}, presence: true
   validates :url, :url => { :message => "is not valid" }
   validates_presence_of :user
   validates :image, file_size: { less_than: 2.megabytes, message: 'link image should be less than %{count}' }

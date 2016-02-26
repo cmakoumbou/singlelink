@@ -44,6 +44,12 @@ Rails.application.routes.draw do
     get '/settings' => 'devise/registrations#edit'
     get '/settings/cancel' => 'registrations#delete'
   end 
+
+  get '/settings/password' => 'users#edit_password', as: :edit_password
+  patch '/settings/update_password' => 'users#update_password', as: :update_password
+
+  get '/settings/account' => 'users#edit_account', as: :edit_account
+  patch '/settings/update_account' => 'users#update_account', as: :update_account
   
   get '/:id' => 'links#profile', :as => :profile
 end

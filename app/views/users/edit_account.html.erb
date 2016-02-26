@@ -1,0 +1,27 @@
+<% provide(:title, "Edit account") %>
+
+<div class="ui segment">
+  <h3 class="ui header">Edit account</h3>
+</div>
+
+<%= form_for(@user, :url => { :action => "update_account" }, html: {class: "ui large form"} ) do |f| %>
+  <%= render 'users/error_messages' %>
+
+  <div class="ui segment">
+    <div class="field <%= "error" if f.object.errors.include?(:username) %>">
+      <%= f.label :username, "Username" %>
+      <%= f.text_field :username, placeholder: "Username" %>
+    </div>
+    <div class="field <%= "error" if f.object.errors.include?(:email) %>">
+      <%= f.label :email %>
+      <%= f.email_field :email, placeholder: "Email" %>
+    </div>
+    <div class="field <%= "error" if f.object.errors.include?(:current_password) %>">
+      <%= f.label :current_password %>
+      <%= f.password_field :current_password, autocomplete: "off", placeholder: "Current password" %>
+    </div>
+  </div>
+
+  <%= f.submit "Update account", class: "ui primary button"  %>
+
+<% end %>

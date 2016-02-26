@@ -96,6 +96,10 @@ body {
 	background-color: #FFFFFF;
 }
 
+#discord {
+	background-color: #FFFFFF;
+}
+
 .pyro {
 	height: 75px;
 }
@@ -116,41 +120,4 @@ body {
 
 .ui.items > .item > .image > img {
 	border-radius:0.285714rem;
-}
-
-// Mobile Portrait
-@media only screen and (max-width : 767px) and (orientation: portrait) {
-	.normal-menu {
-		display: none;
-	}
-}
-
-// Mobile Landscape
-@media only screen and (max-width : 767px) and (orientation: landscape) {
-	.normal-menu {
-		display: none;
-	}
-}
-
-// Tablet
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-	.mobile-menu {
-		display: none;
-	}
-}
-
-// Computer
-@media only screen and (min-width: 992px) {
-	.mobile-menu {
-		display: none;
-	}
-}
-
-html.ios {
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-}
-html.ios,
-html.ios body {
-  height: initial !important;
 }

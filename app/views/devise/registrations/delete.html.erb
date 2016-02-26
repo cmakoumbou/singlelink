@@ -2,7 +2,7 @@
 
 <div class="ui segment">
   <h3 class="ui header">Close your account</h3>
-  <p>Your account will be permanently deleted, this can't be undone.</p>
+  <p>Your subscription will be cancelled and your account will be permanently deleted, this can't be undone.</p>
 </div>
 
 
@@ -10,7 +10,7 @@
   <%= devise_error_messages! %>
 
   <div class="ui segment">
-  	<div class="required field <%= "error" if f.object.errors.include?(:current_password) %>">
+  	<div class="field <%= "error" if f.object.errors.include?(:current_password) %>">
   		<%= f.label :current_password %>
   		<%= f.password_field :current_password, autocomplete: "off", placeholder: "Current password" %>
   	</div>

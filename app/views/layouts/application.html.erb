@@ -10,14 +10,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<%= render 'layouts/sidebar' %>
 	<%= render 'layouts/navigation' %>	
-	<div class="pusher">
-		<div id="main" class="ui container">
-			<%= render 'layouts/messages' %>
-			<%= yield %>
-		</div>
-		<%= render 'layouts/footer' %>
+	<div id="main" class="ui container">
+		<%= render 'layouts/messages' %>
+		<%= yield %>
 	</div>
 </body>
 </html>

@@ -10,16 +10,6 @@ class RegistrationsController < Devise::RegistrationsController
     resource_updated = update_resource(resource, account_update_params)
     yield resource if block_given?
     if resource_updated
-
-    	if @user.subscriptions.present?
-    		cu = Stripe::Customer.retrieve(@user.subscriptions.take.customer_id)
-    		stripe_email = cu.email
-    		if stripe_email != @user.email
-    			cu.email = @user.email
-    			cu.save
-    		end
-    	end
-
       if is_flashing_format?
         flash_key = update_needs_confirmation?(resource, prev_unconfirmed_email) ?
           :update_needs_confirmation : :updated
@@ -61,5 +51,9 @@ class RegistrationsController < Devise::RegistrationsController
 
   def after_sign_up_path_for(resource)
     '/subscriptions'
+  end
+
+  def update_resource(resource, params)
+    resource.update_without_password(params)
   end
 end

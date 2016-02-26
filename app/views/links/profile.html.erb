@@ -7,7 +7,7 @@
 
 <div class="ui items">
   <div class="item">
-    <div class="ui small rounded image">
+    <div class="image">
       <%= image_tag @user.avatar.thumb.url %>
     </div>
     <div class="middle aligned content">
@@ -32,7 +32,7 @@
 
 
 <% if !@links.empty? %>
-  <div class="ui four link doubling stackable cards">
+  <div class="ui five link doubling cards">
     <% @links.each do |link| %>
       <% if link.disable == false %>
         <%= link_to link.url, class: "card", :target => "_blank" do %>

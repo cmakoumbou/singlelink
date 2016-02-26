@@ -8,14 +8,14 @@
 
   <div class="ui segment">
 
-  	<h3 class="ui header">Link Information (Required)</h3>
+  	<h3 class="ui header">Link Information</h3>
 
-	  <div class="required field <%= "error" if f.object.errors.include?(:title) %>">
+	  <div class="field <%= "error" if f.object.errors.include?(:title) %>">
 	  	<%= f.label :title %>
 	  	<%= f.text_field :title, placeholder: "Title" %>
 	  </div>
 
-	  <div class="required field <%= "error" if f.object.errors.include?(:url) %>">
+	  <div class="field <%= "error" if f.object.errors.include?(:url) %>">
 	  	<%= f.label :url, "Website" %>
 	  	<%= f.text_field :url, placeholder: "Website" %>
 		</div>

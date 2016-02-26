@@ -8,55 +8,34 @@
   <%= devise_error_messages! %>
 
   <div class="ui segment">
-    <h3 class="ui header">Profile Information (Optional)</h3>
+    <h3 class="ui header">Profile Information</h3>
     <div class="field <%= "error" if f.object.errors.include?(:display_name) %>">
-      <%= f.label :display_name, "Profile Name (25 max characters)" %>
+      <%= f.label :display_name, "Profile Name" %>
       <%= f.text_field :display_name, placeholder: "Profile Name" %>
     </div>
-    <div class="field <%= "error" if f.object.errors.include?(:bio) %>">
-      <%= f.label :bio, "Profile Bio (200 max characters)" %>    
-      <%= f.text_area :bio, placeholder: "Profile Bio", rows: 3 %>
-    </div>
-    <% if current_user.avatar? %>
-      <div class="field">
-        <h4>Current Profile Avatar</h4>
-    	  <div class="ui medium image"><%= image_tag(current_user.avatar.url) %></div>
-      </div>
-      <div class="field">
-        <div class="ui checkbox">
-    		  <%= f.check_box :remove_avatar %>
-          <%= f.label :remove_image, "Tick to remove current profile image" %>
-        </div>
-      </div>
-    <% end %>
+ 
     <div class="field <%= "error" if f.object.errors.include?(:avatar) %>">
-      <%= f.label :avatar, "Choose a profile avatar to upload (2mb limit, png or jpeg)" %>
+      <%= f.label :avatar, "Profile Image" %>
       <%= f.file_field :avatar %>
     </div>
+
+    <div class="field">
+      <%= f.label :colour, "Profile Colour" %>
+      <%= f.color_field :colour %>
+    </div>
+
+    <div class="field <%= "error" if f.object.errors.include?(:bio) %>">
+      <%= f.label :bio, "Profile Bio" %>    
+      <%= f.text_area :bio, placeholder: "Profile Bio", rows: 5 %>
+    </div>
   </div>
 
   <div class="ui segment">
-    <h3 class="ui header">Account Information (Required)</h3>
-    <div class="required field <%= "error" if f.object.errors.include?(:username) %>">
-      <%= f.label :username, "Username (20 max characters, only letters and numbers)" %>
-      <%= f.text_field :username, placeholder: "Username" %>
-    </div>
-    <div class="required field <%= "error" if f.object.errors.include?(:email) %>">
-      <%= f.label :email %>
-      <%= f.email_field :email, placeholder: "Email" %>
-    </div>
+    <h3 class="ui header"><%= link_to 'Edit your account', edit_account_path %></h3>
   </div>
 
   <div class="ui segment">
-    <h3 class="ui header">Change Password</h3>
-    <div class="field <%= "error" if f.object.errors.include?(:password) %>">
-      <%= f.label :password %>
-      <%= f.password_field :password, autocomplete: "off", placeholder: "New password" %>
-    </div>
-    <div class="field <%= "error" if f.object.errors.include?(:password_confirmation) %>">
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm new password" %>
-    </div>
+    <h3 class="ui header"><%= link_to 'Change your password', edit_password_path %></h3>
   </div>
 
   <div class="ui segment">
@@ -67,16 +46,5 @@
     <h3 class="ui header"><%= link_to('Close your account', settings_cancel_path) %></h3>
   </div>
 
-  <div class="ui segment">
-    <h3 class="ui header">Current password is required to change any settings</h3>
-
-    <div class="required field <%= "error" if f.object.errors.include?(:current_password) %>">
-      <%= f.label :current_password %>
-      <%= f.password_field :current_password, autocomplete: "off", placeholder: "Current password" %>
-    </div>
-  </div>
-
   <%= f.submit "Update", class: "ui primary button" %>
 <% end %>
-
-
