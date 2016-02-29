@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 
   mount StripeEvent::Engine, at: '/webhooks'
 
-  devise_for :users, :path => '', :controllers => { :registrations => 'registrations' }
+  devise_for :users, :path => '', :controllers => { :registrations => 'registrations' }, :path_names => {:sign_in => 'login', :sign_out => 'logout', :sign_up => 'signup'}
   as :user do
     get '/settings' => 'devise/registrations#edit'
     get '/settings/cancel' => 'registrations#delete'

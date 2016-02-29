@@ -10,7 +10,7 @@
 
   <div class="ui segment">
 
-  	<div class="required field <%= "error" if f.object.errors.include?(:email) %>">
+  	<div class="field <%= "error" if f.object.errors.include?(:email) %>">
   		<%= f.label :email %>
     	<%= f.email_field :email, placeholder: "Email" %>
   	</div>

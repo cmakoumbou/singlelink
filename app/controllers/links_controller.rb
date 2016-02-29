@@ -4,7 +4,7 @@ class LinksController < ApplicationController
   layout :resolve_layout
 
   def index
-    authorize! :index, Link, :message => "Enter your billing infortmation to gain access to your dashboard."
+    authorize! :index, Link, :message => "Enter your billing infortmation to gain access to your homepage."
     @links = current_user.links.order(position: :asc)
   end
 

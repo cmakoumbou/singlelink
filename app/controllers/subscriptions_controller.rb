@@ -17,7 +17,7 @@ class SubscriptionsController < ApplicationController
 
     begin
       customer = Stripe::Customer.create(:source => token, :plan => "1", :email => customer_email)
-      flash[:notice] = 'Welcome to your dashboard! This is where you add and manage your links.'
+      flash[:notice] = 'Welcome to your homepage! This is where you add and manage your links.'
     rescue Stripe::CardError => e
       flash[:error] = e.message
       redirect_to subscriptions_path
