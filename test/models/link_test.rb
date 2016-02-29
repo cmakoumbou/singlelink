@@ -20,7 +20,7 @@ class LinkTest < ActiveSupport::TestCase
 
 	def setup
 		@user = users(:bob)
-		@link = Link.new(url: "http://www.google.com", user_id: @user.id)
+		@link = Link.new(title: "google", url: "http://www.google.com", user_id: @user.id)
 	end
 
 	test "should be valid" do

@@ -20,39 +20,38 @@
 
 one:
   status: active
-  user: paul
+  user: bob
 
 two:
   status: active
-  user: kate
+  user: paul
 
 three:
+  status: active
+  user: kate
+
+four:
   status: canceled
   user: janet
   end_date: <%= Time.now + 5.days %>
 
-four:
+five:
   status: canceled
   user: chris
   end_date: <%= Time.now + 5.days %>
 
-five:
+six:
   status: canceled
   user: troy
   end_date: <%= 5.days.ago %>
 
-six:
+seven:
   status: past_due
   user: max
 
-seven:
+eight:
   status: past_due
   user: fox
-
-eight:
-  status: canceled
-  user: felix
-  end_date: <%= 5.days.ago %>
 
 nine:
   status: active
@@ -64,5 +63,10 @@ ten:
   end_date: <%= Time.now + 5.days %>
 
 eleven:
+  status: canceled
+  user: ciara
+  end_date: <%= 5.days.ago %>
+
+twelve:
   status: past_due
   user: laura

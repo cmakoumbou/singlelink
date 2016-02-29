@@ -20,6 +20,7 @@
 #  bio                    :string
 #  admin                  :boolean          default(FALSE)
 #  avatar                 :string
+#  colour                 :string
 #
 
 require 'test_helper'
@@ -75,17 +76,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "bio should not be too long" do
-  	@user.bio = "a" * 170
+  	@user.bio = "a" * 600
   	assert_not @user.valid?
-  end
-
-  test "country should be included" do
-    @user.save
-    assert_includes(ISO3166::Country.translations(:en).keys, @user.country)
-  end
-
-  test "time_zone should be included" do
-    @user.save
-    assert_includes(ActiveSupport::TimeZone.zones_map.keys, @user.time_zone)
   end
 end

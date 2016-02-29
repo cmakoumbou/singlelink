@@ -20,7 +20,7 @@ class LinksControllerTest < ActionController::TestCase
 
   test "should redirect create when not logged in" do
     assert_no_difference 'Link.count' do
-      post :create, link: { url: "www.facebook.com" }
+      post :create, link: {  title: "Facebook", url: "www.facebook.com"}
     end
     assert_redirected_to new_user_session_path
   end
@@ -31,7 +31,7 @@ class LinksControllerTest < ActionController::TestCase
   end
 
   test "should redirect update when not logged in" do
-    patch :update, id: @link, link: { url: "wwww.instagram.com" }
+    patch :update, id: @link, link: { url: "http://wwww.google.com" }
     assert_redirected_to new_user_session_path
   end
 
@@ -65,7 +65,7 @@ class LinksControllerTest < ActionController::TestCase
   test "should redirect update when logged in as wrong user" do
     sign_in users(:bob)
     link = links(:twitter)
-    patch :update, id: link, link: { url: "www.gmail.com" }
+    patch :update, id: link, link: { url: "http://www.gmail.com" }
     assert_equal 'Unauthorized access', flash[:alert]
     assert_redirected_to links_url
   end
@@ -81,7 +81,7 @@ class LinksControllerTest < ActionController::TestCase
   test "should redirect move_up when logged in as wrong user" do
     sign_in users(:bob)
     link = links(:twitter)
-    post :move_up, id: link
+    put :move_up, id: link
     assert_equal 'Unauthorized access', flash[:alert]
     assert_redirected_to links_url
   end
@@ -89,7 +89,23 @@ class LinksControllerTest < ActionController::TestCase
   test "should redirect move_down when logged in as wrong user" do
     sign_in users(:bob)
     link = links(:twitter)
-    post :move_down, id: link
+    put :move_down, id: link
+    assert_equal 'Unauthorized access', flash[:alert]
+    assert_redirected_to links_url
+  end
+
+  test "should redirect disable when logged in as wrong user" do
+    sign_in users(:bob)
+    link = links(:twitter)
+    post :disable, id: link
+    assert_equal 'Unauthorized access', flash[:alert]
+    assert_redirected_to links_url
+  end
+
+  test "should redirect enable when logged in as wrong user" do
+    sign_in users(:bob)
+    link = links(:twitter)
+    post :enable, id: link
     assert_equal 'Unauthorized access', flash[:alert]
     assert_redirected_to links_url
   end
@@ -100,9 +116,9 @@ class LinksControllerTest < ActionController::TestCase
     sign_in users(:bob)
     get :index
     assert_template 'links/index'
-    assert_select 'tr', count: 2
+    assert_select 'tr', count: 4
     users(:bob).links.each do |link|
-      assert_select 'a[href=?]', link.url, text: link.url
+      assert_select 'a[href=?]', link.url, text: link.title
       assert_select 'a[href=?]', edit_link_path(link), text: "Edit"
       assert_select 'a[href=?]', link_path(link), text: "Delete"
       assert_select 'a[href=?]', move_up_link_path(link)
@@ -116,12 +132,12 @@ class LinksControllerTest < ActionController::TestCase
     link = links(:google)
     get :profile, id: link.user
     assert_template 'links/profile'
-    assert_select 'a[href=?]', "/#{link.user.username}", "singlelink.me/#{link.user.username}"
-    assert_select 'ul.list-group' do
-      assert_select 'li', count: 2
+    assert_select 'title', "bob"
+    assert_select '.ui.five.cards' do
+      assert_select '.ui.cards a.card, .ui.link.cards .card, a.ui.card, .ui.link.card', count: 2
     end
-    users(:bob).links.each do |link|
-      assert_select 'a[href=?]', link.url, text: link.url
+    users(:bob).links.where(disable: false).each do |link|
+      assert_select 'a[href=?]', link.url, text: link.title
     end
   end
 
@@ -138,7 +154,7 @@ class LinksControllerTest < ActionController::TestCase
   test "should create link" do
     sign_in users(:bob)
     assert_difference('Link.count') do
-      post :create, link: { url: "http://www.apple.com" }
+      post :create, link: { title: "apple", url: "http://www.apple.com" }
     end
     assert_redirected_to links_url
   end
@@ -173,12 +189,12 @@ class LinksControllerTest < ActionController::TestCase
 
   test "should move_up link" do
     sign_in users(:bob)
-    links = users(:bob).links.rank(:row_order)
+    links = users(:bob).links.order(position: :asc)
     link1 = links[0]
     link2 = links[1]
     assert_equal link1.url, links.first.url
-    post :move_up, id: link2
-    new_links = users(:bob).links.rank(:row_order)
+    link2.move_higher
+    new_links = users(:bob).links.order(position: :asc)
     assert_equal link2.url, new_links.first.url
   end
 
@@ -186,173 +202,142 @@ class LinksControllerTest < ActionController::TestCase
 
   test "should move_down link" do
     sign_in users(:bob)
-    links = users(:bob).links.rank(:row_order)
+    links = users(:bob).links.order(position: :asc)
     link1 = links[0]
     link2 = links[1]
     assert_equal link1.url, links.first.url
-    post :move_down, id: link1
-    new_links = users(:bob).links.rank(:row_order)
+    link1.move_lower
+    new_links = users(:bob).links.order(position: :asc)
     assert_equal link2.url, new_links.first.url
   end
 
   # Links enable test
 
   test "should enable link" do
-    sign_in users(:joe)
-    get :profile, id: users(:joe)
-    assert_select 'ul.list-group' do
-      assert_select 'li', count: 1
+    sign_in users(:bob)
+    get :profile, id: users(:bob)
+    assert_select '.ui.five.cards' do
+      assert_select '.ui.cards a.card, .ui.link.cards .card, a.ui.card, .ui.link.card', count: 2
     end
-    post :enable, id: links(:twitter)
-    get :profile, id: users(:joe)
-    assert_select 'ul.list-group' do
-      assert_select 'li', count: 2
+    post :enable, id: links(:instagram)
+    get :profile, id: users(:bob)
+    assert_select '.ui.five.cards' do
+      assert_select '.ui.cards a.card, .ui.link.cards .card, a.ui.card, .ui.link.card', count: 3
     end
   end
 
   # Links disable test
 
   test "should disable link" do
-    sign_in users(:joe)
-    link = links(:facebook)
-    get :profile, id: link.user
-    assert_select 'ul.list-group' do
-      assert_select 'li', count: 1
+    sign_in users(:bob)
+    get :profile, id: users(:bob)
+    assert_select '.ui.five.cards' do
+      assert_select '.ui.cards a.card, .ui.link.cards .card, a.ui.card, .ui.link.card', count: 2
     end
-    post :disable, id: link
-    get :profile, id: link.user
-    assert_select 'ul.list-group' do
-      assert_select 'li', count: 0
+    post :disable, id: links(:google)
+    get :profile, id: users(:bob)
+    assert_select '.ui.five.cards' do
+      assert_select '.ui.cards a.card, .ui.link.cards .card, a.ui.card, .ui.link.card', count: 1
     end
   end
 
   # Links no subsctiption test
 
-  test "with 5 links should not access new and create (no subscription)" do
+  test "with no subsctiption should not index" do
     sign_in users(:leo)
-    get :profile, id: users(:leo).id
-    assert_select 'ul.list-group' do
-      assert_select 'li', count: 5
-    end
-    get :new
+    get :index
     assert_response :redirect
-    assert_no_difference('Link.count') do
-      post :create, link: { url: "http://www.apple.com" }
-    end
   end
 
   # Links active subscription test
 
-  test "with 5 links should access new and create" do
+  test "with subscription should access index" do
     sign_in users(:paul)
-    get :profile, id: users(:paul).id
-    assert_select 'ul.list-group' do
-      assert_select 'li', count: 5
-    end
-    get :new
+    get :index
     assert_response :success
-    assert_difference('Link.count') do
-      post :create, link: { url: "http://www.apple.com" }
-    end
   end
 
-  test "with 25 links should not access new and create" do
+  test "with 20 links should not access new and create" do
     sign_in users(:kate)
     get :profile, id: users(:kate).id
-    assert_select 'ul.list-group' do
-      assert_select 'li', count: 25
+    assert_select '.ui.five.cards' do
+      assert_select '.ui.cards a.card, .ui.link.cards .card, a.ui.card, .ui.link.card', count: 20
     end
     get :new
     assert_response :redirect
     assert_no_difference('Link.count') do
-      post :create, link: { url: "http://www.apple.com" }
+      post :create, link: { title: "apple", url: "http://www.apple.com" }
     end
   end
 
   # Links canceled and end_date > Time.now subscription test
 
-  test "with 5 links should access new and create (canceled_later)" do
+  test "canceled_later should access new and create" do
     sign_in users(:janet)
     get :profile, id: users(:janet).id
-    assert_select 'ul.list-group' do
-      assert_select 'li', count: 5
+    assert_select '.ui.five.cards' do
+      assert_select '.ui.cards a.card, .ui.link.cards .card, a.ui.card, .ui.link.card', count: 10
     end
     get :new
     assert_response :success
     assert_difference('Link.count') do
-      post :create, link: { url: "http://www.apple.com" }
+      post :create, link: { title: "apple", url: "http://www.apple.com" }
     end
   end
 
-  test "with 25 links should not access new and create (canceled_later)" do
+  test "canceled_later with 20 links should not access new and create" do
     sign_in users(:chris)
     get :profile, id: users(:chris).id
-    assert_select 'ul.list-group' do
-      assert_select 'li', count: 25
+    assert_select '.ui.five.cards' do
+      assert_select '.ui.cards a.card, .ui.link.cards .card, a.ui.card, .ui.link.card', count: 20
     end
     get :new
     assert_response :redirect
     assert_no_difference('Link.count') do
-      post :create, link: { url: "http://www.apple.com" }
+      post :create, link: { title: "apple", url: "http://www.apple.com" }
     end
   end
 
   # Links canceled and end_date < Time.now subscription test
 
-  test "with 5 links should not access new and create (canceled_now)" do
+  test "canceled_now should not access new and create" do
     sign_in users(:troy)
     get :profile, id: users(:troy).id
-    assert_select 'ul.list-group' do
-      assert_select 'li', count: 5
+    assert_select '.ui.five.cards' do
+      assert_select '.ui.cards a.card, .ui.link.cards .card, a.ui.card, .ui.link.card', count: 5
     end
     get :new
     assert_response :redirect
     assert_no_difference('Link.count') do
-      post :create, link: { url: "http://www.apple.com" }
+      post :create, link: { title: "apple", url: "http://www.apple.com" }
     end
   end
 
   # Links past_due subscription test
 
-  test "with 5 links should access new and create (past_due)" do
+  test "past_due with 5 links should access new and create" do
     sign_in users(:max)
     get :profile, id: users(:max).id
-    assert_select 'ul.list-group' do
-      assert_select 'li', count: 5
+    assert_select '.ui.five.cards' do
+      assert_select '.ui.cards a.card, .ui.link.cards .card, a.ui.card, .ui.link.card', count: 5
     end
     get :new
     assert_response :success
     assert_difference('Link.count') do
-      post :create, link: { url: "http://www.apple.com" }
+      post :create, link: { title: "apple", url: "http://www.apple.com" }
     end
   end
 
-  test "with 25 links should not access new and create (past_due)" do
+  test "past_due with 20 links should not access new and create" do
     sign_in users(:fox)
     get :profile, id: users(:fox).id
-    assert_select 'ul.list-group' do
-      assert_select 'li', count: 25
+    assert_select '.ui.five.cards' do
+      assert_select '.ui.cards a.card, .ui.link.cards .card, a.ui.card, .ui.link.card', count: 20
     end
     get :new
     assert_response :redirect
     assert_no_difference('Link.count') do
-      post :create, link: { url: "http://www.apple.com" }
+      post :create, link: { title: "apple", url: "http://www.apple.com" }
     end
-  end
-
-  # Links enable with canceled subscription test
-
-  test "with 25 links should not be able to enable more than 5 links" do
-    user = users(:felix)
-    sign_in user
-    ability = Ability.new(user)
-    get :index
-    assert_template 'links/index'
-    assert_select 'tr', count: 25
-    get :profile, id: user.id
-    assert_select 'ul.list-group' do
-      assert_select 'li', count: 5
-    end
-    assert ability.cannot?(:enable, Link.new(:user => user, :url => "http://www.lol.com"))
   end
 end

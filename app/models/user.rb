@@ -20,6 +20,7 @@
 #  bio                    :string
 #  admin                  :boolean          default(FALSE)
 #  avatar                 :string
+#  colour                 :string
 #
 
 class User < ActiveRecord::Base

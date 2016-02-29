@@ -16,83 +16,90 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+# <% 1.upto(5) do |i| %>
+# link_felix2_<%= i %>:
+#   url: http://www.link_<%= 1 %>.com
+#   user: felix
+#   disable: false
+# <% end %>
+
 google:
-  url: "http://www.google.com"
+  title: "Google+"
+  url: "http://www.googleplus.com"
+  default_image: "google"
+  position: 1
+  disable: false
   user: bob
-  row_order: "8228045"
-
-netflix:
-  url: "http://www.netflix.com"
-  user: bob
-  row_order: "8382054"
-
-twitter:
-  url: "http://www.twitter.com"
-  user: joe
-  disable: true
 
 facebook:
+  title: "Facebook"
   url: "http://www.facebook.com"
-  user: joe
+  default_image: "facebook"
+  position: 2
+  disable: false
+  user: bob
 
-<% 1.upto(5) do |i| %>
-link_leo_<%= i %>:
-  url: http://www.link_<%= 1 %>.com
-  user: leo
-<% end %>
+instagram:
+  title: "Instagram"
+  url: "http://www.instagram.com"
+  default_image: "instagram"
+  position: 3
+  disable: true
+  user: bob
 
-<% 1.upto(5) do |i| %>
-link_paul_<%= i %>:
-  url: http://www.link_<%= 1 %>.com
-  user: paul
-<% end %>
 
-<% 1.upto(25) do |i| %>
+twitter:
+  title: "Twitter"
+  url: "http://www.twitter.com"
+  default_image: "twitter"
+  position: 1
+  disable: false
+
+
+<% 1.upto(20) do |i| %>
 link_kate_<%= i %>:
-  url: http://www.link_<%= 1 %>.com
+  title: "super_<%= i %>"
+  url: http://www.link_<%= i %>.com
   user: kate
+  disable: false
 <% end %>
 
-<% 1.upto(5) do |i| %>
+<% 1.upto(10) do |i| %>
 link_janet_<%= i %>:
-  url: http://www.link_<%= 1 %>.com
+  title: "super_<%= i %>"
+  url: http://www.link_<%= i %>.com
   user: janet
+  disable: false
 <% end %>
 
-<% 1.upto(25) do |i| %>
+<% 1.upto(20) do |i| %>
 link_chris_<%= i %>:
-  url: http://www.link_<%= 1 %>.com
+  title: "super_<%= i %>"
+  url: http://www.link_<%= i %>.com
   user: chris
+  disable: false
 <% end %>
 
 <% 1.upto(5) do |i| %>
 link_troy_<%= i %>:
-  url: http://www.link_<%= 1 %>.com
+  title: "super_<%= i %>"
+  url: http://www.link_<%= i %>.com
   user: troy
+  disable: false
 <% end %>
 
 <% 1.upto(5) do |i| %>
 link_max_<%= i %>:
-  url: http://www.link_<%= 1 %>.com
+  title: "super_<%= i %>"
+  url: http://www.link_<%= i %>.com
   user: max
-<% end %>
-
-<% 1.upto(25) do |i| %>
-link_fox_<%= i %>:
-  url: http://www.link_<%= 1 %>.com
-  user: fox
+  disable: false
 <% end %>
 
 <% 1.upto(20) do |i| %>
-link_felix_<%= i %>:
-  url: http://www.link_<%= 1 %>.com
-  user: felix
-  disable: true
-<% end %>
-
-<% 1.upto(5) do |i| %>
-link_felix2_<%= i %>:
-  url: http://www.link_<%= 1 %>.com
-  user: felix
+link_fox_<%= i %>:
+  title: "super_<%= i %>"
+  url: http://www.link_<%= i %>.com
+  user: fox
   disable: false
 <% end %>

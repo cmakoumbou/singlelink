@@ -20,6 +20,7 @@
 #  bio                    :string
 #  admin                  :boolean          default(FALSE)
 #  avatar                 :string
+#  colour                 :string
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
@@ -38,110 +39,68 @@ bob:
   username: "bob"
   email: "bob@company.com"
   encrypted_password: <%= User.new.send(:password_digest, 'password') %>
-  country: "GB"
-  time_zone: "London"
-
-joe:
-  username: "joe"
-  email: "joe@company.com"
-  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
-  country: "GB"
-  time_zone: "London"
-
-paul:
-  username: paul
-  email: paul@company.com
-  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
-  country: "GB"
-  time_zone: "London"
-
-kate:
-  username: kate
-  email: kate@company.com
-  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
-  country: "GB"
-  time_zone: "London"
-
-janet:
-  username: janet
-  email: janet@company.com
-  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
-  country: "GB"
-  time_zone: "London"
-
-chris:
-  username: chris
-  email: chris@company.com
-  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
-  country: "GB"
-  time_zone: "London"
-
-troy:
-  username: troy
-  email: troy@company.com
-  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
-  country: "GB"
-  time_zone: "London"
-
-max:
-  username: max
-  email: max@company.com
-  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
-  country: "GB"
-  time_zone: "London"
-
-fox:
-  username: fox
-  email: fox@company.com
-  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
-  country: "GB"
-  time_zone: "London"
 
 leo:
-  username: leo
-  email: leo@company.com
+  username: "leo"
+  email: "leo@company.com"
   encrypted_password: <%= User.new.send(:password_digest, 'password') %>
-  country: "GB"
-  time_zone: "London"
 
-felix:
-  username: felix
-  email: felix@company.com
+paul:
+  username: "paul"
+  email: "paul@company.com"
   encrypted_password: <%= User.new.send(:password_digest, 'password') %>
-  country: "GB"
-  time_zone: "London"
 
-peter:
-  username: peter
-  email: peter@company.com
+kate:
+  username: "kate"
+  email: "kate@company.com"
   encrypted_password: <%= User.new.send(:password_digest, 'password') %>
-  country: "GB"
-  time_zone: "London"
+
+janet:
+  username: "janet"
+  email: "janet@company.com"
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+
+chris:
+  username: "chris"
+  email: "chris@company.com"
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+
+troy:
+  username: "troy"
+  email: "troy@company.com"
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+
+max:
+  username: "max"
+  email: "max@company.com"
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+
+fox:
+  username: "fox"
+  email: "fox@company.com"
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
 
 travis:
-  username: travis
-  email: travis@company.com
+  username: "travis"
+  email: "travis@company.com"
   encrypted_password: <%= User.new.send(:password_digest, 'password') %>
-  country: "GB"
-  time_zone: "London"
 
-elise:
-  username: elise
-  email: elise@company.com
+peter:
+  username: "peter"
+  email: "peter@company.com"
   encrypted_password: <%= User.new.send(:password_digest, 'password') %>
-  country: "GB"
-  time_zone: "London"
 
 ciara:
-  username: ciara
-  email: ciara@company.com
+  username: "ciara"
+  email: "ciara@company.com"
   encrypted_password: <%= User.new.send(:password_digest, 'password') %>
-  country: "GB"
-  time_zone: "London"
 
 laura:
-  username: laura
-  email: laura@company.com
+  username: "laura"
+  email: "laura@company.com"
   encrypted_password: <%= User.new.send(:password_digest, 'password') %>
-  country: "GB"
-  time_zone: "London"
+
+elise:
+  username: "elise"
+  email: "elise@company.com"
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>

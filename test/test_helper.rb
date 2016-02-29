@@ -13,5 +13,4 @@ end
 
 class ActionController::TestCase
   include Devise::TestHelpers
-  include Chartkick::Helper
 end
