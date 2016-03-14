@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  mount RailsAdmin::Engine => '/mabika', as: 'rails_admin'
   authenticated :user do
     root to: 'links#index', as: :authenticated_root
   end
@@ -52,4 +51,6 @@ Rails.application.routes.draw do
   patch '/settings/update_account' => 'users#update_account', as: :update_account
   
   get '/:id' => 'links#profile', :as => :profile
+
+  mount RailsAdmin::Engine => '/admin/mabika', as: 'rails_admin'
 end

@@ -1,4 +1,4 @@
-<div class="ui large blue inverted top fixed four item menu">
+<div class="ui large top fixed four item menu">
   <%= link_to 'Home', root_path, class: "item" %>
   <% if user_signed_in? %>
   	<%= link_to 'Profile', profile_path(current_user), class: "item" %>
@@ -10,7 +10,7 @@
 		<%= link_to 'Login', new_user_session_path, class: "item" %>
 	<% end %>
 </div>
-<div class="ui large blue inverted bottom fixed four item menu">
+<div class="ui large bottom fixed four item menu">
 	<%= link_to 'About', about_path, class: "item" %>
 	<%= link_to 'Help', help_path, class: "item" %>
 	<%= link_to 'Terms', terms_path, class: "item" %>

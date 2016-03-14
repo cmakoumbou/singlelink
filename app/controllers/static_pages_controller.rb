@@ -1,6 +1,8 @@
 class StaticPagesController < ApplicationController
 
   def home
+    @user = User.first
+    @links = @user.links.order(position: :asc)
   end
   
   def about
@@ -23,4 +25,5 @@ class StaticPagesController < ApplicationController
 
   def pricing
   end
+  
 end

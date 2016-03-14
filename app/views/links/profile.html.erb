@@ -11,7 +11,11 @@
       <%= image_tag @user.avatar.thumb.url %>
     </div>
     <div class="middle aligned content">
-      <div class="header">
+      <% if @user.text_colour.present? %>
+        <div style="color: <%= @user.text_colour %>" class="header">
+      <% else %>
+        <div class="header">
+      <% end %>
         <% if !@user.display_name.blank? %>
           <%= @user.display_name %> 
         <% else %>
@@ -19,9 +23,17 @@
         <% end %>
       </div>
       <div class="meta">
-        <span><%= link_to nice_url(request.original_url), request.original_url %></span>
+        <% if @user.link_colour.present? %>
+          <span><%= link_to nice_url(request.original_url), request.original_url, {style: "color: #{@user.link_colour}"} %></span>
+        <% else %>
+          <span><%= link_to nice_url(request.original_url), request.original_url %></span>
+        <% end %>
       </div>
-      <div class="description">
+      <% if @user.text_colour.present? %>
+        <div style="color: <%= @user.text_colour %>" class="description">
+      <% else %>
+        <div class="description">
+      <% end %>
         <p><%= @user.bio %></p>
       </div>
     </div>

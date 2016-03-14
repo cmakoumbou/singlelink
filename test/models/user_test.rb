@@ -21,6 +21,8 @@
 #  admin                  :boolean          default(FALSE)
 #  avatar                 :string
 #  colour                 :string
+#  text_colour            :string
+#  link_colour            :string
 #
 
 require 'test_helper'

@@ -9,7 +9,11 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body style="background-color: <%= @user.colour if @user.colour %>">
+<% if @user.colour.present? %>
+	<body style="background-color: <%= @user.colour %>">
+<% else %>
+	<body>
+<% end %>
 	<% if @user == current_user %>
 		<%= render 'layouts/navigation' %>	
 		<div id="main" class="ui container">
