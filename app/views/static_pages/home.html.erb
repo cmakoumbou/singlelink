@@ -10,14 +10,14 @@
         <% else %>
           <%= @user.username %> 
         <% end %>
+
       </div>
       <div class="meta">
         <span><%= link_to "singlelink.me", root_path %></span>
       </div>
       <div class="description">
         <p><%= @user.bio %></p>
-        <p>Works on computers, mobiles and tablets.</p>
-        <p>£20 per year.</p>
+        <%= link_to "Try Singlelink Me for Free", new_user_registration_path, class: "ui primary button" %>
       </div>
     </div>
   </div>
