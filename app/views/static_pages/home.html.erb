@@ -4,23 +4,20 @@
       <%= image_tag @user.avatar.thumb.url %>
     </div>
     <div class="middle aligned content">
-      <div style="color: <%= @user.text_colour if @user.text_colour %>" class="header">
+      <div class="header">
         <% if !@user.display_name.blank? %>
           <%= @user.display_name %> 
         <% else %>
           <%= @user.username %> 
         <% end %>
       </div>
-      <div style="color: <%= @user.text_colour if @user.text_colour %>" class="meta">
+      <div class="meta">
         <span><%= link_to "singlelink.me", root_path %></span>
       </div>
-      <div style="color: <%= @user.text_colour if @user.text_colour %>" class="description">
+      <div class="description">
         <p><%= @user.bio %></p>
         <p>Works on computers, mobiles and tablets.</p>
         <p>£20 per year.</p>
-      </div>
-      <div class="extra">
-        <%= link_to "Sign up now", new_user_registration_path, class: "ui large right floated primary button" %>
       </div>
     </div>
   </div>
