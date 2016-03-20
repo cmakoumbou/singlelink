@@ -1,6 +1,6 @@
 <% provide(:title, "Settings") %>
 
-<div class="ui segment">
+<div class="ui orange segment">
   <h3 class="ui header">Settings</h3>
 </div>
 
@@ -10,7 +10,7 @@
   <div class="ui segment">
     <div class="field <%= "error" if f.object.errors.include?(:display_name) %>">
       <%= f.label :display_name, "Profile Name" %>
-      <%= f.text_field :display_name, placeholder: "Profile Name" %>
+      <%= f.text_field :display_name %>
     </div>
  
     <div class="field <%= "error" if f.object.errors.include?(:avatar) %>">
@@ -18,44 +18,46 @@
       <%= f.file_field :avatar %>
     </div>
 
-    <div class="field">
-      <%= f.label :text_colour, "Profile Text Colour" %>
-      <%= f.color_field :text_colour %>
-    </div>
+    <% if current_user.avatar? %>
+      <div class="field">
+        <div class="ui checkbox">
+          <%= f.check_box :remove_avatar %>
+          <%= f.label :remove_avatar, "Remove current profile image" %>
+        </div>
+      </div>
+    <% end %>
 
     <div class="field">
-      <%= f.label :link_colour, "Profile Singlelink Colour" %>
-      <%= f.color_field :link_colour %>
+      <%= f.label :text_colour, "Profile Text Colour" %>
+      <%= f.text_field :text_colour, class: "colorpicker_text" %>
     </div>
 
     <div class="field">
       <%= f.label :colour, "Profile Background Colour" %>
-      <%= f.color_field :colour %>
+      <%= f.text_field :colour, class: "colorpicker_background" %>
     </div>
 
     <div class="field <%= "error" if f.object.errors.include?(:bio) %>">
       <%= f.label :bio, "Profile Bio" %>    
       <%= f.text_area :bio, placeholder: "Profile Bio", rows: 3 %>
     </div>
+
+    <%= f.submit "Update profile", class: "ui primary button" %>
   </div>
-
-  <div class="ui segments">
-    <div class="ui segment">
-      <h3 class="ui header"><%= link_to 'Edit your account', edit_account_path %></h3>
-    </div>
-
-    <div class="ui segment">
-      <h3 class="ui header"><%= link_to 'Change your password', edit_password_path %></h3>
-    </div>
-
-    <div class="ui segment">
-      <h3 class="ui header"><%= link_to 'Manage your subscription', subscriptions_path %></h3>
-    </div>
-
-    <div class="ui segment">
-      <h3 class="ui header"><%= link_to('Close your account', settings_cancel_path) %></h3>
-    </div>
-  </div>
-
-  <%= f.submit "Update", class: "ui primary button" %>
+  
 <% end %>
+
+<div class="ui segments">
+  <div class="ui segment">
+    <h4 class="ui header"><%= link_to 'Edit your account', edit_account_path %></h4>
+  </div>
+
+  <div class="ui segment">
+    <h4 class="ui header"><%= link_to 'Change your password', edit_password_path %></h4>
+  </div>
+
+  <div class="ui segment">
+    <h4 class="ui header"><%= link_to 'Manage your subscription', subscriptions_path %></h4>
+  </div>
+</div>
+

@@ -1,8 +1,7 @@
 <% provide(:title, "Sign up") %>
 
-<div class="ui segment">
+<div class="ui orange segment">
   <h3 class="ui header">Sign up - 7 Day Free Trial</h3>
-  <p>Already have an account? <%= link_to('Log in', new_user_session_path) %></p>
 </div>
 
 <div class="ui two steps">
@@ -49,7 +48,7 @@
   </div>
 
   <div class="ui segment">
-    By clicking on "Sign up" below, you are agreeing to the <%= link_to "Terms of Service", terms_path %> and the <%= link_to "Privacy Policy", privacy_path %>.
+    By clicking on "Sign up" below, you are agreeing to our <%= link_to "Terms", terms_path %>.
   </div>
 
   <%= f.submit "Sign up", class: "ui primary button" %>

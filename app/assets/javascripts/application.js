@@ -12,7 +12,9 @@
 //
 //= require jquery
 //= require semantic-ui
+//= require spectrum.min
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+

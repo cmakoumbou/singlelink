@@ -13,7 +13,6 @@ Rails.application.routes.draw do
 
   get '/about' => 'static_pages#about', as: :about
   get '/terms' => 'static_pages#terms', as: :terms
-  get '/privacy' => 'static_pages#privacy', as: :privacy
   get '/contact' => 'static_pages#contact', as: :contact
 
   get '/features' => 'static_pages#features', as: :features

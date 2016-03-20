@@ -17,6 +17,7 @@
 	<% if @user == current_user %>
 		<%= render 'layouts/navigation' %>	
 		<div id="main" class="ui container">
+			<%= render 'layouts/messages' %>
 			<%= yield %>
 		</div>
 	<% else %>

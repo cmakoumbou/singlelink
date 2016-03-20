@@ -1,8 +1,7 @@
 <% provide(:title, "Forgot password") %>
 
-<div class="ui segment">
-	<h3 class="ui header">Forgot your password?</h3>
-  <p>Found your password? <%= link_to('Log in', new_user_session_path) %></p>
+<div class="ui orange segment">
+  <h3 class="ui header">Forgot your password?</h3>
 </div>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "ui large form" }) do |f| %>

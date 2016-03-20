@@ -19,13 +19,13 @@ class Ability
       if sub.status == "active"
         can :manage, Link
         can :cancel, Subscription
-        cannot :new, Link if user.links(:reload).count >= 20
-        cannot :create, Link if user.links(:reload).count >= 20
+        cannot :new, Link if user.links(:reload).count >= 30
+        cannot :create, Link if user.links(:reload).count >= 30
       elsif sub.status == "canceled" && sub.end_date > Time.now
         can :manage, Link
         can :resume, Subscription
-        cannot :new, Link if user.links(:reload).count >= 20
-        cannot :create, Link if user.links(:reload).count >= 20
+        cannot :new, Link if user.links(:reload).count >= 30
+        cannot :create, Link if user.links(:reload).count >= 30
       elsif sub.status == "canceled" && sub.end_date < Time.now
         can :index, Link
         can :renew, Subscription
@@ -33,8 +33,8 @@ class Ability
       elsif sub.status == "past_due"
         can :manage, Link
         can :cancel, Subscription
-        cannot :new, Link if user.links(:reload).count >= 20
-        cannot :create, Link if user.links(:reload).count >= 20
+        cannot :new, Link if user.links(:reload).count >= 30
+        cannot :create, Link if user.links(:reload).count >= 30
       end
     end
   end

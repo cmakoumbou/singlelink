@@ -1,15 +1,15 @@
-<div class="ui segment">
+<div class="ui orange segment">
   <h3 class="ui header">Home</h3>
 </div>
 
 <% if !@links.empty? %>
-  <table class="ui large single line table">
+  <table class="ui single line table">
     <thead>
       <tr><th colspan="6">
         <% if can? :new, Link %>
           <%= link_to 'Add a new link', new_link_path, class: "ui primary button" %>
         <% else %>
-          <%= link_to '20 Links limit reached', new_link_path, class: "ui disabled button" %>
+          <%= link_to '30 Links limit reached', new_link_path, class: "ui disabled button" %>
         <% end %>
       </th>
     </tr></thead>
@@ -17,8 +17,8 @@
       <% @links.each do |link| %>
         <tr>
           <td class="center aligned"><%= link_to link.title, link.url, :target => "_blank" %></td>
-          <td><%= link_to 'Move Up', move_up_link_path(link), :method => :put, class: "large fluid ui blue basic button" %></td>
-          <td><%= link_to 'Move Down', move_down_link_path(link), :method => :put, class: "large fluid ui blue basic button" %></td>
+          <td><%= link_to 'Up', move_up_link_path(link), :method => :put, class: "large fluid ui blue basic button" %></td>
+          <td><%= link_to 'Down', move_down_link_path(link), :method => :put, class: "large fluid ui blue basic button" %></td>
           <% if link.disable == false %>
             <td><%= link_to 'Disable', disable_link_path(link), :method => :post, class: "large fluid ui blue basic button" %></td>
           <% else %>

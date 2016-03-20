@@ -1,6 +1,6 @@
 <% provide(:title, "Edit link") %>
 
-<div class="ui segment">
+<div class="ui orange segment">
   <h3 class="ui header">Edit link</h3>
 </div>
   <%= form_for @link, html: {class: "ui large form"} do |f| %>
@@ -23,21 +23,8 @@
 
       <div class="field <%= "error" if f.object.errors.include?(:default_image) %>">
         <%= f.label :default_image, "Select an image to use from our database" %>
-        <%= f.select :default_image, options_for_default_images, { :prompt => "Select one" }, { class: "ui dropdown" } %>
+        <%= f.select :default_image, options_for_default_images, {include_blank: 'None'}, { class: "ui dropdown" } %>
       </div>
-
-      <% if @link.image? %>
-        <div class="field">
-          <h4>Current Image</h4>
-      	  <div class="ui medium image"><%= image_tag(@link.image.url) %></div>
-        </div>
-        <div class="field">
-          <div class="ui checkbox">
-            <%= f.check_box :remove_image %>
-            <%= f.label :remove_image, "Tick to remove current image" %>
-          </div>
-        </div>
-      <% end %>
 
       <div class="ui horizontal divider">
         Or
@@ -47,6 +34,15 @@
         <%= f.label :image, "Choose an image to upload from your files" %>
         <%= f.file_field :image %>
       </div>
+
+      <% if @link.image? %>
+        <div class="field">
+          <div class="ui checkbox">
+            <%= f.check_box :remove_image %>
+            <%= f.label :remove_image, "Remove current image" %>
+          </div>
+        </div>
+      <% end %>
     </div>
 
     <%= f.submit "Update link", class: "ui primary button" %>

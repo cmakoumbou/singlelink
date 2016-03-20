@@ -23,10 +23,10 @@
         <% end %>
       </div>
       <div class="meta">
-        <% if @user.link_colour.present? %>
-          <span><%= link_to nice_url(request.original_url), request.original_url, {style: "color: #{@user.link_colour}"} %></span>
+        <% if @user.text_colour.present? %>
+          <span><%= link_to nice_url(request.original_url), request.original_url, {style: "color: #{@user.text_colour}"} %></span>
         <% else %>
-          <span><%= link_to nice_url(request.original_url), request.original_url %></span>
+          <span><%= link_to nice_url(request.original_url), request.original_url, {style: "color: #000000"} %></span>
         <% end %>
       </div>
       <% if @user.text_colour.present? %>

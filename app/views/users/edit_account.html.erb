@@ -1,6 +1,6 @@
 <% provide(:title, "Edit account") %>
 
-<div class="ui segment">
+<div class="ui orange segment">
   <h3 class="ui header">Edit account</h3>
 </div>
 
@@ -20,8 +20,8 @@
       <%= f.label :current_password %>
       <%= f.password_field :current_password, autocomplete: "off", placeholder: "Current password" %>
     </div>
-  </div>
 
-  <%= f.submit "Update account", class: "ui primary button"  %>
+    <%= f.submit "Update account", class: "ui primary button"  %>
+  </div>
 
 <% end %>
