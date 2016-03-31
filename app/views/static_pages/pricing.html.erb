@@ -9,14 +9,11 @@
 		 	<div class="ui label">
 		    £20 per year
 	  	</div>
-	  	<div class="ui label">
-		    Simple interface
-	  	</div>
 		  <div class="ui label">
 		    Cancel anytime
 		  </div>
 		  <div class="ui label">
-		    No Hidden fees
+		    No hidden fees
 	  	</div>
 		</div>
   </div>
@@ -24,9 +21,9 @@
 
 <div class="ui segment">
   <h3 class="ui header">Information</h3>
-    <p><b>Renewal: </b>Wednesday 15 February 2017</p>
+    <p><b>Renewal: </b><%= 1.year.from_now.strftime('%A %d %B %Y') %></p>
     <p><b>Cost: </b> £20 per year</p>
-    <p><b>Billing Card (last 4 digits): </b>1502</p>
+    <p><b>Billing Card (last 4 digits): </b>****</p>
 </div>
 
 <div class="ui segment">
@@ -36,7 +33,7 @@
 
 <div class="ui segment">
   <h3 class="ui header">Cancel</h3>
-  	<p>If you cancel your subscription now, you will be subscribed until Wednesday 15 February 2017
+  	<p>If you cancel your subscription now, you will be subscribed until <%= 1.year.from_now.strftime('%A %d %B %Y') %>
     then your subscription will be canceled.</p>
     <a class="ui primary button">Cancel Subscription</a>
 </div>

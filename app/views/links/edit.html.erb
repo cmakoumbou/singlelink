@@ -3,48 +3,47 @@
 <div class="ui orange segment">
   <h3 class="ui header">Edit link</h3>
 </div>
-  <%= form_for @link, html: {class: "ui large form"} do |f| %>
-  	<%= render 'links/error_messages' %>
+<%= form_for @link, html: {class: "ui large form"} do |f| %>
+	<%= render 'links/error_messages' %>
 
-    <div class="ui segment">
-      <h3 class="ui header">Link Information</h3>
-      <div class="field <%= "error" if f.object.errors.include?(:title) %>">
-        <%= f.label :title %>
-        <%= f.text_field :title %>
-      </div>
-      <div class="field <%= "error" if f.object.errors.include?(:url) %>">
-        <%= f.label :url, "Website" %>
-        <%= f.text_field :url %>
-      </div>
+  <div class="ui segment">
+    <h3 class="ui header">Link Information</h3>
+    <div class="field <%= "error" if f.object.errors.include?(:title) %>">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+    <div class="field <%= "error" if f.object.errors.include?(:url) %>">
+      <%= f.label :url, "Website" %>
+      <%= f.text_field :url %>
+    </div>
+  </div>
+
+  <div class="ui segment">
+    <h3 class="ui header">Link Image</h3>
+
+    <div class="field <%= "error" if f.object.errors.include?(:default_image) %>">
+      <%= f.label :default_image, "Select an image to use from our database" %>
+      <%= f.select :default_image, options_for_default_images, {include_blank: 'None'}, { class: "ui dropdown" } %>
     </div>
 
-    <div class="ui segment">
-      <h3 class="ui header">Link Image</h3>
+    <div class="ui horizontal divider">
+      Or
+    </div>
 
-      <div class="field <%= "error" if f.object.errors.include?(:default_image) %>">
-        <%= f.label :default_image, "Select an image to use from our database" %>
-        <%= f.select :default_image, options_for_default_images, {include_blank: 'None'}, { class: "ui dropdown" } %>
-      </div>
+    <div class="field <%= "error" if f.object.errors.include?(:image) %>">
+      <%= f.label :image, "Choose an image to upload from your files" %>
+      <%= f.file_field :image %>
+    </div>
 
-      <div class="ui horizontal divider">
-        Or
-      </div>
-
-      <div class="field <%= "error" if f.object.errors.include?(:image) %>">
-        <%= f.label :image, "Choose an image to upload from your files" %>
-        <%= f.file_field :image %>
-      </div>
-
-      <% if @link.image? %>
-        <div class="field">
-          <div class="ui checkbox">
-            <%= f.check_box :remove_image %>
-            <%= f.label :remove_image, "Remove current image" %>
-          </div>
+    <% if @link.image? %>
+      <div class="field">
+        <div class="ui checkbox">
+          <%= f.check_box :remove_image %>
+          <%= f.label :remove_image, "Remove current image" %>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
+  </div>
 
-    <%= f.submit "Update link", class: "ui primary button" %>
-  <% end %>
-</div>
+  <%= f.submit "Update link", class: "ui primary button" %>
+<% end %>

@@ -15,10 +15,12 @@
 	<body>
 <% end %>
 	<% if @user == current_user %>
-		<%= render 'layouts/navigation' %>	
+		
 		<div id="main" class="ui container">
+			<%= render 'layouts/navigation' %>	
 			<%= render 'layouts/messages' %>
 			<%= yield %>
+			<%= render 'layouts/footer' %>
 		</div>
 	<% else %>
 		<div id="profile" class="ui container">
