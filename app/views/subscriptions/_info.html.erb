@@ -1,26 +1,25 @@
-<div class="ui segment">
-  <h3 class="ui header">Information</h3>
+<div class="ui segments">
+  <div class="ui secondary segment">
+    <h4 class="ui header">Your subscription</h4>
+  </div>
+  <div class="ui segment">
+    <% if @user_subscription && @user_subscription.active? %>
+      <p><b>Renewal: </b><%= @user_subscription.end_date.strftime("%A %d %B %Y") %></p>
+      <p><b>Cost: </b> £20 per year</p>
+    <% end %>
 
-  <% if @user_subscription && @user_subscription.active? %>
-    <p><b>Renewal: </b><%= @user_subscription.end_date.strftime("%A %d %B %Y") %></p>
-    <p><b>Cost: </b> £20 per year</p>
-  <% end %>
+    <% if @user_subscription && @user_subscription.past_due? %>
+      <p>Your subscription payment failed, you can update your card or cancel if necessary.</p>
+      <p>The next payment attempt will be on <%= @user_subscription.next_payment_attempt.strftime("%A %d %B %Y") %>.</p>
+    <% end %>
 
-  <% if @user_subscription && @user_subscription.past_due? %>
-    <p>Your subscription payment failed, you can update your card or cancel if necessary.</p>
-    <p>The next payment attempt will be on <%= @user_subscription.next_payment_attempt.strftime("%A %d %B %Y") %>.</p>
-  <% end %>
+    <% if @user_subscription && @user_subscription.canceled_later? %>
+      <p>Subscribed until <%= @user_subscription.end_date.strftime("%A %d %B %Y") %>
+      then your subscription will be canceled.</p>
+    <% end %>
 
-  <% if @user_subscription && @user_subscription.canceled_later? %>
-    <p>Subscribed until <%= @user_subscription.end_date.strftime("%A %d %B %Y") %>
-    then your subscription will be canceled.</p>
-  <% end %>
-
-  <% if @user_subscription && @user_subscription.canceled_now? %>
-    <p>Subscription cancelled</p>
-  <% end %>
-
-  <% if can? :card, Subscription %>
-    <p><b>Billing Card (last 4 digits): </b><%= @user_subscription.last4 %></p>
-  <% end %>
+    <% if @user_subscription && @user_subscription.canceled_now? %>
+      <p>Subscription cancelled</p>
+    <% end %>
+  </div>
 </div>

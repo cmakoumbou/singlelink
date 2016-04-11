@@ -17,12 +17,12 @@ class SubscriptionsController < ApplicationController
 
     begin
       customer = Stripe::Customer.create(:source => token, :plan => "1", :email => customer_email)
-      flash[:notice] = 'Welcome to your homepage! This is where you add and manage your links.'
+      flash[:notice] = 'Welcome to your homepage!'
     rescue Stripe::CardError => e
       flash[:error] = e.message
       redirect_to subscriptions_path
     rescue => e
-      flash[:error] = "An error occurred while processing your card. Try again in a little bit."
+      flash[:error] = "An error occurred while processing your card. Try again later."
       redirect_to subscriptions_path
     else
       subscription = Subscription.create(user: @user, status: "active")
@@ -46,7 +46,7 @@ class SubscriptionsController < ApplicationController
       flash[:error] = e.message
       redirect_to subscriptions_path
     rescue => e
-      flash[:error] = "An error occurred while processing your card. Try again in a little bit."
+      flash[:error] = "An error occurred while processing your card. Try again later."
       redirect_to subscriptions_path
     else
       @user_subscription.update(status: "active")
@@ -77,7 +77,7 @@ class SubscriptionsController < ApplicationController
     flash[:error] = e.message
     redirect_to subscriptions_path
   rescue => e
-    flash[:error] = "An error occurred, try again in a little bit."
+    flash[:error] = "An error occurred, try again later."
     redirect_to subscriptions_path
   end
 
@@ -101,7 +101,7 @@ class SubscriptionsController < ApplicationController
     flash[:error] = e.message
     redirect_to subscriptions_path
   rescue => e
-    flash[:error] = "An error occurred, try again in a little bit."
+    flash[:error] = "An error occurred, try again later."
     redirect_to subscriptions_path
   end
 
@@ -121,7 +121,7 @@ class SubscriptionsController < ApplicationController
     flash[:error] = e.message
     redirect_to subscriptions_path
   rescue => e
-    flash[:error] = "An error occurred, try again in a little bit."
+    flash[:error] = "An error occurred, try again later."
     redirect_to subscriptions_path
   end
 end

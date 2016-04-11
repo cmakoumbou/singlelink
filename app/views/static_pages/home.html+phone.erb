@@ -1,25 +1,13 @@
-<div class="ui items">
-  <div class="item">
-    <div class="image">
-      <%= image_tag "profilepicturehere.jpg" %>
-    </div>
-    <div class="middle aligned content">
-      <div class="header">
-        Your profile name
-      </div>
-      <div class="meta">
-        <span><%= link_to "singlelink.me/username", root_path, {style: "color: #000000"} %></span>
-      </div>
-      <div class="description">
-        <p>Your profile bio</p>
-        <%= link_to "Try Singlelink Me for Free", new_user_registration_path, class: "ui primary button" %>
-      </div>
-    </div>
-  </div>
-</div>
+<%= image_tag("profilepicturehere.jpg", class: "ui small rounded image") %>
+
+<h2 id="mobile_header_margin" class="ui header">
+  Your profile name
+  <div class="sub header"><%= link_to "singlelink.me/username", root_path, {style: "color: #000000"} %></div>
+</h2>
+<h3 class="ui header">Your profile bio</h3>
 
 <% if !@links.empty? %>
-  <div class="ui six link doubling cards">
+  <div class="ui two link cards">
     <% @links.each do |link| %>
       <% if link.disable == false %>
         <%= link_to link.url, class: "card", :target => "_blank" do %>

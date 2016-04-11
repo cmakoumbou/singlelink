@@ -1,39 +1,42 @@
 <% provide(:title, "Pricing") %>
 
-<div class="ui segments">
-  <div class="ui segment">
-    <h3 class="ui header">Pricing</h3>
+<div class="ui large labels">
+  <div class="ui teal label">
+    £20 per year
   </div>
-  <div class="ui orange center aligned secondary segment">
-    <div class="ui large blue labels">
-		 	<div class="ui label">
-		    £20 per year
-	  	</div>
-		  <div class="ui label">
-		    Cancel anytime
-		  </div>
-		  <div class="ui label">
-		    No hidden fees
-	  	</div>
-		</div>
+  <div class="ui teal label">
+    Cancel anytime
   </div>
+  <%= link_to "Try Singlelink Me for Free", new_user_registration_path, class: "ui blue label" %>
 </div>
 
-<div class="ui segment">
-  <h3 class="ui header">Information</h3>
+<div class="ui segments">
+  <div class="ui secondary segment">
+    <h4 class="ui header">Your subscription</h4>
+  </div>
+  <div class="ui segment">
     <p><b>Renewal: </b><%= 1.year.from_now.strftime('%A %d %B %Y') %></p>
     <p><b>Cost: </b> £20 per year</p>
-    <p><b>Billing Card (last 4 digits): </b>****</p>
+  </div>
 </div>
 
-<div class="ui segment">
-  <h3 class="ui header">Card</h3>
-	<a class="ui primary button">Update Card</a>
+<div class="ui segments">
+  <div class="ui secondary segment">
+    <h4 class="ui header">Your card</h4>
+  </div>
+  <div class="ui segment">
+    <p><b>Payment Card (last 4 digits): </b>1234</p>
+    <a class="ui primary button">Update Card</a>
+  </div>
 </div>
 
-<div class="ui segment">
-  <h3 class="ui header">Cancel</h3>
-  	<p>If you cancel your subscription now, you will be subscribed until <%= 1.year.from_now.strftime('%A %d %B %Y') %>
+<div class="ui segments">
+  <div class="ui secondary segment">
+    <h4 class="ui header">Cancel</h4>
+  </div>
+  <div class="ui segment">
+    <p>If you cancel your subscription now, you will be subscribed until <%= 1.year.from_now.strftime('%A %d %B %Y') %>
     then your subscription will be canceled.</p>
     <a class="ui primary button">Cancel Subscription</a>
+  </div>
 </div>

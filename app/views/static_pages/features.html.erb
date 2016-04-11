@@ -1,108 +1,111 @@
 <% provide(:title, "Features") %>
 
-<div class="ui attached center aligned secondary segment">
-
-  <div class="ui large labels">
-    <div class="ui teal label">
-      30 Links
-    </div>
-    <div class="ui teal label">
-      Computer
-    </div>
-    <div class="ui teal label">
-      Mobile
-    </div>
-    <div class="ui teal label">
-      Tablet
-    </div>
-    <%= link_to "Try Singlelink Me for Free", new_user_registration_path, class: "ui blue label" %>
+<div class="ui large labels">
+  <div class="ui teal label">
+    Personal Profile
   </div>
+  <div class="ui teal label">
+    30 Links
+  </div>
+  <div class="ui teal label">
+    Computer
+  </div>
+  <div class="ui teal label">
+    Mobile
+  </div>
+  <div class="ui teal label">
+    Tablet
+  </div>
+  <%= link_to "Try Singlelink Me for Free", new_user_registration_path, class: "ui blue label" %>
+</div>
 
-  <table class="ui single line table">
-    <thead>
-      <tr><th colspan="6">
-        Link Management
-      </th>
-    </tr></thead>
-    <tbody>
-      <tr>
-        <td class="center aligned"><a>Facebook</a></td>
-        <td><a class="large fluid ui blue basic button">Up</a></td>
-        <td><a class="large fluid ui blue basic button">Down</a></td>
-        <td><a class="large fluid ui blue basic button">Disable</a></td>
-        <td><a class="large fluid ui blue basic button">Edit</a></td>
-        <td><a class="large fluid ui blue basic button">Delete</a></td>
-      </tr>
-    </tbody> 
-  </table>
+<div class="ui segments">
+  <div class="ui secondary segment">
+    <h4 class="ui header">Your profile</h4>
+  </div>
+  <div class="ui segment">
+    <form class="ui large form">
+      <div class="field">
+        <label>Name</label>
+        <input type="text" name="profile_name" readonly="" placeholder="Your profile name">
+      </div>
 
-  <div class="ui two column stackable called grid">
-    <div class="row">
-      <div class="column">
-        <div class="ui segments">
-          <div class="ui secondary left aligned segment">
-            <h4 class="ui header">Link Information</h4>
-          </div>
-          <div class="ui left aligned segment">
-            <form class="ui large form">
-              <div class="field">
-                <label>Title</label>
-                <input type="text" name="link_title" readonly="" placeholder="Facebook">
-              </div>
-              <div class="field">
-                <label>Website</label>
-                <input type="text" name="link_website" readonly="" placeholder="www.facebook.com">
-              </div>
-              <h4 class="ui header">Image</h4>
-              <b><label>Select an image to use from our database</label></b>
-              <div class="disabled field">
-                <select class="ui dropdown">
-                  <option value="">Facebook</option>
-                </select>
-              </div>
-              <div class="ui horizontal divider">
-                Or
-              </div>
-              <b><label>Choose an image to upload from your files</label></b>
-              <div class="disabled field">
-                <input type="file" name="link_image">
-              </div>
-            </form>
-          </div>
+      <div class="field">
+        <label>Bio</label>
+        <textarea rows="3" readonly="" placeholder="Your profile bio"></textarea>
+      </div>
+
+      <div class="three fields">
+        <div class="inline field">
+          <label>Picture</label>
+          <input type="file" name="profile_image" disabled="true">
+        </div>
+
+        <div class="field">
+          <label>Text</label>
+          <input type="file" name="profile_text_colour" class="colorpicker_text_demo">
+        </div>
+
+        <div class="field">
+          <label>Background</label>
+          <input type="file" name="profile_background_colour" class="colorpicker_background_demo">
         </div>
       </div>
-      <div class="column">
-        <div class="ui segments">
-          <div class="ui secondary left aligned segment">
-            <h4 class="ui header">Profile Information</h4>
-          </div>
-          <div class="ui left aligned segment">
-            <form class="ui large form">
-              <div class="field">
-                <label>Name</label>
-                <input type="text" name="profile_name" readonly="" placeholder="Your profile name">
-              </div>
 
-              <div class="field">
-                <label>Bio</label>
-                <textarea rows="2" readonly="" placeholder="Your profile bio"></textarea>
-              </div>
-              <b><label>Picture</label></b>
-              <div class="disabled field">
-                <input type="file" name="profile_image">
-              </div>
-              <div class="field">
-                <label>Text Colour</label>
-                <input type="file" name="profile_text_colour" class="colorpicker_text_demo">
-              </div>
-              <div class="field">
-                <label>Background Colour</label>
-                <input type="file" name="profile_background_colour" class="colorpicker_background_demo">
-              </div>
-            </form>
-          </div>
-        </div>
+    </form>
+  </div>
+</div>
+
+<table class="ui single line table">
+  <thead>
+    <tr><th colspan="6">
+      Your links
+    </th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td class="center aligned"><a>Facebook</a></td>
+      <td><a class="ui fluid black basic button">Up</a></td>
+      <td><a class="ui fluid black basic button">Down</a></td>
+      <td><a class="ui fluid black basic button">Disable</a></td>
+      <td><a class="ui fluid black basic button">Edit</a></td>
+      <td><a class="ui fluid black basic button">Delete</a></td>
+    </tr>
+  </tbody> 
+</table>
+
+<div class="ui segments">
+  <div class="ui secondary segment">
+    <h4 class="ui header">Link information</h4>
+  </div>
+  <div class="ui segment">
+    <form class="ui large form">
+      <div class="field">
+        <label>Title</label>
+        <input type="text" name="link_title" readonly="" placeholder="Facebook">
       </div>
-    </div>
+      <div class="field">
+        <label>Website</label>
+        <input type="text" name="link_website" readonly="" placeholder="www.facebook.com">
+      </div>
+
+      <h4 class="ui header">Image</h4>
+
+      <div class="field">
+        <label>Select an image to use from our database</label>
+        <select class="ui dropdown" disabled="true">
+          <option value="">Facebook</option>
+        </select>
+      </div>
+
+      <div class="ui horizontal divider">
+        Or
+      </div>
+
+      <div class="field">
+        <label>Choose an image to upload from your files</label>
+        <input type="file" name="link_image" disabled="true">
+      </div>
+    </form>
   </div>
 </div>

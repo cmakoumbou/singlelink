@@ -1,19 +1,18 @@
 <% provide(:title, "Close Account") %>
 
-<div class="ui orange segment">
-  <h3 class="ui header">Close your account</h3>
-  <p>Your subscription will be cancelled and your account will be permanently deleted, this can't be undone.</p>
-</div>
-
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { confirm: "Are you sure?" }, html: { method: :delete, class: "ui large form" }) do |f| %>
-  <%= devise_error_messages! %>
-
+<div class="ui segments">
+  <div class="ui secondary segment">
+    <h4 class="ui header">Close your account</h4>
+  </div>
   <div class="ui segment">
-  	<div class="field <%= "error" if f.object.errors.include?(:current_password) %>">
-  		<%= f.label :current_password %>
-  		<%= f.password_field :current_password, autocomplete: "off", placeholder: "Current password" %>
-  	</div>
-
-  	<%= f.submit "Close your account", class: "ui primary button" %>
-<% end %>
+  	<p>Your subscription will be cancelled and your account will be permanently deleted, this can't be undone.</p>
+		<%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { confirm: "Are you sure?" }, html: { method: :delete, class: "ui large form" }) do |f| %>
+		  <%= devise_error_messages! %>
+	  	<div class="field <%= "error" if f.object.errors.include?(:current_password) %>">
+	  		<%= f.label :current_password %>
+	  		<%= f.password_field :current_password, autocomplete: "off", placeholder: "Current password" %>
+	  	</div>
+	  	<%= f.submit "Close your account", class: "ui primary button" %>
+		<% end %>
+	</div>
+</div>

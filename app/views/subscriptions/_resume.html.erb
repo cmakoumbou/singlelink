@@ -1,5 +1,9 @@
-<div class="ui segment">
-  <h3 class="ui header">Resume</h3>
-  <p>If you resume your subscription now, you will be charged £20 on <%= @user_subscription.end_date.strftime("%A %d %B %Y") %>.</p>
-	<%= link_to "Resume Subscription", resume_subscription_path, data: { confirm: "Are you sure?" }, class: "ui primary button" %>
+<div class="ui segments">
+  <div class="ui secondary segment">
+    <h4 class="ui header">Resume</h4>
+  </div>
+  <div class="ui segment">
+	  <p>If you resume your subscription now, you will be charged £20 on <%= @user_subscription.end_date.strftime("%A %d %B %Y") %>.</p>
+		<%= link_to "Resume Subscription", resume_subscription_path, data: { confirm: "Are you sure?" }, class: "ui primary button" %>
+  </div>
 </div>

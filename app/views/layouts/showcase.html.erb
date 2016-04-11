@@ -15,11 +15,13 @@
 	<body>
 <% end %>
 	<% if @user == current_user %>
-		
 		<div id="main" class="ui container">
-			<%= render 'layouts/navigation' %>	
-			<%= render 'layouts/messages' %>
-			<%= yield %>
+			<%= render 'layouts/header' %>
+			<%= render 'layouts/navigation' %>
+			<div class="ui attached secondary segment">	
+				<%= render 'layouts/messages' %>
+				<%= yield %>
+			</div>
 			<%= render 'layouts/footer' %>
 		</div>
 	<% else %>

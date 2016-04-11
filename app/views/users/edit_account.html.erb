@@ -1,13 +1,15 @@
 <% provide(:title, "Edit account") %>
 
-<div class="ui orange segment">
-  <h3 class="ui header">Edit account</h3>
-</div>
-
-<%= form_for(@user, :url => { :action => "update_account" }, html: {class: "ui large form"} ) do |f| %>
-  <%= render 'users/error_messages' %>
-
+<div class="ui segments">
+  <div class="ui secondary left aligned segment">
+    <h4 class="ui header">Edit your account</h4>
+  </div>
   <div class="ui segment">
+
+  <%= form_for(@user, :url => { :action => "update_account" }, html: {class: "ui large form"} ) do |f| %>
+    <%= render 'users/error_messages' %>
+
+
     <div class="field <%= "error" if f.object.errors.include?(:username) %>">
       <%= f.label :username, "Username" %>
       <%= f.text_field :username, placeholder: "Username" %>
@@ -22,6 +24,6 @@
     </div>
 
     <%= f.submit "Update account", class: "ui primary button"  %>
-  </div>
 
-<% end %>
+  <% end %>
+</div>

@@ -1,14 +1,31 @@
-<div class="ui segment">
-  <h3 class="ui header">Billing Info</h3>
-  <%= form_tag pro_subscription_path do %>
-    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-            data-name="Singlelink Me"
-            data-description="7 Day Free Trial"
-            data-email="<%= @user.email%>"
-            data-locale="auto"
-            data-panel-label="Finish sign up"
-            data-label="Enter billing info"
-            data-allow-remember-me="false"></script>
-  <% end %>
+<div class="ui two steps">
+  <div class="active step">
+    <div class="content">
+      <div class="title">Enter your payment details</div>
+    </div>
+  </div>
+  <div class="disabled step">
+    <div class="content">
+      <div class="title">Enjoy your free trial</div>
+    </div>
+  </div>
+</div>
+
+<div class="ui segments">
+  <div class="ui secondary segment">
+    <h4 class="ui header">Payment Information</h4>
+  </div>
+  <div class="ui segment">
+    <%= form_tag pro_subscription_path do %>
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+              data-name="Singlelink Me"
+              data-description="7 Day Free Trial"
+              data-email="<%= @user.email%>"
+              data-locale="auto"
+              data-panel-label="Finish sign up"
+              data-label="Enter payment details"
+              data-allow-remember-me="false"></script>
+    <% end %>
+  </div>
 </div>

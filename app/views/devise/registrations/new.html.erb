@@ -1,55 +1,50 @@
 <% provide(:title, "Sign up") %>
 
-<div class="ui orange segment">
-  <h3 class="ui header">Sign up - 7 Day Free Trial</h3>
-</div>
-
-<div class="ui two steps">
+<div class="ui three steps">
   <div class="active step">
-    <i class="user icon"></i>
     <div class="content">
-      <div class="title">Account</div>
-      <div class="description">Set up an account</div>
+      <div class="title">Create your account</div>
     </div>
   </div>
   <div class="disabled step">
-    <i class="payment icon"></i>
     <div class="content">
-      <div class="title">Billing</div>
-      <div class="description">Enter billing information</div>
+      <div class="title">Enter your payment details</div>
+    </div>
+  </div>
+  <div class="disabled step">
+    <div class="content">
+      <div class="title">Enjoy your free trial</div>
     </div>
   </div>
 </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "ui large form" }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="ui segment">
-
-    <div class="field <%= "error" if f.object.errors.include?(:username) %>">
-      <%= f.label :username, "Username" %>
-      <%= f.text_field :username, placeholder: "Username" %>
-    </div>
-
-    <div class="field <%= "error" if f.object.errors.include?(:email) %>">
-      <%= f.label :email %>
-      <%= f.email_field :email, placeholder: "Email" %>
-    </div>
-
-    <div class="field <%= "error" if f.object.errors.include?(:password) %>">
-      <%= f.label :password %>
-      <%= f.password_field :password, placeholder: "Password" %>
-    </div>
-
-    <div class="field <%= "error" if f.object.errors.include?(:password_confirmation) %>">
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, placeholder: "Confirm new password" %>
-    </div>
+<div class="ui segments">
+  <div class="ui secondary segment">
+    <h4 class="ui header">Sign up - 7 Day Free Trial</h4>
   </div>
-
   <div class="ui segment">
-    By clicking on "Sign up" below, you are agreeing to our <%= link_to "Terms", terms_path %>.
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "ui large form" }) do |f| %>
+      <%= devise_error_messages! %>
+      <div class="field <%= "error" if f.object.errors.include?(:username) %>">
+        <%= f.label :username, "Username" %>
+        <%= f.text_field :username, placeholder: "Username" %>
+      </div>
+      <div class="field <%= "error" if f.object.errors.include?(:email) %>">
+        <%= f.label :email %>
+        <%= f.email_field :email, placeholder: "Email" %>
+      </div>
+      <div class="field <%= "error" if f.object.errors.include?(:password) %>">
+        <%= f.label :password %>
+        <%= f.password_field :password, placeholder: "Password" %>
+      </div>
+      <div class="field <%= "error" if f.object.errors.include?(:password_confirmation) %>">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, placeholder: "Confirm new password" %>
+      </div>
+      <%= f.submit "Sign up", class: "ui primary button" %>
+    <% end %>
   </div>
-
-  <%= f.submit "Sign up", class: "ui primary button" %>
-<% end %>
+  <div class="ui secondary segment">
+    <p>By clicking on "Sign up" above, you are agreeing to our <%= link_to "Terms", terms_path %>.</p>
+  </div>
+</div>

@@ -1,21 +1,18 @@
 <% provide(:title, "Forgot password") %>
 
-<div class="ui orange segment">
-  <h3 class="ui header">Forgot your password?</h3>
-</div>
-
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "ui large form" }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="ui segment">
-
-  	<div class="field <%= "error" if f.object.errors.include?(:email) %>">
-  		<%= f.label :email %>
-    	<%= f.email_field :email, placeholder: "Email" %>
-  	</div>
-
+<div class="ui segments">
+  <div class="ui secondary left aligned segment">
+    <h4 class="ui header">Forgot your password?</h4>
   </div>
-
-  <%= f.submit "Send me reset password instructions", class: "ui primary button" %>
-
-<% end %>
+ 
+  <div class="ui left aligned segment">
+		<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "ui large form" }) do |f| %>
+		  <%= devise_error_messages! %>
+	  	<div class="field <%= "error" if f.object.errors.include?(:email) %>">
+	  		<%= f.label :email %>
+	    	<%= f.email_field :email, placeholder: "Email" %>
+	  	</div>
+		  <%= f.submit "Send me reset password instructions", class: "ui primary button" %>
+		<% end %>
+  </div>
+</div>

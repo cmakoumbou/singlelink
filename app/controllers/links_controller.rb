@@ -1,10 +1,11 @@
 class LinksController < ApplicationController
   before_action :authenticate_user!, except: [:profile]
   before_action :correct_link, only: [:edit, :update, :destroy, :move_up, :move_down, :enable, :disable]
+  before_action :set_device_type, only: [:profile]
   layout :resolve_layout
 
   def index
-    authorize! :index, Link, :message => "Enter your billing infortmation to gain access to your homepage."
+    authorize! :index, Link, :message => "Enter your payment details to gain access to your homepage."
     @links = current_user.links.order(position: :asc)
   end
 
@@ -75,14 +76,15 @@ class LinksController < ApplicationController
   end
 
   private
-    def correct_link
-      @link = Link.find(params[:id])
-      redirect_to links_url, alert: 'Unauthorized access' unless @link.user == current_user
-    end
 
-    def link_params
-      params.require(:link).permit(:url, :title, :image, :remove_image, :default_image)
-    end
+  def correct_link
+    @link = Link.find(params[:id])
+    redirect_to links_url, alert: 'Unauthorized access' unless @link.user == current_user
+  end
+
+  def link_params
+    params.require(:link).permit(:url, :title, :image, :remove_image, :default_image)
+  end
 
   def resolve_layout
     case action_name
@@ -91,5 +93,10 @@ class LinksController < ApplicationController
     else
       "application"
     end
+  end
+
+  def set_device_type
+    request.variant = :phone if browser.device.mobile?
+    request.variant = :tablet if browser.device.tablet?
   end
 end

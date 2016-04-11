@@ -1,4 +1,5 @@
 class StaticPagesController < ApplicationController
+  before_action :set_device_type, only: [:home]
 
   def home
     @user = User.first
@@ -24,6 +25,13 @@ class StaticPagesController < ApplicationController
   end
 
   def pricing
+  end
+
+  private
+
+  def set_device_type
+    request.variant = :phone if browser.device.mobile?
+    request.variant = :tablet if browser.device.tablet?
   end
   
 end

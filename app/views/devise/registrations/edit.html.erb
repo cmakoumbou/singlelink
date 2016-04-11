@@ -1,63 +1,53 @@
 <% provide(:title, "Settings") %>
 
-<div class="ui orange segment">
-  <h3 class="ui header">Settings</h3>
-</div>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, :multipart => true, class: "ui large form" }) do |f| %>
-  <%= devise_error_messages! %>
-
+<div class="ui segments">
+  <div class="ui secondary segment">
+    <h4 class="ui header">Your profile</h4>
+  </div>
   <div class="ui segment">
-    <div class="field <%= "error" if f.object.errors.include?(:display_name) %>">
-      <%= f.label :display_name, "Profile Name" %>
-      <%= f.text_field :display_name %>
-    </div>
- 
-    <div class="field <%= "error" if f.object.errors.include?(:avatar) %>">
-      <%= f.label :avatar, "Profile Image" %>
-      <%= f.file_field :avatar %>
-    </div>
-
-    <% if current_user.avatar? %>
-      <div class="field">
-        <div class="ui checkbox">
-          <%= f.check_box :remove_avatar %>
-          <%= f.label :remove_avatar, "Remove current profile image" %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, :multipart => true, class: "ui large form" }) do |f| %>
+      <%= devise_error_messages! %>
+      <div class="field <%= "error" if f.object.errors.include?(:display_name) %>">
+        <%= f.label :display_name, "Name" %>
+        <%= f.text_field :display_name, placeholder: "Profile Name" %>
+      </div>
+      <div class="field <%= "error" if f.object.errors.include?(:bio) %>">
+        <%= f.label :bio, "Bio" %>    
+        <%= f.text_area :bio, placeholder: "Profile Bio", rows: 3 %>
+      </div>
+      <div class="three fields">
+        <div class="inline field <%= "error" if f.object.errors.include?(:avatar) %>">
+          <%= f.label :avatar, "Picture" %>
+          <%= f.file_field :avatar %>
+          <% if current_user.avatar? %>
+            <div class="ui checkbox">
+              <%= f.check_box :remove_avatar %>
+              <%= f.label :remove_avatar, "Remove current profile image" %>
+            </div>
+          <% end %>
+        </div>
+        <div class="field">
+          <%= f.label :text_colour, "Text" %>
+          <%= f.text_field :text_colour, class: "colorpicker_text" %>
+        </div>
+        <div class="field">
+          <%= f.label :colour, "Background" %>
+          <%= f.text_field :colour, class: "colorpicker_background" %>
         </div>
       </div>
+      <%= f.submit "Update profile", class: "ui primary button" %>
     <% end %>
-
-    <div class="field">
-      <%= f.label :text_colour, "Profile Text Colour" %>
-      <%= f.text_field :text_colour, class: "colorpicker_text" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :colour, "Profile Background Colour" %>
-      <%= f.text_field :colour, class: "colorpicker_background" %>
-    </div>
-
-    <div class="field <%= "error" if f.object.errors.include?(:bio) %>">
-      <%= f.label :bio, "Profile Bio" %>    
-      <%= f.text_area :bio, placeholder: "Profile Bio", rows: 3 %>
-    </div>
-
-    <%= f.submit "Update profile", class: "ui primary button" %>
-  </div>
-  
-<% end %>
-
-<div class="ui segments">
-  <div class="ui segment">
-    <h4 class="ui header"><%= link_to 'Edit your account', edit_account_path %></h4>
-  </div>
-
-  <div class="ui segment">
-    <h4 class="ui header"><%= link_to 'Change your password', edit_password_path %></h4>
-  </div>
-
-  <div class="ui segment">
-    <h4 class="ui header"><%= link_to 'Manage your subscription', subscriptions_path %></h4>
   </div>
 </div>
 
+<div class="ui segments">
+  <div class="ui secondary segment">
+    <h4 class="ui header">Your options</h4>
+  </div>
+  <div class="ui segment">
+    <p><%= link_to 'Edit your account', edit_account_path %></p>
+    <p><%= link_to 'Change your password', edit_password_path %></p>
+    <p><%= link_to 'Manage your subscription', subscriptions_path %></p>
+    <p><%= link_to 'Close your account', settings_cancel_path %></p>
+  </div>
+</div>

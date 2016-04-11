@@ -1,26 +1,26 @@
 <% provide(:title, "Change password") %>
 
-<div class="ui orange segment">
-  <h3 class="ui header">Change your password</h3>
-</div>
-
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "ui large form" }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="ui segment">
-    <%= f.hidden_field :reset_password_token %>
-
-    <div class="required field <%= "error" if f.object.errors.include?(:password) %>">
-      <%= f.label :password %>
-      <%= f.password_field :password, autocomplete: "off", placeholder: "New password" %>
-    </div>
-
-    <div class="required field <%= "error" if f.object.errors.include?(:password_confirmation) %>">
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm new password" %>
-    </div>
+<div class="ui segments">
+  <div class="ui secondary segment">
+    <h4 class="ui header">Change your password</h4>
   </div>
+ 
+  <div class="ui segment">
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "ui large form" }) do |f| %>
+      <%= devise_error_messages! %>
 
-  <%= f.submit "Change my password", class: "ui primary button" %>
-<% end %>
-  
+      <%= f.hidden_field :reset_password_token %>
+
+      <div class="field <%= "error" if f.object.errors.include?(:password) %>">
+        <%= f.label :password %>
+        <%= f.password_field :password, autocomplete: "off", placeholder: "New password" %>
+      </div>
+
+      <div class="field <%= "error" if f.object.errors.include?(:password_confirmation) %>">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm new password" %>
+      </div>
+      <%= f.submit "Change my password", class: "ui primary button" %>
+    <% end %>
+  </div>
+</div>

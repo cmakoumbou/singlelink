@@ -1,11 +1,15 @@
-<div class="ui segment">
-  <h3 class="ui header">Cancel</h3>
-  <% if @user_subscription.end_date > Time.now %>
-  	<p>If you cancel your subscription now, you will be subscribed until <%= @user_subscription.end_date.strftime("%A %d %B %Y") %>
-    then your subscription will be canceled.</p>
-  <% end %>
-  <% if @user_subscription.end_date < Time.now %>
-    <p>If you cancel your subscription now, you will have to renew your subscription to use our services again.</p>
-  <% end %>
-	<%= link_to "Cancel Subscription", cancel_subscription_path, data: { confirm: "Are you sure?" }, class: "ui primary button" %>
+<div class="ui segments">
+  <div class="ui secondary segment">
+    <h4 class="ui header">Cancel</h4>
+  </div>
+  <div class="ui segment">
+		<% if @user_subscription.end_date > Time.now %>
+	  	<p>If you cancel your subscription now, you will be subscribed until <%= @user_subscription.end_date.strftime("%A %d %B %Y") %>
+	    then your subscription will be canceled.</p>
+	  <% end %>
+	  <% if @user_subscription.end_date < Time.now %>
+	    <p>If you cancel your subscription now, you will have to renew your subscription to use our services again.</p>
+	  <% end %>
+		<%= link_to "Cancel Subscription", cancel_subscription_path, data: { confirm: "Are you sure?" }, class: "ui primary button" %>
+  </div>
 </div>
