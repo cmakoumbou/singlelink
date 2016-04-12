@@ -1,12 +1,29 @@
-<div class="ui large attached four item menu">
-  <%= link_to 'Home', root_path, class: "item" %>
-  <% if user_signed_in? %>
-  	<%= link_to 'Profile', profile_path(current_user), class: "item" %>
-  	<%= link_to 'Settings', settings_path, class: "item" %>
-  	<%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "item" %>
-  <% else %>
-  	<%= link_to 'Features', features_path, class: "item" %>
-		<%= link_to 'Pricing', pricing_path, class: "item" %>
-		<%= link_to 'Login', new_user_session_path, class: "item" %>
-	<% end %>
+<div class="normal_menu">  
+  <div class="ui large borderless inverted attached menu">
+    <div class="ui container">
+      <%= link_to 'Singlelink Me', root_path, class: "header item" %>
+      <div class="right menu">
+      	<%= link_to 'Features', features_path, class: "item" %>
+      	<%= link_to 'Pricing', pricing_path, class: "item" %>
+        <%= link_to 'Support', help_path, class: "item" %>
+        <div class="item">
+          <%= link_to 'Sign up', new_user_registration_path, class: "ui primary button" %>
+        </div>
+        <div id="nav_button_padding" class="item">
+          <%= link_to 'Log in', new_user_session_path, class: "ui white button" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mobile_menu">
+  <div class="ui large borderless inverted attached menu">
+    <div class="ui container">
+      <%= link_to 'Singlelink Me', root_path, class: "header item" %>
+      <div class="right menu">
+        <a id="sidebar_button" class="item"><i class="content icon"></i></a>
+      </div>
+    </div>
+  </div>
 </div>

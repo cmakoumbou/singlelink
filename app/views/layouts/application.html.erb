@@ -3,21 +3,20 @@
 <head>
 	<meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= full_title(yield(:title)) %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<div id="main" class="ui container">
-		<%= render 'layouts/header' %>
+	<%= render 'layouts/sidebar' %>
+	<div class="pusher">
 		<%= render 'layouts/navigation' %>
-			<div class="ui attached secondary segment">	
-				<%= render 'layouts/messages' %>
-				<%= yield %>
-			</div>
-		<%= render 'layouts/footer' %>
+		<div id="main" class="ui container">
+			<%= render 'layouts/messages' %>
+			<%= yield %>
+		</div>
 	</div>
 </body>
 </html>
