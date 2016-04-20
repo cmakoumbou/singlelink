@@ -23,7 +23,7 @@
 
 <div id="main" class="ui container">
   <% if !@links.empty? %>
-    <div id="custom_cards" class="ui four link cards">
+    <div id="custom_cards" class="ui two link cards">
       <% @links.each do |link| %>
         <% if link.disable == false %>
           <%= link_to link.url, class: "card", :target => "_blank" do %>

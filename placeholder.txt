@@ -10,9 +10,14 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery.turbolinks
+// = require jquery
+// = require semantic-ui
+// = require spectrum
+// = require matchMedia
+// = require matchMedia.addListener
+// = require slideout
+// = require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
-//= require jquery.fullpage
 //= require_tree .
+

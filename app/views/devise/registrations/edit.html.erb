@@ -7,34 +7,51 @@
   <div class="ui segment">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, :multipart => true, class: "ui large form" }) do |f| %>
       <%= devise_error_messages! %>
+
       <div class="field <%= "error" if f.object.errors.include?(:display_name) %>">
         <%= f.label :display_name, "Name" %>
         <%= f.text_field :display_name, placeholder: "Profile Name" %>
       </div>
+
       <div class="field <%= "error" if f.object.errors.include?(:bio) %>">
         <%= f.label :bio, "Bio" %>    
         <%= f.text_area :bio, placeholder: "Profile Bio", rows: 3 %>
       </div>
-      <div class="three fields">
-        <div class="inline field <%= "error" if f.object.errors.include?(:avatar) %>">
-          <%= f.label :avatar, "Picture" %>
-          <%= f.file_field :avatar %>
-          <% if current_user.avatar? %>
-            <div class="ui checkbox">
-              <%= f.check_box :remove_avatar %>
-              <%= f.label :remove_avatar, "Remove current profile image" %>
-            </div>
-          <% end %>
+
+      <div class="inline field <%= "error" if f.object.errors.include?(:avatar) %>">
+        <%= f.label :avatar, "Picture" %>
+        <%= f.file_field :avatar %>
+        <% if current_user.avatar? %>
+          <div class="ui checkbox">
+            <%= f.check_box :remove_avatar %>
+            <%= f.label :remove_avatar, "Remove current profile image" %>
+          </div>
+        <% end %>
+      </div>
+      
+      <div class="five fields">
+        <div class="field">
+          <%= f.label :name_colour, "Name" %>
+          <%= f.text_field :name_colour, class: "colorpicker_name" %>
         </div>
         <div class="field">
-          <%= f.label :text_colour, "Text" %>
-          <%= f.text_field :text_colour, class: "colorpicker_text" %>
+          <%= f.label :bio_colour, "Bio" %>
+          <%= f.text_field :bio_colour, class: "colorpicker_bio" %>
         </div>
         <div class="field">
-          <%= f.label :colour, "Background" %>
-          <%= f.text_field :colour, class: "colorpicker_background" %>
+          <%= f.label :singlelink_colour, "Singlelink" %>
+          <%= f.text_field :singlelink_colour, class: "colorpicker_singlelink" %>
+        </div>
+        <div class="field">
+          <%= f.label :topbg_colour, "Top background" %>
+          <%= f.text_field :topbg_colour, class: "colorpicker_topbg" %>
+        </div>
+         <div class="field">
+          <%= f.label :botbg_colour, "Bottom background" %>
+          <%= f.text_field :botbg_colour, class: "colorpicker_botbg" %>
         </div>
       </div>
+
       <%= f.submit "Update profile", class: "ui primary button" %>
     <% end %>
   </div>

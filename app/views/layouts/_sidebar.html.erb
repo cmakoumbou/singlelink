@@ -1,12 +1,9 @@
-<div id="sidebar_menu" class="ui left inverted vertical sidebar menu">
+<div id="sidebar_menu" class="ui left vertical sidebar menu">
 	<%= link_to 'Singlelink Me', root_path, class: "header item" %>
 	<%= link_to 'Features', features_path, class: "item" %>
   <%= link_to 'Pricing', pricing_path, class: "item" %>
-  <%= link_to 'Support', help_path, class: "item" %>
+  <%= link_to 'Log in', new_user_session_path, class: "item" %>
   <div class="item">
-    <%= link_to 'Sign up', new_user_registration_path, class: "ui fluid primary button" %>
-  </div>
-  <div class="item">
-    <%= link_to 'Log in', new_user_session_path, class: "ui fluid white button" %>
+    <%= link_to 'Sign up', new_user_registration_path, class: "ui fluid blue basic button" %>
   </div>
 </div>

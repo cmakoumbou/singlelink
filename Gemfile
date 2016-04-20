@@ -28,6 +28,8 @@ gem 'acts_as_list', '0.7.2'
 gem 'file_validators', '2.0.2'
 gem 'jquery-minicolors-rails', '2.2.3.0'
 gem 'browser', '2.0.3'
+gem 'normalize-rails', '4.0.0'
+gem 'font-awesome-rails', '4.6.1.0'
 
 group :development, :test do
   gem 'byebug', '5.0.0'

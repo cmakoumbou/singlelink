@@ -9,7 +9,20 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body style="background-color: <%= @user.botbg_colour %>">
-	<%= yield %>
+<% if @user.colour.present? %>
+	<body style="background-color: <%= @user.colour %>">
+<% else %>
+	<body>
+<% end %>
+	<% if @user == current_user %>
+		<%# <%= render 'layouts/navigation' %>
+		<%#	<%= render 'layouts/messages' %>
+		<%= yield %>
+		<%# <%= render 'layouts/footer' %>
+	<% else %>
+		<div id="profile" class="ui container">
+			<%= yield %>
+		</div>
+	<% end %>
 </body>
 </html>
