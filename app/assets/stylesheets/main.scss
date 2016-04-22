@@ -1,347 +1,69 @@
-// body {
-// 	width: 100%;
-//   height: 100%;
-// 	font-size: 16px;
-// 	background-color:#e7ecef;
-// }
-
-// html.ios {
-//   overflow-x: hidden;
-//   -webkit-overflow-scrolling: touch;
-// }
-// html.ios,
-// html.ios body {
-//   height: initial !important;
-// }
-
-// #main {
-// 	padding-top:35px;
-// 	padding-bottom:35px;
-// }
-
-// #profile {
-// 	padding-top:40px;
-// 	padding-bottom:40px;
-// }
-
-// .ui.attached.menu {
-// 	position: relative;
-//   right: 1px;
-// }
-
-// #facebook {
-// 	background-color: #3B579D;
-// }
-
-// #twitter {
-// 	background-color: #5FA9DD;
-// }
-
-// #google {
-// 	background-color: #DD4A39;
-// }
-
-// #youtube {
-// 	background-color: #CF2227;
-// }
-
-// #instagram {
-// 	background-color: #305C85;
-// }
-
-// #blogger {
-// 	background-color: #F4811F;
-// }
-
-// #flickr {
-// 	background-color: #FFFFFF;
-// }
-
-// #linkedin {
-// 	background-color: #0D77B7;
-// }
-
-// #medium {
-// 	background-color: #FFFFFF;
-// }
-
-// #meerkat {
-// 	background-color: #FFE100;
-// }
-
-// #periscope {
-// 	background-color: #39A3C5;
-// }
-
-// #pinterest {
-// 	background-color: #FFFFFF;
-// }
-
-// #reddit {
-// 	background-color: #CEE2F8;
-// }
-
-// #tumblr {
-// 	background-color: #35465C;
-// }
-
-// #vimeo {
-// 	background-color: #1AB7EA;
-// }
-
-// #vine {
-// 	background-color: #00B488;
-// }
-
-// #snapchat {
-// 	background-color: #FFFC00;
-// }
-
-// #twitch {
-// 	background-color: #6441A5;
-// }
-
-// #wordpress {
-// 	background-color: #FFFFFF;
-// }
-
-// #discord {
-// 	background-color: #FFFFFF;
-// }
-
-// .pyro {
-// 	height: 75px;
-// }
-
-// .ui.vertical.inverted.menu .menu .item, .ui.vertical.inverted.menu .menu .item a:not(.ui) {
-// 	color:rgba(255,255,255,0.7);
-// }
-
-// .ui.medium.images .image,
-// .ui.medium.images img,
-// .ui.medium.images svg,
-// .ui.medium.image {
-//   width: 250px;
-//   height: auto;
-//   font-size: 1rem;
-// }
-
-
-// .ui.items > .item > .image > img {
-// 	border-radius:0.285714rem;
-// }
-
-// #nav_button_padding {
-// 	padding-left: 0;
-// }
-
-// // // Mobile Portrait
-// // @media only screen and (max-width : 767px) and (orientation: portrait) {
-// // 	.normal_menu {
-// // 		display: none;
-// // 	}
-// // 	.masthead.segment {
-// //     min-height: 300px;
-// // 	}
-// // }
-
-// // // Mobile Landscape
-// // @media only screen and (max-width : 767px) and (orientation: landscape) {
-// // 	.normal_menu {
-// // 		display: none;
-// // 	}
-// // 	.masthead.segment {
-// //     min-height: 300px;
-// // 	}
-// // }
-
-// // // Tablet
-// // @media only screen and (min-width: 768px) and (max-width: 991px) {
-// // 	.mobile_menu {
-// // 		display: none;
-// // 	}
-// // 	.masthead.segment {
-// //     min-height: 400px;
-// // 	}
-// // }
-
-// // // Computer
-// // @media only screen and (min-width: 992px) {
-// // 	.mobile_menu {
-// // 		display: none;
-// // 	}
-// // 	.masthead.segment {
-// //     min-height: 400px;
-// // 	}
-// // }
-
-// // body.pushable > .pusher {
-// //   background: #e7ecef;
-// // }
-
-// #nav_bar_margin {
-// 	padding-top:20px;
-// 	padding-bottom:20px;
-// }
-
-// #break {
-// 	word-wrap: break-word;
-// }
-
-// .slideout-menu {
-//   position: fixed;
-//   left: 0;
-//   top: 0;
-//   bottom: 0;
-//   right: 0;
-//   z-index: 0;
-//   width: 256px;
-//   overflow-y: auto;
-//   -webkit-overflow-scrolling: touch;
-//   display: none;
-// }
-
-// .slideout-panel {
-//   position:relative;
-//   z-index: 1;
-//   will-change: transform;
-// }
-
-// .slideout-open,
-// .slideout-open body,
-// .slideout-open .slideout-panel {
-//   overflow: hidden;
-// }
-
-// .slideout-open .slideout-menu {
-//   display: block;
-// }
-
-// .Aligner {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// }
-
-// .Aligner-item {
-//   max-width: 50%;
-// }
-
-// .Aligner {
-//   display: flex;
-//   align-items: center;
-//   min-height: 24em;
-//   justify-content: center;
-// }
-
-// .Aligner-item {
-//   flex: 1;
-// }
-
-// .Aligner-item--top {
-//   align-self: flex-start;
-// }
-
-// .Aligner-item--bottom {
-//   align-self: flex-end;
-// }
-
-// .Aligner-item--fixed {
-//   flex: none;
-//   max-width: 50%;
-// }
 body {
 	background-color:#e7ecef;
+	font-family: 'Roboto', sans-serif;
 }
 
-.hidden-menu {
-	background-color:#00ff00;
+.mobile-menu {
+	background-color: orange;
 	width: 100%;
-	height: 100%;
-	position:fixed;
-	overflow: hidden;
+	height:48px;
 }
 
-ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-}
-
-.fixIt {
-	position: fixed;
-	left: 0;
-	overflow: hidden;
-	width: 100%;
-}
-
-.static-menu li {
+.mobile-menu li {
 	display: inline;
 }
 
-ul.static-menu {
-	background-color: white;
+.hidden-menu {
+	background-color:white;
+	position: absolute;
+	top: 48px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+  overflow-y: auto;
 	padding: 1em;
-	// padding-left: 1em;
- //  padding-right: 1em;
 }
 
-.logo {
-	float:right;
+.hidden-menu li a {
+	color: black;
+	text-decoration: none;
+	font-size: 18px;
+	display: inline-block;
+	margin-bottom: 1em;
 }
 
-// * {
-//   -moz-box-sizing: border-box;
-//   -webkit-box-sizing: border-box;
-//   box-sizing: border-box;
-//   margin: 0;
-//   padding: 0;
-//   line-height: 1.5em;
-// }
+ul {
+	margin:0;
+	padding:0;
+	list-style-type: none;
+}
 
-// .menu-toggle {
-//   position: fixed;
-//   top: 1.5em;
-//   right: 1.5em;
-//   font-size: 1em;
-//   padding: 0.5em;
-//   z-index: 100;
-// }
+.no-scroll {
+	overflow: hidden;
+}
 
-// .menu {
-//   position: fixed;
-//   z-index: 99;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100vh;
-//   background-color: rgba(255, 0, 0, 0.8);
-//   display: table;
-//   overflow: auto;
-//   text-align: center;
-// }
+.menu-icon {
+	position: absolute;
+	margin: 1em;
+}
 
-// .menu-inner {
-//   display: table-cell;
-//   vertical-align: middle;
-// }
+.logo a {
+	position: absolute;
+	margin-top: 0.9em;
+	left: 50%;
+	margin-left: -50px;
+	color: black;
+	text-decoration: none;
+	font-size: 18px;
+	font-weight: bold;
+}
 
-// .menu-inner-link:link {
-//   color: #fff;
-//   text-decoration: none;
-//   display: inline-block;
-//   padding: 0.5em;
-// }
+.sign-in a {
+	float: right;
+	color: black;
+	margin: 1em;
+}
 
-// .menu-inner-link:hover,
-// .menu-inner-link:hover,
-// .menu-inner-link:hover {
-//   text-decoration: underline;
-// }
-
-// .fixIt {
-//   position: fixed;
-//   left: 0;
-//   overflow: hidden;
-//   width: 100%;
-// }
+.main-container {
+	margin: 1em;
+}

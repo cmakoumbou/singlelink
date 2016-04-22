@@ -10,24 +10,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div id="wrapper" class="wrapper">
-    <div id="fullpage">
-      <div class="section">
-        <ul class="static-menu">
-          <li><i id="menuToggle" class="fa fa-bars" aria-hidden="true" data-click-state="0"></i></li>
-          <li class="logo">Singlelink Me</li>
-        </ul>
-        <ul id="menuPanel" class="hidden-menu" role="navigation">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">News</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">About</a></li>
-        </ul>
-      </div>
-      <div class="section">Section 2</div>
-      <div class="section">Section 3</div>
-      <div class="section">Section 4</div>
-    </div>
+  <%= render 'layouts/navigation' %>
+  <div class="main-container">
+    <%= yield %>
   </div>
 </body>
 </html>

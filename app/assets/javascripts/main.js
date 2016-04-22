@@ -1,30 +1,41 @@
 $(function(){
-  $('#fullpage').fullpage({
-    scrollBar: true,
-    verticalCentered: false
-  });
+  $('#hidden-menu').hide();
 
-  $('#menuPanel').hide();
-
-  $('#menuToggle').on('click', function() {
+  $('#menu-toggle').on('click', function() {
     // $(this).html('hide menu'); 
-    $(this).removeClass("fa fa-bars").addClass("fa fa-times");
+    $(this).removeClass("fa fa-bars fa-lg").addClass("fa fa-times fa-lg");
     if ($(this).attr('data-click-state') == 0) {
-      $('#menuPanel').show();
-      $.fn.fullpage.setAllowScrolling(false);
-      $position = $(document).scrollTop();
-      $('#wrapper').addClass('fixIt').css('top', -$position);
+      $('#hidden-menu').show();
+      $('html').addClass('no-scroll');
       $(this).attr('data-click-state', 1); 
     } else if ($(this).attr('data-click-state') == 1) {
       // $(this).html('show menu')
-      $(this).removeClass("fa fa-times").addClass("fa fa-bars");
-      $('#menuPanel').hide();
-      $.fn.fullpage.setAllowScrolling(true);
-      $('#wrapper').removeClass('fixIt').css('top', 'auto');
-      $(document).scrollTop($position);
+      $(this).removeClass("fa fa-times fa-lg").addClass("fa fa-bars fa-lg");
+      $('#hidden-menu').hide();
+      $('html').removeClass('no-scroll');
       $(this).attr('data-click-state', 0);
     }
   });
+
+  // $('#hidden-menu').hide();
+
+  // $('#menu-toggle').on('click', function() {
+  //   // $(this).html('hide menu'); 
+  //   $(this).removeClass("fa fa-bars fa-lg").addClass("fa fa-times fa-lg");
+  //   if ($(this).attr('data-click-state') == 0) {
+  //     $('#hidden-menu').show();
+  //     // $position = $(document).scrollTop();
+  //     // $('#menu-container').addClass('fix-it').css('top', -$position);
+  //     $(this).attr('data-click-state', 1); 
+  //   } else if ($(this).attr('data-click-state') == 1) {
+  //     // $(this).html('show menu')
+  //     $(this).removeClass("fa fa-times fa-lg").addClass("fa fa-bars fa-lg");
+  //     $('#hidden-menu').hide();
+  //     // $('#menu-container').removeClass('fix-it').css('top', 'auto');
+  //     // $(document).scrollTop($position);
+  //     $(this).attr('data-click-state', 0);
+  //   }
+  // });
 
 
   // $('#menuToggle').on('click', function() {
