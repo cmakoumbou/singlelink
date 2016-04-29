@@ -14,4 +14,7 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
+//= require matchMedia
+//= require matchMedia.addListener
+//= require spectrum
 //= require_tree .

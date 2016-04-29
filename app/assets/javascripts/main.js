@@ -1,5 +1,6 @@
 $(function(){
   $('#hidden-menu').hide();
+  $('html').removeClass('no-scroll');
 
   $('#menu-toggle').on('click', function() {
     // $(this).html('hide menu'); 
@@ -17,6 +18,23 @@ $(function(){
     }
   });
 
+  var mql = window.matchMedia("only screen and (max-width : 767px) and (orientation: landscape)");
+
+  if(mql.matches) {  
+    $('.responsive-image').css('max-width', '75%');
+  } else {
+    $('.responsive-image').css('max-width', '100%');
+  }
+
+  mql.addListener(function(m) {
+    if(m.matches) {
+      $('.responsive-image').css('max-width', '75%');
+    }
+    else {
+      $('.responsive-image').css('max-width', '100%');
+    }
+  });
+  
   // $('#hidden-menu').hide();
 
   // $('#menu-toggle').on('click', function() {
@@ -168,4 +186,23 @@ $(function(){
  //    color: "#e7ecef",
  //    disabled: true
  //  });
+
+  $(".colorpicker_card_name").spectrum({
+    allowEmpty:true,
+    preferredFormat: "hex",
+    showInput: true
+  });
+
+  $(".colorpicker_card_username").spectrum({
+    allowEmpty:true,
+    preferredFormat: "hex",
+    showInput: true
+  });
+
+  $(".colorpicker_card_background").spectrum({
+    allowEmpty:true,
+    preferredFormat: "hex",
+    showInput: true
+  });
+
 });

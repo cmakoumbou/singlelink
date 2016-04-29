@@ -20,9 +20,11 @@
 #  bio                    :string
 #  admin                  :boolean          default(FALSE)
 #  avatar                 :string
-#  colour                 :string
-#  text_colour            :string
-#  link_colour            :string
+#  name_colour            :string
+#  bio_colour             :string
+#  singlelink_colour      :string
+#  topbg_colour           :string
+#  botbg_colour           :string
 #
 
 require 'test_helper'

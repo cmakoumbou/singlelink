@@ -20,9 +20,11 @@
 #  bio                    :string
 #  admin                  :boolean          default(FALSE)
 #  avatar                 :string
-#  colour                 :string
-#  text_colour            :string
-#  link_colour            :string
+#  name_colour            :string
+#  bio_colour             :string
+#  singlelink_colour      :string
+#  topbg_colour           :string
+#  botbg_colour           :string
 #
 
 class User < ActiveRecord::Base
@@ -32,7 +34,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :links, dependent: :destroy
+  has_many :cards, dependent: :destroy
   has_many :subscriptions, dependent: :destroy
 
   extend FriendlyId

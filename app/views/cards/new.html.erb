@@ -1,0 +1,26 @@
+<% provide(:title, "New card") %>
+
+<%= form_for @card do |f| %>
+
+	<%= render 'cards/error_messages' %>
+
+  <%= f.text_field :name, placeholder: "Name" %>
+
+  <%= f.text_field :username, placeholder: "Username" %>
+
+  <%= f.text_field :url, placeholder: "Url" %>
+
+  <%= f.select :default_image, options_for_default_images, { :prompt => "Select one" }, { class: "" } %>
+
+  <%= f.file_field :image %>
+
+  <%= f.file_field :logo %>
+
+  <%= f.text_field :name_colour, class: "colorpicker_card_name" %>
+
+  <%= f.text_field :username_colour, class: "colorpicker_card_username" %>
+
+  <%= f.text_field :background_colour, class: "colorpicker_card_background" %>
+
+  <%= f.submit "Create card" %>
+<% end %>

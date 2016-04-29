@@ -1,0 +1,26 @@
+<%= form_for @card do |f| %>
+  <%= render 'cards/error_messages' %>
+
+  <div class="field <%= "error" if f.object.errors.include?(:name) %>">
+    <%= f.label :name %>
+    <%= f.text_field :name, placeholder: "Title" %>
+  </div>
+
+  <div class="field <%= "error" if f.object.errors.include?(:url) %>">
+    <%= f.label :url, "Website" %>
+    <%= f.text_field :url, placeholder: "Website" %>
+  </div>
+
+
+  <div class="field <%= "error" if f.object.errors.include?(:default_image) %>">
+    <%= f.label :default_image, "Select an image to use from our database" %>
+    <%= f.select :default_image, options_for_default_images, { :prompt => "Select one" }, { class: "ui dropdown" } %>
+  </div>
+
+  <div class="field <%= "error" if f.object.errors.include?(:image) %>">
+    <%= f.label :image, "Choose an image to upload from your files" %>
+    <%= f.file_field :image %>
+  </div>
+  
+  <%= f.submit "Create card" %>
+<% end %>

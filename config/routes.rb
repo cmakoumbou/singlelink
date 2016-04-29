@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   authenticated :user do
-    root to: 'links#index', as: :authenticated_root
+    root to: 'cards#index', as: :authenticated_root
   end
 
   devise_scope :user do
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get '/features' => 'static_pages#features', as: :features
   get '/pricing' => 'static_pages#pricing', as: :pricing
 
-  resources :links, except: [:show] do
+  resources :cards, except: [:show] do
     member do
       put :move_up
       put :move_down
@@ -49,7 +49,7 @@ Rails.application.routes.draw do
   get '/settings/account' => 'users#edit_account', as: :edit_account
   patch '/settings/update_account' => 'users#update_account', as: :update_account
   
-  get '/:id' => 'links#profile', :as => :profile
+  get '/:id' => 'cards#profile', :as => :profile
 
   mount RailsAdmin::Engine => '/admin/mabika', as: 'rails_admin'
 end

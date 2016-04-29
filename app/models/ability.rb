@@ -17,24 +17,24 @@ class Ability
       sub = user.subscriptions.take
       can :card, Subscription
       if sub.status == "active"
-        can :manage, Link
+        can :manage, Card
         can :cancel, Subscription
-        cannot :new, Link if user.links(:reload).count >= 30
-        cannot :create, Link if user.links(:reload).count >= 30
+        cannot :new, Card if user.cards(:reload).count >= 30
+        cannot :create, Card if user.cards(:reload).count >= 30
       elsif sub.status == "canceled" && sub.end_date > Time.now
-        can :manage, Link
+        can :manage, Card
         can :resume, Subscription
-        cannot :new, Link if user.links(:reload).count >= 30
-        cannot :create, Link if user.links(:reload).count >= 30
+        cannot :new, Card if user.cards(:reload).count >= 30
+        cannot :create, Card if user.cards(:reload).count >= 30
       elsif sub.status == "canceled" && sub.end_date < Time.now
-        can :index, Link
+        can :index, Card
         can :renew, Subscription
         cannot :card, Subscription
       elsif sub.status == "past_due"
-        can :manage, Link
+        can :manage, Card
         can :cancel, Subscription
-        cannot :new, Link if user.links(:reload).count >= 30
-        cannot :create, Link if user.links(:reload).count >= 30
+        cannot :new, Card if user.cards(:reload).count >= 30
+        cannot :create, Card if user.cards(:reload).count >= 30
       end
     end
   end

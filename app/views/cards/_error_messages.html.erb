@@ -1,0 +1,11 @@
+<% if @card.errors.any? %>
+  <div class="ui negative message">
+    <i class="close icon"></i>
+    The form contains <%= pluralize(@card.errors.count, "error") %>.
+    <ul>
+    <% @card.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

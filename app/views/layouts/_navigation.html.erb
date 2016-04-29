@@ -2,20 +2,35 @@
   <ul id="mobile-menu" class="mobile-menu">
     <li class="menu-icon"><i id="menu-toggle" class="fa fa-bars fa-lg" aria-hidden="true" data-click-state="0"></i></li>
     <li class="logo">
-      <%= link_to "Singlelink Me", root_path %>
+      <%= link_to "Logo", root_path %>
     </li>
-    <li class="sign-in">
-      <%= link_to new_user_session_path do %>
-        <i class="fa fa-sign-in fa-lg" aria-hidden="true"></i>
-      <% end %>  
-    </li>
+    <% if user_signed_in? %>
+      <li class="sign-out">
+        <%= link_to destroy_user_session_path, :method => :delete do %>
+          <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i>
+        <% end %>  
+      </li>
+    <% else %>
+      <li class="sign-in">
+        <%= link_to new_user_session_path do %>
+          <i class="fa fa-sign-in fa-lg" aria-hidden="true"></i>
+        <% end %>  
+      </li>
+    <% end %>
   </ul>
   <ul id="hidden-menu" class="hidden-menu" role="navigation">
-    <li><%= link_to 'Home', root_path %></li>
-    <li><%= link_to 'Features', features_path %></li>
-    <li><%= link_to 'Pricing', pricing_path %></li>
-    <li><%= link_to 'Support', help_path %></li>
-    <li><%= link_to 'Log in', new_user_session_path %></li>
-    <li><%= link_to 'Sign up', new_user_registration_path %></li>
+    <% if user_signed_in? %>
+      <li><%= link_to 'Home', root_path %></li>
+      <li><%= link_to 'Profile', profile_path(current_user) %></li>
+      <li><%= link_to 'Settings', settings_path %></li>
+      <li><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
+    <% else %>
+      <li><%= link_to 'Home', root_path %></li>
+      <li><%= link_to 'Features', features_path %></li>
+      <li><%= link_to 'Pricing', pricing_path %></li>
+      <li><%= link_to 'Support', help_path %></li>
+      <li><%= link_to 'Log in', new_user_session_path %></li>
+      <li><%= link_to 'Sign up', new_user_registration_path %></li>
+    <% end %>
   </ul>
 </div>

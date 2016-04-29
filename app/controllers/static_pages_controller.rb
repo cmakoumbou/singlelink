@@ -2,8 +2,6 @@ class StaticPagesController < ApplicationController
   before_action :set_device_type, only: [:home]
 
   def home
-    @user = User.first
-    @links = @user.links.order(position: :asc)
   end
   
   def about
