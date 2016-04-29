@@ -11,29 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426075949) do
+ActiveRecord::Schema.define(version: 20160414113257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "cards", force: :cascade do |t|
+  create_table "links", force: :cascade do |t|
     t.string   "url"
     t.integer  "user_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.boolean  "disable",           default: false
-    t.string   "name"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.boolean  "disable",       default: false
+    t.string   "title"
     t.string   "image"
     t.integer  "position"
     t.string   "default_image"
-    t.string   "username"
-    t.string   "logo"
-    t.string   "name_colour"
-    t.string   "username_colour"
-    t.string   "background_colour"
   end
 
-  add_index "cards", ["user_id"], name: "index_cards_on_user_id", using: :btree
+  add_index "links", ["user_id"], name: "index_links_on_user_id", using: :btree
 
   create_table "subscriptions", force: :cascade do |t|
     t.string   "subscription_id"
@@ -80,6 +75,6 @@ ActiveRecord::Schema.define(version: 20160426075949) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
-  add_foreign_key "cards", "users"
+  add_foreign_key "links", "users"
   add_foreign_key "subscriptions", "users"
 end
