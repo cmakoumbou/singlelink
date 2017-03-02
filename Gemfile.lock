@@ -271,5 +271,8 @@ DEPENDENCIES
   valid_url (= 0.0.4)
   web-console (= 2.2.1)
 
+RUBY VERSION
+   ruby 2.2.2p95
+
 BUNDLED WITH
-   1.10.6
+   1.14.5
