@@ -1,6 +1,6 @@
 == Singlelink
 
-Singlelink allows you to create and share a single link for all your social networks.
+Singlelink.me allows you to create and share a single link for all your social networks.
 
 Features:
 
