@@ -1,23 +1,18 @@
 <div class="ui items">
   <div class="item">
     <div class="image">
-      <%= image_tag @user.avatar.thumb.url %>
+      <%= image_tag("singlelink.jpg") %>
     </div>
     <div class="middle aligned content">
       <div class="header">
-        <% if !@user.display_name.blank? %>
-          <%= @user.display_name %> 
-        <% else %>
-          <%= @user.username %> 
-        <% end %>
-
+        Demo
       </div>
       <div class="meta">
-        <span><%= link_to "singlelink.me", root_path, {style: "color: #000000"} %></span>
+        <span><%= link_to "singlelink.me/demo", root_path, {style: "color: #000000"} %></span>
       </div>
       <div class="description">
-        <p><%= @user.bio %></p>
-        <%= link_to "Try Singlelink Me for Free", new_user_registration_path, class: "ui primary button" %>
+        <p>Singlelink allows you to create and share a single link for all your social networks.</p>
+        <%= link_to "Try Singlelink for Free", new_user_registration_path, class: "ui primary button" %>
       </div>
     </div>
   </div>

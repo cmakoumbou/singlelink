@@ -21,6 +21,10 @@
   </div>
 </div>
 
+<div class="ui segment">
+  To test the web app use the following billing details from Stripe in the next step. Card: 4242 4242 4242 4242 / CVC: 123
+</div>
+
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "ui large form" }) do |f| %>
   <%= devise_error_messages! %>
 
@@ -45,10 +49,6 @@
       <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation, placeholder: "Confirm new password" %>
     </div>
-  </div>
-
-  <div class="ui segment">
-    By clicking on "Sign up" below, you are agreeing to our <%= link_to "Terms", terms_path %>.
   </div>
 
   <%= f.submit "Sign up", class: "ui primary button" %>
